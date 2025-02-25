@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">HappyPaws</string>
+    <string name="first_name">First Name</string>
+    <string name="last_name">Last Name</string>
+    <string name="ID">ID</string>
+    <string name="address">Address</string>
+    <string name="mail">Mail</string>
+    <string name="phone_number">Phone Number</string>
+    <string name="sign_up">Sign UP!</string>
+
+</resources>
