@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">HappyPaws</string>
-    <string name="first_name">First Name</string>
-    <string name="last_name">Last Name</string>
+    <string name="first_name">Enter your first name</string>
+    <string name="last_name">Enter your last name</string>
     <string name="ID">ID</string>
     <string name="address">Address</string>
     <string name="mail">Mail</string>
@@ -14,5 +14,8 @@
     <string name="daily_walks">Amount of daily walks</string>
     <string name="food">Food</string>
     <string name="register">Register pet!</string>
+    <string name="weight">Weight (KG)</string>
+    <string name="ID_owner">Enter your ID</string>
+
 
 </resources>

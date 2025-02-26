@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity2">
 
     <TextView
@@ -14,80 +16,81 @@
         android:text="Register your pet!"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="30dp"/>
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
     <EditText
         android:id="@+id/name"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/name"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="16dp"
-        android:layout_marginHorizontal="40dp"/>
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        />
 
     <EditText
         android:id="@+id/breed"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/breed"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/name"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
-
-    <EditText
-        android:id="@+id/description"
-        android:layout_width="wrap_content"
-        android:layout_height="50dp"
-        android:hint="@string/description"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/breed"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
     <EditText
         android:id="@+id/daily_walks"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/daily_walks"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/description"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
     <EditText
         android:id="@+id/food"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/food"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/daily_walks"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
+    <EditText
+        android:id="@+id/weight"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/weight"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="16dp" />
+
+    <EditText
+        android:id="@+id/ID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/ID_owner"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/description"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
 
     <Button
         android:id="@+id/register_pet"
-        android:layout_width="wrap_content"
+        android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/register"
-        app:layout_constraintTop_toBottomOf="@id/food"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp"/>
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>
