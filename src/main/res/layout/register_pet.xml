@@ -5,13 +5,13 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity2">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN UP!"
+        android:text="Register your pet!"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintTop_toTopOf="parent"
@@ -20,10 +20,10 @@
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/firstname"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:hint="@string/first_name"
+        android:hint="@string/name"
         android:inputType="text"
         app:layout_constraintTop_toBottomOf="@id/title"
         app:layout_constraintStart_toStartOf="parent"
@@ -32,71 +32,60 @@
         android:layout_marginHorizontal="40dp"/>
 
     <EditText
-        android:id="@+id/lastname"
+        android:id="@+id/breed"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:hint="@string/last_name"
+        android:hint="@string/breed"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/firstname"
+        app:layout_constraintTop_toBottomOf="@id/name"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
         android:layout_marginHorizontal="40dp"/>
 
     <EditText
-        android:id="@+id/ID"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:hint="@string/ID"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/lastname"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
-
-    <EditText
-        android:id="@+id/address"
+        android:id="@+id/description"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:hint="@string/address"
+        android:hint="@string/description"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/ID"
+        app:layout_constraintTop_toBottomOf="@id/breed"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
         android:layout_marginHorizontal="40dp"/>
 
     <EditText
-        android:id="@+id/mail"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:hint="@string/mail"
-        android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/address"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="12dp"
-        android:layout_marginHorizontal="40dp"/>
-
-    <EditText
-        android:id="@+id/phone_number"
+        android:id="@+id/daily_walks"
         android:layout_width="wrap_content"
         android:layout_height="50dp"
-        android:hint="@string/phone_number"
+        android:hint="@string/daily_walks"
         android:inputType="text"
-        app:layout_constraintTop_toBottomOf="@id/mail"
+        app:layout_constraintTop_toBottomOf="@id/description"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="12dp"
         android:layout_marginHorizontal="40dp"/>
+
+    <EditText
+        android:id="@+id/food"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:hint="@string/food"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/daily_walks"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="12dp"
+        android:layout_marginHorizontal="40dp"/>
+
 
     <Button
-        android:id="@+id/sign_up"
+        android:id="@+id/register_pet"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
-        app:layout_constraintTop_toBottomOf="@id/phone_number"
+        android:text="@string/register"
+        app:layout_constraintTop_toBottomOf="@id/food"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         android:layout_marginTop="20dp"/>

@@ -8,4 +8,11 @@
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign UP!</string>
 
+    <string name="name">Name</string>
+    <string name="breed">Breed</string>
+    <string name="description">Description</string>
+    <string name="daily_walks">Amount of daily walks</string>
+    <string name="food">Food</string>
+    <string name="register">Register pet!</string>
+
 </resources>
