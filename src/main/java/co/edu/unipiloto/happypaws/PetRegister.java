@@ -81,25 +81,28 @@ public class PetRegister extends AppCompatActivity {
                     EditText editText = (EditText) view;
                     String contenido = editText.getText().toString().trim();
 
+                    int input = editText.getInputType();
+
                     if (contenido.isEmpty()) {
                         editText.setError("Debe llenar este campo");
                         registerIsValid = false;
                         //continue;
                     }
 
-                    if (editText.getInputType() == InputType.TYPE_CLASS_NUMBER) {
+                    if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER) {
                         try {
                             Integer.parseInt(contenido);
                         } catch (NumberFormatException e) {
-                            editText.setError("Debe ingresar un numero valido");
+                            editText.setError("Debe ingresar un numero entero valido");
                             registerIsValid = false;
-                            continue;
+                            //continue;
                         }
-                    } else if (editText.getInputType() == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
+                    }if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER &&
+                            (input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
                         try {
                             Float.parseFloat(contenido);
                         } catch (NumberFormatException e) {
-                            editText.setError("Debe ser un numero decimal valido");
+                            editText.setError("Debe ser un número decimal válido");
                             registerIsValid = false;
                         }
                     }
@@ -111,8 +114,7 @@ public class PetRegister extends AppCompatActivity {
             Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             sendRegisterPets();
         }
-        else Toast.makeText(this, "Idiota llene bien todos los campos", Toast.LENGTH_SHORT);
-
+        else Toast.makeText(this, "Idiota llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -199,13 +201,13 @@ public class PetRegister extends AppCompatActivity {
             pet.setPadding(0, 10, 0, 10);
             container.addView(pet);
 
-            EditText nameInput = createEditText("Name", InputType.TYPE_TEXT_FLAG_CAP_WORDS);
-            EditText age = createEditText("Age", InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            EditText nameInput = createEditText("Name", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            EditText age = createEditText("Age", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             EditText breedInput = createEditText("Breed", InputType.TYPE_CLASS_TEXT);
             EditText dailyWalksInput = createEditText("Daily Walks", InputType.TYPE_CLASS_NUMBER);
             EditText foodInput = createEditText("Food", InputType.TYPE_CLASS_TEXT);
             EditText amountMeals = createEditText("Amount of Meals", InputType.TYPE_CLASS_NUMBER);
-            EditText weightInput = createEditText("Weight", InputType.TYPE_NUMBER_FLAG_DECIMAL);
+            EditText weightInput = createEditText("Weight", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             EditText idInput = createEditText("Owner ID", InputType.TYPE_CLASS_TEXT);
             EditText descriptionInput = createEditText("Description", InputType.TYPE_CLASS_TEXT);
 
