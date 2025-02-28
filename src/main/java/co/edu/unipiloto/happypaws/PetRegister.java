@@ -76,11 +76,57 @@ public class PetRegister extends AppCompatActivity {
         else{
             for (int i = 0; i<container.getChildCount(); i++) {
                 //JSONObject petObject = new JSONObject();
+
                 View view = container.getChildAt(i);
                 if (view instanceof EditText) {
                     EditText editText = (EditText) view;
                     String contenido = editText.getText().toString().trim();
+                    int input = editText.getInputType();
 
+
+                    if (contenido.isEmpty()) {
+                        editText.setError("Debe llenar este campo");
+                        registerIsValid = false;
+                        //continue;
+                    }
+
+                    if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER) {
+                        try {
+                            int numero = Integer.parseInt(contenido);
+
+                            if ("dailyWalks".equals(editText.getTag())) {
+                                if (numero <= 0 || numero > 5) {
+                                    editText.setError("Debe ingresar un número entre 1 y 5 para los paseos diarios");
+                                    registerIsValid = false;
+                                }
+                            }
+
+                            if ("amountOfMeals".equals(editText.getTag())) {
+                                if (numero <= 0 || numero > 5) {
+                                    editText.setError("Debe ingresar un número entre 1 y 5 para las comidas diarias");
+                                    registerIsValid = false;
+                                }
+                            }
+
+                        } catch (NumberFormatException e) {
+                            editText.setError("Debe ingresar un número entero válido");
+                            registerIsValid = false;
+                        }
+                    }
+
+                    if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER &&
+                            (input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
+                        try {
+                            Float.parseFloat(contenido);
+                        } catch (NumberFormatException e) {
+                            editText.setError("Debe ser un número decimal válido");
+                            registerIsValid = false;
+                        }
+                    }
+                }
+                    /*
+                    EditText editText = (EditText) view;
+                    String contenido = editText.getText().toString().trim();
                     int input = editText.getInputType();
 
                     if (contenido.isEmpty()) {
@@ -97,6 +143,36 @@ public class PetRegister extends AppCompatActivity {
                             registerIsValid = false;
                             //continue;
                         }
+
+                        if(editText.getTag().equals("dailyWalks")){
+                            try{
+                                int dailyWalks = Integer.parseInt(contenido);
+                                if (dailyWalks<=0 || dailyWalks>5){
+                                    editText.setError("Debe ingresar un numero entre 1 y 5 para los paseos diarios");
+                                    registerIsValid = false;
+                                }
+                            }catch (NumberFormatException e) {
+                                editText.setError("Debe ingresar un numero entero valido");
+                                registerIsValid = false;
+                                //continue;
+                            }
+                        }
+
+                        if(editText.getTag().equals("amountOfMeals")){
+                            try{
+                                int dailyWalks = Integer.parseInt(contenido);
+                                if (dailyWalks<=0 || dailyWalks>5){
+                                    editText.setError("Debe ingresar un numero entre 1 y 5 para los paseos diarios");
+                                    registerIsValid = false;
+                                }
+                            }catch (NumberFormatException e) {
+                                editText.setError("Debe ingresar un numero entero valido");
+                                registerIsValid = false;
+                                //continue;
+                            }
+                        }
+
+
                     }if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER &&
                             (input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
                         try {
@@ -107,14 +183,17 @@ public class PetRegister extends AppCompatActivity {
                         }
                     }
 
+
                 }
+                */
+
             }
         }
         if(registerIsValid) {
             Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             sendRegisterPets();
         }
-        else Toast.makeText(this, "Idiota llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -187,11 +266,26 @@ public class PetRegister extends AppCompatActivity {
     private void generateFields(){
         container.removeAllViews();
 
-        String numberOfPetsStr = numberOfPets.getText().toString();
+        String numberOfPetsStr = numberOfPets.getText().toString().trim();
 
-        if (numberOfPetsStr.isEmpty()) return;
+        if (numberOfPetsStr.isEmpty()) {
+            Toast.makeText(this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int numberPets;
 
-        int numberPets = Integer.parseInt(numberOfPetsStr);
+        try {
+            numberPets = Integer.parseInt(numberOfPetsStr);
+        } catch (NumberFormatException e) { // Manejar si ingresan letras u otro carácter no válido
+            Toast.makeText(this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        if (numberPets == 0) {
+            Toast.makeText(this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
 
         for (int i = 1; i<= numberPets; i++){
             TextView pet = new TextView(this);
@@ -205,8 +299,10 @@ public class PetRegister extends AppCompatActivity {
             EditText age = createEditText("Age", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             EditText breedInput = createEditText("Breed", InputType.TYPE_CLASS_TEXT);
             EditText dailyWalksInput = createEditText("Daily Walks", InputType.TYPE_CLASS_NUMBER);
+            dailyWalksInput.setTag("dailyWalks");
             EditText foodInput = createEditText("Food", InputType.TYPE_CLASS_TEXT);
             EditText amountMeals = createEditText("Amount of Meals", InputType.TYPE_CLASS_NUMBER);
+            amountMeals.setTag("amountOfMeals");
             EditText weightInput = createEditText("Weight", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             EditText idInput = createEditText("Owner ID", InputType.TYPE_CLASS_TEXT);
             EditText descriptionInput = createEditText("Description", InputType.TYPE_CLASS_TEXT);
