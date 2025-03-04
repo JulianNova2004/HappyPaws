@@ -26,11 +26,19 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 import org.json.JSONException;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+import models.Pet;
+import network.PetService;
+import network.Retro;
+import network.UserService;
+import retrofit2.Call;
+
 public class PetRegister extends AppCompatActivity {
 
+    private PetService petService;
     private LinearLayout container;
     private EditText numberOfPets;
     private Button generateFieldsBtn, registerPetBtn;
@@ -45,6 +53,7 @@ public class PetRegister extends AppCompatActivity {
         generateFieldsBtn = findViewById(R.id.generate_fields);
         registerPetBtn = findViewById(R.id.register_pet);
         container = findViewById(R.id.dynamic_container);
+        petService = Retro.getClient().create(PetService.class);
 
         generateFieldsBtn.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -124,68 +133,7 @@ public class PetRegister extends AppCompatActivity {
                         }
                     }
                 }
-                    /*
-                    EditText editText = (EditText) view;
-                    String contenido = editText.getText().toString().trim();
-                    int input = editText.getInputType();
 
-                    if (contenido.isEmpty()) {
-                        editText.setError("Debe llenar este campo");
-                        registerIsValid = false;
-                        //continue;
-                    }
-
-                    if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER) {
-                        try {
-                            Integer.parseInt(contenido);
-                        } catch (NumberFormatException e) {
-                            editText.setError("Debe ingresar un numero entero valido");
-                            registerIsValid = false;
-                            //continue;
-                        }
-
-                        if(editText.getTag().equals("dailyWalks")){
-                            try{
-                                int dailyWalks = Integer.parseInt(contenido);
-                                if (dailyWalks<=0 || dailyWalks>5){
-                                    editText.setError("Debe ingresar un numero entre 1 y 5 para los paseos diarios");
-                                    registerIsValid = false;
-                                }
-                            }catch (NumberFormatException e) {
-                                editText.setError("Debe ingresar un numero entero valido");
-                                registerIsValid = false;
-                                //continue;
-                            }
-                        }
-
-                        if(editText.getTag().equals("amountOfMeals")){
-                            try{
-                                int dailyWalks = Integer.parseInt(contenido);
-                                if (dailyWalks<=0 || dailyWalks>5){
-                                    editText.setError("Debe ingresar un numero entre 1 y 5 para los paseos diarios");
-                                    registerIsValid = false;
-                                }
-                            }catch (NumberFormatException e) {
-                                editText.setError("Debe ingresar un numero entero valido");
-                                registerIsValid = false;
-                                //continue;
-                            }
-                        }
-
-
-                    }if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER &&
-                            (input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
-                        try {
-                            Float.parseFloat(contenido);
-                        } catch (NumberFormatException e) {
-                            editText.setError("Debe ser un número decimal válido");
-                            registerIsValid = false;
-                        }
-                    }
-
-
-                }
-                */
 
             }
         }
@@ -198,68 +146,89 @@ public class PetRegister extends AppCompatActivity {
     }
 
     private void sendRegisterPets(){
+        ArrayList<Pet> pets = new ArrayList<Pet>();
 
-        String url = "url";
-        JSONArray petsArray = new JSONArray();
+        for (int i = 0; i<container.getChildCount(); i += 8) {
+            String name = ((EditText) container.getChildAt(i)).getText().toString();
+            double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
+            String race = ((EditText) container.getChildAt(i + 2)).getText().toString();
+            int amount_of_walks = Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString());
+            String food = ((EditText) container.getChildAt(i + 4)).getText().toString();
+            int amount_of_food = Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString());
+            int weight = Integer.parseInt(((EditText) container.getChildAt(i + 6)).getText().toString());
+            String description = ((EditText) container.getChildAt(i + 8)).getText().toString();
 
-        for (int i = 0; i<container.getChildCount(); i++){
-            View view = container.getChildAt(i);
-
-            if(view instanceof EditText){
-                EditText editText = (EditText) view;
-                String value = editText.getText().toString().trim();
-
-                if(value.isEmpty()){
-                    Toast.makeText(this, "Deben de llenarse todos los campos", Toast.LENGTH_SHORT).show();
-                    return;
-                }
-            }
+            Pet pet = new Pet(name,race,amount_of_walks,amount_of_food,food,weight,description,age);
+            pets.add(pet);
         }
 
-        for (int i = 0; i<container.getChildCount(); i += 8){
-            try {
-                JSONObject petObject = new JSONObject();
-                petObject.put("name", ((EditText) container.getChildAt(i)).getText().toString());
-                petObject.put("age", ((Double.parseDouble((((EditText) container.getChildAt(i+1)).getText()).toString()))));
-                petObject.put("race", ((EditText) container.getChildAt(i + 2)).getText().toString());
-                petObject.put("amount_of_walks", Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString()));
-                petObject.put("food", ((EditText) container.getChildAt(i + 4)).getText().toString());
-                petObject.put("amount_of_foods", Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString()));
-                petObject.put("weight", Double.parseDouble(((EditText) container.getChildAt(i + 6)).getText().toString()));
-                petObject.put("id_owner", ((EditText) container.getChildAt(i + 7)).getText().toString());
-                petObject.put("description", ((EditText) container.getChildAt(i + 8)).getText().toString());
+        //Call<Pet> call = petService.savePets(pets,id_owner);
 
-                petsArray.put(petObject);
-            }catch(JSONException e){
-                e.printStackTrace();
-            }
-        }
 
-        JSONObject requestBody = new JSONObject();
-        try{
-            requestBody.put("pets", petsArray);
-        }catch(JSONException e){
-            e.printStackTrace();
-        }
 
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-                response ->{
-                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-                },
-                error ->{
-                    Toast.makeText(this, "Error al registrar las mascotas", Toast.LENGTH_SHORT).show();
-                    error.printStackTrace();
-                }){
-            @Override
-            public Map<String, String> getHeaders() throws AuthFailureError{
-                Map<String, String> headers = new HashMap<>();
-                headers.put("Content-Type", "application/json");
-                return headers;
-            }
-        };
 
-        RequestQueue queue = Volley.newRequestQueue(this);
-        queue.add(request);
+
+//        String url = "url";
+//        JSONArray petsArray = new JSONArray();
+//
+//        for (int i = 0; i<container.getChildCount(); i++){
+//            View view = container.getChildAt(i);
+//
+//            if(view instanceof EditText){
+//                EditText editText = (EditText) view;
+//                String value = editText.getText().toString().trim();
+//
+//                if(value.isEmpty()){
+//                    Toast.makeText(this, "Deben de llenarse todos los campos", Toast.LENGTH_SHORT).show();
+//                    return;
+//                }
+//            }
+//        }
+//
+//        for (int i = 0; i<container.getChildCount(); i += 8){
+//            try {
+//                JSONObject petObject = new JSONObject();
+//                petObject.put("name", ((EditText) container.getChildAt(i)).getText().toString());
+//                petObject.put("age", ((Double.parseDouble((((EditText) container.getChildAt(i+1)).getText()).toString()))));
+//                petObject.put("race", ((EditText) container.getChildAt(i + 2)).getText().toString());
+//                petObject.put("amount_of_walks", Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString()));
+//                petObject.put("food", ((EditText) container.getChildAt(i + 4)).getText().toString());
+//                petObject.put("amount_of_foods", Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString()));
+//                petObject.put("weight", Double.parseDouble(((EditText) container.getChildAt(i + 6)).getText().toString()));
+//                petObject.put("id_owner", ((EditText) container.getChildAt(i + 7)).getText().toString());
+//                petObject.put("description", ((EditText) container.getChildAt(i + 8)).getText().toString());
+//
+//                petsArray.put(petObject);
+//            }catch(JSONException e){
+//                e.printStackTrace();
+//            }
+//        }
+//
+//        JSONObject requestBody = new JSONObject();
+//        try{
+//            requestBody.put("pets", petsArray);
+//        }catch(JSONException e){
+//            e.printStackTrace();
+//        }
+//
+//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
+//                response ->{
+//                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
+//                },
+//                error ->{
+//                    Toast.makeText(this, "Error al registrar las mascotas", Toast.LENGTH_SHORT).show();
+//                    error.printStackTrace();
+//                }){
+//            @Override
+//            public Map<String, String> getHeaders() throws AuthFailureError{
+//                Map<String, String> headers = new HashMap<>();
+//                headers.put("Content-Type", "application/json");
+//                return headers;
+//            }
+//        };
+//
+//        RequestQueue queue = Volley.newRequestQueue(this);
+//        queue.add(request);
 
     }
 
@@ -303,8 +272,8 @@ public class PetRegister extends AppCompatActivity {
             EditText foodInput = createEditText("Food", InputType.TYPE_CLASS_TEXT);
             EditText amountMeals = createEditText("Amount of Meals", InputType.TYPE_CLASS_NUMBER);
             amountMeals.setTag("amountOfMeals");
-            EditText weightInput = createEditText("Weight", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
-            EditText idInput = createEditText("Owner ID", InputType.TYPE_CLASS_TEXT);
+            EditText weightInput = createEditText("Weight", InputType.TYPE_CLASS_NUMBER);
+            //EditText idInput = createEditText("Owner ID", InputType.TYPE_CLASS_TEXT);
             EditText descriptionInput = createEditText("Description", InputType.TYPE_CLASS_TEXT);
 
             container.addView(nameInput);
@@ -314,7 +283,7 @@ public class PetRegister extends AppCompatActivity {
             container.addView(foodInput);
             container.addView(amountMeals);
             container.addView(weightInput);
-            container.addView(idInput);
+            //container.addView(idInput);
             container.addView(descriptionInput);
         }
 
