@@ -7,7 +7,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".FirstPage">
+    tools:context=".LogIn">
 
     <TextView
         android:id="@+id/title"
@@ -21,10 +21,10 @@
         android:layout_marginBottom="16dp"/>
 
     <EditText
-        android:id="@+id/emailLI"
+        android:id="@+id/usernameLI"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="Put your email"
+        android:hint="Put your username"
         android:inputType="text"
         android:layout_gravity="center"
         android:layout_margin="16dp"/>
@@ -45,7 +45,7 @@
         android:layout_height="wrap_content"
         android:text="@string/logInFP"
         android:layout_gravity="center"
-
+        android:onClick="startLogIn"
         android:layout_marginBottom="12dp"
         android:padding="12dp" />
 

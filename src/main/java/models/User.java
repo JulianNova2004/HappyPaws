@@ -4,7 +4,7 @@ import java.util.List;
 
 public class User {
 
-    private int userId;
+    private Integer userId;
     
     private String username;
     

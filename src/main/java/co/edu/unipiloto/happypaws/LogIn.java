@@ -26,7 +26,7 @@ import retrofit2.Response;
 public class LogIn extends AppCompatActivity {
 
 
-    private EditText email, password;
+    private EditText username, password;
     private Button btnAccess;
     private UserService userService;
     private SharedPreferences sharedPreferences;
@@ -36,29 +36,27 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in);
-
-        email = findViewById(R.id.emailLI);
+        username = findViewById(R.id.usernameLI);
         password = findViewById(R.id.passwordLI);
         btnAccess = findViewById(R.id.logInLI);
-
         userService = Retro.getClient().create(UserService.class);
-
         sharedPreferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
-        btnAccess.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                //generateFields();
 
-            }
-        });
+    }
+
+    public void startLogIn(View view){
+        access();
+        Intent intent = new Intent(this,Home.class);
+        startActivity(intent);
     }
 
     public void access(){
-        String emailStr = email.getText().toString().trim();
+        String usernameStr = username.getText().toString().trim();
         String passwordStr = password.getText().toString().trim();
 
+        User user = new User(usernameStr,passwordStr,null,null,null,null,null,null);
 
-        Call<User> call = userService.login(emailStr, passwordStr);
+        Call<User> call = userService.login(user);
 
         call.enqueue(new Callback<User>() {
             @Override
@@ -73,9 +71,7 @@ public class LogIn extends AppCompatActivity {
 
                     Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(LogIn.this, FirstPage.class);
-                    startActivity(intent);
-                    finish();
+
                 } else {
                     Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
                 }
@@ -89,10 +85,4 @@ public class LogIn extends AppCompatActivity {
         });
     }
 
-    /*
-    public void access(View view){
-        Intent intent = new Intent(this,SignUp.class);
-        startActivity(intent);
-    }
-     */
 }

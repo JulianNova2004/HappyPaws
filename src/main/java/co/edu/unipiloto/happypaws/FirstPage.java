@@ -27,7 +27,7 @@ public class FirstPage extends AppCompatActivity {
     }
 
     public void logIn(View view){
-        //Intent intent = new Intent(this,LogIn.class);
-        //startActivity(intent);
+        Intent intent = new Intent(this,LogIn.class);
+        startActivity(intent);
     }
 }
