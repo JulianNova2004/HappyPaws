@@ -10,14 +10,16 @@
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign UP!</string>
 
+    <string name="register">Register pet!</string>
+    <!--
     <string name="name">Name</string>
     <string name="breed">Breed</string>
     <string name="description">Description</string>
     <string name="daily_walks">Amount of daily walks</string>
     <string name="food">Food</string>
-    <string name="register">Register pet!</string>
     <string name="weight">Weight (KG)</string>
     <string name="ID_owner">Enter your ID</string>
+    -->
 
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
