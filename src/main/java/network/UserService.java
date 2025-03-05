@@ -18,7 +18,7 @@ public interface UserService {
         Call<Void> deleteUser(@Path("id") int id);
 
         @POST("user/login")
-        Call<User> login(@Path("email") String email, @Path("password") String password);
+        Call<User> login(@Body User user);
 
 
 }

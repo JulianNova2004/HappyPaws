@@ -64,20 +64,14 @@ public class SignUp extends AppCompatActivity {
 
         User user = new User(usernameStr,passwordStr,firstnameStr,lastnameStr,IDStr,addressStr,mailStr,phoneNumberStr);
 
-        //Logica Shared Preference
-        /*
+
         Call<User> call = userService.saveUser(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    //String correo = response.body().getUserId().toString();
-                    //SharedPreferences.Editor editor = sharedPreferences.edit();
-                    //editor.putString("DataUser", correo);
-                    //editor.apply();
-
                     Toast.makeText(SignUp.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-                    finish(); // Cerrar la actividad después de registrar
+                    finish();
                 } else {
                     Toast.makeText(SignUp.this, "Error al registrar usuario", Toast.LENGTH_SHORT).show();
 
@@ -89,6 +83,6 @@ public class SignUp extends AppCompatActivity {
                 Log.i("MiApp", "Ocurrió un error", t);
             }});
 
-        */
+
     }
 }
