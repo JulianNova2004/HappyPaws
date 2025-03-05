@@ -1,6 +1,7 @@
 package co.edu.unipiloto.happypaws;
 
 import android.content.Intent;
+//import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -23,6 +24,7 @@ public class SignUp extends AppCompatActivity {
     private EditText username, password, firstname, lastname, ID, address, mail, phoneNumber;
     private Button btnSend;
     private UserService userService;
+    //private SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class SignUp extends AppCompatActivity {
 
         userService = Retro.getClient().create(UserService.class);
 
+        //sharedPreferences = getSharedPreferences("UserData", MODE_PRIVATE);
+
     }
     public void onSendMessage(View view){
         SignUpUser();
@@ -60,11 +64,18 @@ public class SignUp extends AppCompatActivity {
 
         User user = new User(usernameStr,passwordStr,firstnameStr,lastnameStr,IDStr,addressStr,mailStr,phoneNumberStr);
 
+        //Logica Shared Preference
+        /*
         Call<User> call = userService.saveUser(user);
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body() != null) {
+                    //String correo = response.body().getUserId().toString();
+                    //SharedPreferences.Editor editor = sharedPreferences.edit();
+                    //editor.putString("DataUser", correo);
+                    //editor.apply();
+
                     Toast.makeText(SignUp.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
                     finish(); // Cerrar la actividad después de registrar
                 } else {
@@ -78,5 +89,6 @@ public class SignUp extends AppCompatActivity {
                 Log.i("MiApp", "Ocurrió un error", t);
             }});
 
+        */
     }
 }
