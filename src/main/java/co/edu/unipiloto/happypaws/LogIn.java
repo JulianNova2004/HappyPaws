@@ -42,13 +42,23 @@ public class LogIn extends AppCompatActivity {
         userService = Retro.getClient().create(UserService.class);
         sharedPreferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
 
+        btnAccess.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                review();
+
+            }
+        });
+
     }
 
+    /*
     public void startLogIn(View view){
         access();
         Intent intent = new Intent(this,Home.class);
         startActivity(intent);
     }
+     */
 
     public void access(){
         String usernameStr = username.getText().toString().trim();
@@ -70,7 +80,8 @@ public class LogIn extends AppCompatActivity {
                     editor.apply();
 
                     Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
-
+                    Intent intent = new Intent(LogIn.this,Home.class);
+                    startActivity(intent);
 
                 } else {
                     Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
@@ -83,6 +94,22 @@ public class LogIn extends AppCompatActivity {
             }
 
         });
+    }
+
+    public void review(){
+        boolean loginIsValid = true;
+
+        if(username.getText().toString().trim().isEmpty() ||password.getText().toString().trim().isEmpty()){
+            loginIsValid=false;
+            Toast.makeText(this, "Bueno pero ponga algo", Toast.LENGTH_SHORT).show();
+        }
+
+        if(loginIsValid) {
+            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            access();
+        }
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+
     }
 
 }

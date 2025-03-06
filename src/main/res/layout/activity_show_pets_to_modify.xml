@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ShowPetsToModify">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="These are your pets!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+    <!--
+    <EditText
+        android:id="@+id/number_pets"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="Number of pets"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+    <Button
+        android:id="@+id/generate_fields"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Generate Fields"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+    -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:contentDescription="Registro de mascotas"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerPets"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp" />
+
+    </ScrollView>
+
+    <EditText
+        android:id="@+id/petID"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="Insert your pet ID"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+
+    <Button
+        android:id="@+id/send_modify_pet"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+</LinearLayout>

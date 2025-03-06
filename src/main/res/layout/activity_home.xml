@@ -25,8 +25,18 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginBottom="12dp"
-        android:onClick="onSendMessage"
+        android:onClick="sendActivityRegister"
         android:padding="12dp"
         android:text="@string/register" />
+
+    <Button
+        android:id="@+id/modify_pet_Home"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:onClick="sendActivityModify"
+        android:padding="12dp"
+        android:text="@string/modifyPet" />
 
 </LinearLayout>

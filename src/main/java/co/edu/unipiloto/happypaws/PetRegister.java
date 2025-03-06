@@ -1,7 +1,10 @@
 package co.edu.unipiloto.happypaws;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -25,10 +28,13 @@ import java.util.HashMap;
 import java.util.Map;
 
 import models.Pet;
+import models.User;
 import network.PetService;
 import network.Retro;
 import network.UserService;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 public class PetRegister extends AppCompatActivity {
 
@@ -40,7 +46,7 @@ public class PetRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.register_pet);
 
         numberOfPets = findViewById(R.id.number_pets);
@@ -143,6 +149,7 @@ public class PetRegister extends AppCompatActivity {
         ArrayList<Pet> pets = new ArrayList<Pet>();
 
         for (int i = 0; i<container.getChildCount(); i += 8) {
+            if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
             double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
             String race = ((EditText) container.getChildAt(i + 2)).getText().toString();
@@ -156,73 +163,29 @@ public class PetRegister extends AppCompatActivity {
             pets.add(pet);
         }
 
-        //Call<Pet> call = petService.savePets(pets,id_owner);
+        SharedPreferences preferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
+        int userId = preferences.getInt("User_ID",-1);
 
 
+        Call<Void> call = petService.savePets(pets,userId);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(PetRegister.this, "Mascotas registradas con éxito :D", Toast.LENGTH_SHORT).show();
+                    //Intent intent = new Intent(PetRegister.this, FutureNewActivity.class);
+                    //startActivity(intent);
+                } else {
+                    Toast.makeText(PetRegister.this, "Error al registrar las mascotas :(", Toast.LENGTH_SHORT).show();
+                }
+            }
 
-
-
-//        String url = "url";
-//        JSONArray petsArray = new JSONArray();
-//
-//        for (int i = 0; i<container.getChildCount(); i++){
-//            View view = container.getChildAt(i);
-//
-//            if(view instanceof EditText){
-//                EditText editText = (EditText) view;
-//                String value = editText.getText().toString().trim();
-//
-//                if(value.isEmpty()){
-//                    Toast.makeText(this, "Deben de llenarse todos los campos", Toast.LENGTH_SHORT).show();
-//                    return;
-//                }
-//            }
-//        }
-//
-//        for (int i = 0; i<container.getChildCount(); i += 8){
-//            try {
-//                JSONObject petObject = new JSONObject();
-//                petObject.put("name", ((EditText) container.getChildAt(i)).getText().toString());
-//                petObject.put("age", ((Double.parseDouble((((EditText) container.getChildAt(i+1)).getText()).toString()))));
-//                petObject.put("race", ((EditText) container.getChildAt(i + 2)).getText().toString());
-//                petObject.put("amount_of_walks", Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString()));
-//                petObject.put("food", ((EditText) container.getChildAt(i + 4)).getText().toString());
-//                petObject.put("amount_of_foods", Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString()));
-//                petObject.put("weight", Double.parseDouble(((EditText) container.getChildAt(i + 6)).getText().toString()));
-//                petObject.put("id_owner", ((EditText) container.getChildAt(i + 7)).getText().toString());
-//                petObject.put("description", ((EditText) container.getChildAt(i + 8)).getText().toString());
-//
-//                petsArray.put(petObject);
-//            }catch(JSONException e){
-//                e.printStackTrace();
-//            }
-//        }
-//
-//        JSONObject requestBody = new JSONObject();
-//        try{
-//            requestBody.put("pets", petsArray);
-//        }catch(JSONException e){
-//            e.printStackTrace();
-//        }
-//
-//        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, requestBody,
-//                response ->{
-//                    Toast.makeText(this, "Registro exitoso", Toast.LENGTH_SHORT).show();
-//                },
-//                error ->{
-//                    Toast.makeText(this, "Error al registrar las mascotas", Toast.LENGTH_SHORT).show();
-//                    error.printStackTrace();
-//                }){
-//            @Override
-//            public Map<String, String> getHeaders() throws AuthFailureError{
-//                Map<String, String> headers = new HashMap<>();
-//                headers.put("Content-Type", "application/json");
-//                return headers;
-//            }
-//        };
-//
-//        RequestQueue queue = Volley.newRequestQueue(this);
-//        queue.add(request);
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(PetRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al registrar mascotas", t);
+            }
+        });
 
     }
 
