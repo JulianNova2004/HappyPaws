@@ -30,15 +30,16 @@
         android:layout_margin="16dp"/>
 
     <EditText
-        android:id="@+id/petnameM"
+        android:id="@+id/petNameM"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/petName"
         android:inputType="text"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
+
     <EditText
-        android:id="@+id/breed"
+        android:id="@+id/breedM"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/breed"
@@ -47,34 +48,16 @@
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/amountWalks"
+        android:id="@+id/ageM"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="@string/daily_walks"
-        android:inputType="number"
+        android:hint="@string/age"
+        android:inputType="numberDecimal"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/amountFood"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/daily_food"
-        android:inputType="number"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/food"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/food"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/weight"
+        android:id="@+id/weightM"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/weight"
@@ -83,7 +66,35 @@
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/description"
+        android:id="@+id/foodM"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/food"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+
+    <EditText
+        android:id="@+id/amountFoodM"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/daily_food"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/amountWalksM"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/daily_walks"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/descriptionM"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/description"
@@ -91,25 +102,14 @@
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
-    <EditText
-        android:id="@+id/age"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/age"
-        android:inputType="numberDecimal"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
 
     <Button
-        android:id="@+id/modifyPetInformation"
+        android:id="@+id/btnSendModifyInformation"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/modifyPetInformation"
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:padding="12dp"/>
-    <!--
-    android:onClick="onSendMessage"/>
-    -->
 
 </LinearLayout>

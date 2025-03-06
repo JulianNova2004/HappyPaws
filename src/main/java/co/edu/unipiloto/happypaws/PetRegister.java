@@ -46,7 +46,7 @@ public class PetRegister extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //EdgeToEdge.enable(this);
+        EdgeToEdge.enable(this);
         setContentView(R.layout.register_pet);
 
         numberOfPets = findViewById(R.id.number_pets);
@@ -149,6 +149,7 @@ public class PetRegister extends AppCompatActivity {
         ArrayList<Pet> pets = new ArrayList<Pet>();
 
         for (int i = 0; i<container.getChildCount(); i += 8) {
+            if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
             double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
             String race = ((EditText) container.getChildAt(i + 2)).getText().toString();

@@ -28,7 +28,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void sendActivityModify(View view){
-        Intent intent = new Intent(this,PetRegister.class);
+        Intent intent = new Intent(this,ShowPetsToModify.class);
         startActivity(intent);
     }
 
