@@ -18,11 +18,19 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         EdgeToEdge.enable(this);
 
+
+
     }
 
-    public void onSendMessage(View view){
-
+    public void sendActivityRegister(View view){
         Intent intent = new Intent(this,PetRegister.class);
         startActivity(intent);
     }
+
+    public void sendActivityModify(View view){
+        Intent intent = new Intent(this,PetRegister.class);
+        startActivity(intent);
+    }
+
+
 }

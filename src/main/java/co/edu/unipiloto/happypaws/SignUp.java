@@ -90,7 +90,7 @@ public class SignUp extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(SignUp.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("MiApp", "Ocurrió un error", t);
+                Log.i("HappyPaws", "Ocurrió un error", t);
             }});
     }
 

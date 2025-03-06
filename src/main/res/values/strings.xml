@@ -11,15 +11,20 @@
     <string name="sign_up">Sign UP!</string>
 
     <string name="register">Register pet!</string>
-    <!--
-    <string name="name">Name</string>
+    <string name="modifyPet">Modify pets</string>
+
+    <string name="petName">Pet Name</string>
     <string name="breed">Breed</string>
     <string name="description">Description</string>
     <string name="daily_walks">Amount of daily walks</string>
+    <string name="daily_food">Amount of daily food</string>
     <string name="food">Food</string>
     <string name="weight">Weight (KG)</string>
     <string name="ID_owner">Enter your ID</string>
-    -->
+    <string name="age">Age</string>
+    <string name="modifyPetInformation">Modify Information</string>
+
+
 
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>

@@ -5,6 +5,7 @@ import java.util.List;
 import models.Pet;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.Path;
 
@@ -15,4 +16,6 @@ public interface PetService {
         @POST("pet/saves/{id_owner}")
         Call<Void> savePets(@Body List<Pet> pets, @Path("id_owner") int idOwner);
 
+        @GET("pet/getPets/{id_owner}")
+        Call<List<Pet>> getAllPets(@Path("id_owner")int idOwner);
 }
