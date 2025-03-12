@@ -54,33 +54,50 @@ public class ModifyPet extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 modifyPetInformation();
+                Intent intent = new Intent(ModifyPet.this,Home.class);
+                startActivity(intent);
             }
         });
     }
     public void modifyPetInformation(){
+
         String petNameMStr = petNameM.getText().toString().trim();
+        petNameMStr = petNameMStr.isEmpty() ? "" : petNameMStr;
+
         String breedMStr = breedM.getText().toString().trim();
-        double ageDouble = Double.parseDouble(ageM.getText().toString().trim());
-        int weightMInt = Integer.parseInt(weightM.getText().toString().trim());
+        breedMStr = breedMStr.isEmpty() ? "" : breedMStr;
+
+        double ageDouble = (!ageM.getText().toString().trim().isEmpty()) ?
+                Double.parseDouble(ageM.getText().toString().trim()) : 0.0;
+
+        int weightMInt = (!weightM.getText().toString().trim().isEmpty()) ?
+                Integer.parseInt(weightM.getText().toString().trim()) : 0;
+
         String foodMStr = foodM.getText().toString().trim();
-        int amountFoodInt = Integer.parseInt(amountFoodM.getText().toString().trim());
-        int amountWalksInt = Integer.parseInt(amountWalksM.getText().toString().trim());
+        foodMStr = foodMStr.isEmpty() ? "" : foodMStr;
+
+        int amountFoodInt = (!amountFoodM.getText().toString().trim().isEmpty()) ?
+                Integer.parseInt(amountFoodM.getText().toString().trim()) : 0;
+
+        int amountWalksInt = (!amountWalksM.getText().toString().trim().isEmpty()) ?
+                Integer.parseInt(amountWalksM.getText().toString().trim()) : 0;
+
         String descriptionMStr = descriptionM.getText().toString().trim();
+        descriptionMStr = descriptionMStr.isEmpty() ? "" : descriptionMStr;
+
 
         Pet petM = new Pet(petNameMStr, breedMStr, amountWalksInt, amountFoodInt, foodMStr, weightMInt, descriptionMStr, ageDouble);
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int petId = sharedPreferences.getInt("Pet_ID", -1);
-
+        Toast.makeText(ModifyPet.this, "id = " + petId + "", Toast.LENGTH_SHORT).show();
         if(petId != -1){
             Call<Void> call = petService.updatePet(petId, petM);
             call.enqueue(new Callback<Void>(){
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful() && response.body() != null) {
+                    if (response.isSuccessful()) {
 
                         Toast.makeText(ModifyPet.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(ModifyPet.this,Home.class);
-                        startActivity(intent);
 
                     } else {
                         Toast.makeText(ModifyPet.this, "Error al modificar información de la mascota", Toast.LENGTH_SHORT).show();
@@ -93,6 +110,6 @@ public class ModifyPet extends AppCompatActivity {
                 }
             });
 
-        }
+        }else{Toast.makeText(ModifyPet.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
     }
 }

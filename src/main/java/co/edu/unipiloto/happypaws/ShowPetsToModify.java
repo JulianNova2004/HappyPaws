@@ -78,7 +78,7 @@ public class ShowPetsToModify extends AppCompatActivity {
         }
 
         Toast.makeText(this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        SharedPreferences preferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("Pet_ID", idPet);
         editor.apply();
@@ -102,7 +102,7 @@ public class ShowPetsToModify extends AppCompatActivity {
                             Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                            pets.addAll(response.body());
+                           // pets.addAll(response.body());
                             int i = 1;
                             for(Pet pet: pets){
                                 TextView petD = new TextView(ShowPetsToModify.this);

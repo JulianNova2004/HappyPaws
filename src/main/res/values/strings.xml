@@ -25,9 +25,19 @@
     <string name="modifyPetInformation">Modify Information</string>
 
 
-
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
 
+    <string name="vaccineDate">Date</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="dose">Dose</string>
+    <string name="reason">Reason</string>
+    <string name="comments">Comments</string>
+
+    <string name="consultationDate">Date</string>
+    <string name="consultationReason">Reason</string>
+    <string name="petState">State of the pet</string>
+    <string name="designatedVeterinary">Designated Veterinary</string>
+    <string name="consultationResults">Results of the Consultation</string>
 
 </resources>
