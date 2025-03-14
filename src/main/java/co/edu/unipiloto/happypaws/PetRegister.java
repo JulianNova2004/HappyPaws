@@ -1,6 +1,5 @@
 package co.edu.unipiloto.happypaws;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -15,23 +14,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import models.Pet;
-import models.User;
 import network.PetService;
 import network.Retro;
-import network.UserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +35,7 @@ public class PetRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.register_pet);
+        setContentView(R.layout.activity_register_pet);
 
         numberOfPets = findViewById(R.id.number_pets);
         generateFieldsBtn = findViewById(R.id.generate_fields);

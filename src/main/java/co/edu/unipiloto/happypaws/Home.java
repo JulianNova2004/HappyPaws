@@ -32,5 +32,22 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void sendActivityVaccineDateRegister(View view){
+        Intent intent = new Intent(this,VaccineDateRegister.class);
+        startActivity(intent);
+    }
+
+    public void sendActivityAddConsultationMedicalHistory(View view){
+        Intent intent = new Intent(this,AddConsultationMedicalHistory.class);
+        startActivity(intent);
+    }
+
+    public void sendActivityViewMedicalHistory(View view){
+
+        //view_medical_history_home --> class = ViewMedicalHistory
+        Intent intent = new Intent(this,VaccineDateRegister.class);
+        startActivity(intent);
+    }
+
 
 }
