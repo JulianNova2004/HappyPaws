@@ -15,9 +15,8 @@ public class Consultation {
     public Consultation(){
 
     }
-    public Consultation(Integer id, Date fecha, String motivo, String estado, String veterinario, String resultado,
+    public Consultation(Date fecha, String motivo, String estado, String veterinario, String resultado,
                     Pet pet) {
-        this.id = id;
         this.fecha = fecha;
         this.motivo = motivo;
         this.estado = estado;

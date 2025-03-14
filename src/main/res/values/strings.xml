@@ -38,6 +38,7 @@
     <string name="reason">Reason</string>
     <string name="comments">Comments</string>
 
+    <string name="petIdC">Pet ID</string>
     <string name="consultationDate">Date</string>
     <string name="consultationReason">Reason</string>
     <string name="petState">State of the pet</string>

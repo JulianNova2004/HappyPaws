@@ -23,4 +23,7 @@ public interface PetService {
         @PATCH("pet/update/{id_owner}")
         Call<Void> updatePet(@Path("id_owner")int idPet, @Body Pet pet);
 
+        //confirmar
+        @GET("pet/getPet/{id_pet}")
+        Call<Pet> getPet(@Path("id_pet")int id_pet);
 }
