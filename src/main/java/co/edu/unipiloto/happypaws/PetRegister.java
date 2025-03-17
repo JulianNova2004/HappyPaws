@@ -15,23 +15,12 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-import org.json.JSONException;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 import models.Pet;
-import models.User;
 import network.PetService;
 import network.Retro;
-import network.UserService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -47,7 +36,7 @@ public class PetRegister extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.register_pet);
+        setContentView(R.layout.activity_register_pet);
 
         numberOfPets = findViewById(R.id.number_pets);
         generateFieldsBtn = findViewById(R.id.generate_fields);
@@ -148,7 +137,7 @@ public class PetRegister extends AppCompatActivity {
     private void sendRegisterPets(){
         ArrayList<Pet> pets = new ArrayList<Pet>();
 
-        for (int i = 0; i<container.getChildCount(); i += 8) {
+        for (int i = 1; i<container.getChildCount(); i += 8) {
             if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
             double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
@@ -157,7 +146,7 @@ public class PetRegister extends AppCompatActivity {
             String food = ((EditText) container.getChildAt(i + 4)).getText().toString();
             int amount_of_food = Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString());
             int weight = Integer.parseInt(((EditText) container.getChildAt(i + 6)).getText().toString());
-            String description = ((EditText) container.getChildAt(i + 8)).getText().toString();
+            String description = ((EditText) container.getChildAt(i + 7)).getText().toString();
 
             Pet pet = new Pet(name,race,amount_of_walks,amount_of_food,food,weight,description,age);
             pets.add(pet);
@@ -173,8 +162,8 @@ public class PetRegister extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(PetRegister.this, "Mascotas registradas con éxito :D", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(PetRegister.this, FutureNewActivity.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(PetRegister.this, Home.class);
+                    startActivity(intent);
                 } else {
                     Toast.makeText(PetRegister.this, "Error al registrar las mascotas :(", Toast.LENGTH_SHORT).show();
                 }

@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".VaccineDateRegister">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccine Date Register!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="160dp"/>
+
+    <EditText
+        android:id="@+id/vaccineDate"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/vaccineDate"
+        android:inputType="date"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+    <EditText
+        android:id="@+id/vaccine"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/vaccine"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/dose"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/dose"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/reason"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/reason"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/comments"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/comments"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <Button
+        android:id="@+id/sign_up"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="Register Vaccine Date"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+</LinearLayout>

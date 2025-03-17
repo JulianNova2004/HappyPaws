@@ -16,6 +16,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".AddConsultationMedicalHistory"
+            android:exported="false" />
+        <activity
+            android:name=".VaccineDateRegister"
+            android:exported="false" />
+        <activity
             android:name=".ModifyPet"
             android:exported="false" />
         <activity
