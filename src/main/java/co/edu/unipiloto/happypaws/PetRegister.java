@@ -1,5 +1,6 @@
 package co.edu.unipiloto.happypaws;
 
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.InputType;
@@ -136,7 +137,7 @@ public class PetRegister extends AppCompatActivity {
     private void sendRegisterPets(){
         ArrayList<Pet> pets = new ArrayList<Pet>();
 
-        for (int i = 0; i<container.getChildCount(); i += 8) {
+        for (int i = 1; i<container.getChildCount(); i += 8) {
             if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
             double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
@@ -145,26 +146,26 @@ public class PetRegister extends AppCompatActivity {
             String food = ((EditText) container.getChildAt(i + 4)).getText().toString();
             int amount_of_food = Integer.parseInt(((EditText) container.getChildAt(i + 5)).getText().toString());
             int weight = Integer.parseInt(((EditText) container.getChildAt(i + 6)).getText().toString());
-            String description = ((EditText) container.getChildAt(i + 8)).getText().toString();
+            String description = ((EditText) container.getChildAt(i + 7)).getText().toString();
 
             Pet pet = new Pet(name,race,amount_of_walks,amount_of_food,food,weight,description,age);
             pets.add(pet);
         }
 
-        SharedPreferences preferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = preferences.getInt("User_ID",-1);
 
-
+        Toast.makeText(PetRegister.this, "User_ID = " + userId + ".", Toast.LENGTH_SHORT).show();
         Call<Void> call = petService.savePets(pets,userId);
         call.enqueue(new Callback<Void>() {
             @Override
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(PetRegister.this, "Mascotas registradas con éxito :D", Toast.LENGTH_SHORT).show();
-                    //Intent intent = new Intent(PetRegister.this, FutureNewActivity.class);
-                    //startActivity(intent);
+                    Intent intent = new Intent(PetRegister.this, Home.class);
+                    startActivity(intent);
                 } else {
-                    Toast.makeText(PetRegister.this, "Error al registrar las mascotas :(", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(PetRegister.this, "Hubo un error al registrar las mascotas :(", Toast.LENGTH_SHORT).show();
                 }
             }
 

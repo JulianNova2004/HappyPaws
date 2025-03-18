@@ -2,7 +2,6 @@ package co.edu.unipiloto.happypaws;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -12,17 +11,15 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.sql.Date;
+import java.util.Locale;
 
 
-import models.Consultation;
+import models.Consulta;
 import models.Pet;
 import network.ConsultationService;
 import network.PetService;
@@ -58,13 +55,14 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
         consultationService = Retro.getClient().create(ConsultationService.class);
         petService = Retro.getClient().create(PetService.class);
         btnSendInformationMedicalHistory = findViewById(R.id.registerConsultationInformation);
+        date.setOnClickListener(v -> showCalendar());
+
         btnSendInformationMedicalHistory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                showCalendar();
                 sendConsultationInfo();
-                //Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
-                //startActivity(intent);
+                Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
+                startActivity(intent);
             }
         });
     }
@@ -91,58 +89,46 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
         int petIdInt = (!petId.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(petId.getText().toString().trim()) : 0;
 
-        callPet(petIdInt);
+        callPet(petIdInt, () -> {
+            Log.i("state", "STATEbef: " + state);
+            if (state) {
+                String dateStr = date.getText().toString().trim();
+                dateStr = dateStr.isEmpty() ? "" : dateStr;
 
-        String dateStr = date.getText().toString().trim();
-        dateStr = dateStr.isEmpty() ? "" : dateStr;
+                String reasonStr = reason.getText().toString().trim();
+                String petStateStr = petState.getText().toString().trim();
+                String vetStr = vet.getText().toString().trim();
+                String resultStr = result.getText().toString().trim();
 
-        Date dateC = null;
-        try{
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-            java.util.Date utilDate = sdf.parse(dateStr);
+                Consulta consultaA = new Consulta(dateStr, reasonStr, petStateStr, vetStr, resultStr, pet);
+                Call<Consulta> call = consultationService.addConsulta(consultaA, petIdInt);
 
-            dateC = new Date(utilDate.getTime());
+                call.enqueue(new Callback<Consulta>() {
+                    @Override
+                    public void onResponse(Call<Consulta> call, Response<Consulta> response) {
+                        if (response.isSuccessful()) {
+                        Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
+                        startActivity(intent);}
+                        else{
+                            Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                        }
+                    }
 
-        }catch (ParseException e) {
-            e.printStackTrace();
-        }
+                    @Override
+                    public void onFailure(Call<Consulta> call, Throwable t) {
+                        Toast.makeText(AddConsultationMedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.i("HappyPaws", "Error al agregar consulta", t);
+                    }
+                });
+            } else {
+                Toast.makeText(AddConsultationMedicalHistory.this, "Toast de error", Toast.LENGTH_SHORT).show();
+            }
+        });
 
-        String reasonStr = reason.getText().toString().trim();
-        reasonStr = reasonStr.isEmpty() ? "" : reasonStr;
-
-        String petStateStr = petState.getText().toString().trim();
-        petStateStr = petStateStr.isEmpty() ? "" : petStateStr;
-
-        String vetStr = vet.getText().toString().trim();
-        vetStr = vetStr.isEmpty() ? "" : vetStr;
-
-        String resultStr = result.getText().toString().trim();
-        resultStr = resultStr.isEmpty() ? "" : resultStr;
-
-        if(state){
-            Consultation consultationA = new Consultation(dateC, reasonStr, petStateStr, vetStr, resultStr,pet);
-            Call<Void> call = consultationService.addConsultation(consultationA, petIdInt);
-            call.enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
-                    startActivity(intent);
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(AddConsultationMedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al agregar consulta", t);
-                }
-            });
-        }
-        else{
-            Toast.makeText(AddConsultationMedicalHistory.this, "Toast de error", Toast.LENGTH_SHORT).show();
-        }
     }
 
-    private void callPet(int petId){
+    private void callPet(int petId, Runnable onSuccess){
         //boolean called = false;
         if(petId != 0){
             Call<Pet> call = petService.getPet(petId);
@@ -152,7 +138,10 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Toast.makeText(AddConsultationMedicalHistory.this, "Mascota encontrada", Toast.LENGTH_SHORT).show();
                         pet = response.body();
+                        Log.i("hapi", "callPet: "+response.body().getPetId());
                         state = true;
+                        Log.i("stat", "callPet: "+state);
+                        onSuccess.run();
                     } else {
                         Toast.makeText(AddConsultationMedicalHistory.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
                     }

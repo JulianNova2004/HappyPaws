@@ -2,21 +2,21 @@ package models;
 
 import java.sql.Date;
 
-public class Consultation {
+public class Consulta {
 
     private Integer id;
-    private Date fecha;
+    private String fecha;
     private String motivo;
     private String estado;
     private String veterinario;
     private String resultado;
     private Pet pet;
 
-    public Consultation(){
+    public Consulta(){
 
     }
-    public Consultation(Date fecha, String motivo, String estado, String veterinario, String resultado,
-                    Pet pet) {
+
+    public Consulta(String fecha, String motivo, String estado, String veterinario, String resultado, Pet pet) {
         this.fecha = fecha;
         this.motivo = motivo;
         this.estado = estado;
@@ -24,7 +24,6 @@ public class Consultation {
         this.resultado = resultado;
         this.pet = pet;
     }
-
 
     public Integer getId() {
         return id;
@@ -36,15 +35,13 @@ public class Consultation {
     }
 
 
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
-
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
-
 
     public String getMotivo() {
         return motivo;

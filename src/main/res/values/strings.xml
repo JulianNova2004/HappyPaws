@@ -32,10 +32,12 @@
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
 
+    <string name="petIdH">Pet ID</string>
     <string name="vaccineDate">Date</string>
     <string name="vaccine">Vaccine</string>
     <string name="dose">Dose</string>
     <string name="reason">Reason</string>
+    <string name="cuantity">Cuantity of dose</string>
     <string name="comments">Comments</string>
 
     <string name="petIdC">Pet ID</string>
@@ -44,5 +46,7 @@
     <string name="petState">State of the pet</string>
     <string name="designatedVeterinary">Designated Veterinary</string>
     <string name="consultationResults">Results of the Consultation</string>
+
+
 
 </resources>

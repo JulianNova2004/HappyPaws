@@ -35,7 +35,9 @@
         android:hint="@string/consultationDate"
         android:inputType="date"
         android:layout_gravity="center"
-        android:layout_margin="12dp"/>
+        android:layout_margin="12dp"
+        android:focusable="false"
+        android:clickable="true"/>
     <EditText
         android:id="@+id/consultationReason"
         android:layout_width="200dp"
