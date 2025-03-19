@@ -29,9 +29,12 @@
 
     <LinearLayout
         android:id="@+id/contenedorDelete"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="30dp"
         android:visibility="gone">
     </LinearLayout>
 
