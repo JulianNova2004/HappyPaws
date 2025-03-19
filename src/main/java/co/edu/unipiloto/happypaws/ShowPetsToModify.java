@@ -87,7 +87,7 @@ public class ShowPetsToModify extends AppCompatActivity {
     }
 
     public void sendPets(){
-        SharedPreferences sharedPreferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
+        SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = sharedPreferences.getInt("User_ID", -1);
 
         if(userId != -1){

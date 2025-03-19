@@ -40,7 +40,7 @@ public class LogIn extends AppCompatActivity {
         password = findViewById(R.id.passwordLI);
         btnAccess = findViewById(R.id.logInLI);
         userService = Retro.getClient().create(UserService.class);
-        sharedPreferences = getSharedPreferences("SaveSesion", MODE_PRIVATE);
+        sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
 
         btnAccess.setOnClickListener(new View.OnClickListener(){
             @Override

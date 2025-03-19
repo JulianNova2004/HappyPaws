@@ -90,7 +90,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 Integer.parseInt(petId.getText().toString().trim()) : 0;
 
         callPet(petIdInt, () -> {
-            Log.i("state", "STATEbef: " + state); // Ahora este log se ejecuta después de callPet()
+            Log.i("state", "STATEbef: " + state);
             if (state) {
                 String dateStr = date.getText().toString().trim();
                 dateStr = dateStr.isEmpty() ? "" : dateStr;
