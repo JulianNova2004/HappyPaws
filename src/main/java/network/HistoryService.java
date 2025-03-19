@@ -8,7 +8,7 @@ import retrofit2.http.POST;
 import retrofit2.http.Path;
 public interface HistoryService {
 
-    @POST("/add/{pet_id}")
-    Call<Void> addHistory(@Body History history, @Path("pet_id") int pet_id);
+    @POST("history/add/{pet_id}")
+    Call<History> addHistory(@Body History history, @Path("pet_id") int pet_id);
 
 }

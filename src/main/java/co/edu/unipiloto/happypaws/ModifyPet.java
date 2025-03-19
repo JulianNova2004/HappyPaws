@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.List;
 
 import models.Pet;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import network.PetService;
@@ -67,8 +68,8 @@ public class ModifyPet extends AppCompatActivity {
         String breedMStr = breedM.getText().toString().trim();
         breedMStr = breedMStr.isEmpty() ? "" : breedMStr;
 
-        double ageDouble = (!ageM.getText().toString().trim().isEmpty()) ?
-                Double.parseDouble(ageM.getText().toString().trim()) : 0.0;
+        String ageDouble = !ageM.getText().toString().trim().isEmpty() ? ageM.getText().toString().trim():"";
+
 
         int weightMInt = (!weightM.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(weightM.getText().toString().trim()) : 0;

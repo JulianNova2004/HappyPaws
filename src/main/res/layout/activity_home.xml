@@ -9,13 +9,12 @@
     tools:context=".Home">
 
     <TextView
-        android:id="@+id/title"
+        android:id="@+id/titleUsr"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:layout_marginBottom="16dp"
-        android:text="Welcome (userNameFromDb)!"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -68,5 +67,15 @@
         android:onClick="sendActivityViewMedicalHistory"
         android:padding="12dp"
         android:text="@string/viewMedicalHistory" />
+
+    <Button
+        android:id="@+id/delete_pet"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="12dp"
+        android:onClick="deletePet"
+        android:padding="12dp"
+        android:text="@string/deletePet" />
 
 </LinearLayout>

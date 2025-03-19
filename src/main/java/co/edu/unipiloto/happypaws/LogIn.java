@@ -74,9 +74,13 @@ public class LogIn extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
 
                     int userId = response.body().getUserId();
+                    String usernameStrR = response.body().getUsername();
+                    String passwordStrR = response.body().getPassword();
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("User_ID", userId);
+                    editor.putString("Username", usernameStrR);
+                    editor.putString("Password", passwordStrR);
                     editor.apply();
 
                     Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();

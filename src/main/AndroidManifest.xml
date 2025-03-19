@@ -16,6 +16,15 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ViewPets"
+            android:exported="false" />
+        <activity
+            android:name=".DeletePet"
+            android:exported="false" />
+        <activity
+            android:name=".MedicalHistory"
+            android:exported="false" />
+        <activity
             android:name=".AddConsultationMedicalHistory"
             android:exported="false" />
         <activity

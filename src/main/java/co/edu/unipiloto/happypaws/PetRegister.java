@@ -16,6 +16,8 @@ import android.widget.Toast;
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.gson.Gson;
+
 import java.util.ArrayList;
 
 import models.Pet;
@@ -140,7 +142,7 @@ public class PetRegister extends AppCompatActivity {
         for (int i = 1; i<container.getChildCount(); i += 8) {
             if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
-            double age = ((Double.parseDouble((((EditText) container.getChildAt(i + 1)).getText()).toString())));
+            String age = ((EditText) container.getChildAt(i + 1)).getText().toString();
             String race = ((EditText) container.getChildAt(i + 2)).getText().toString();
             int amount_of_walks = Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString());
             String food = ((EditText) container.getChildAt(i + 4)).getText().toString();
@@ -150,7 +152,11 @@ public class PetRegister extends AppCompatActivity {
 
             Pet pet = new Pet(name,race,amount_of_walks,amount_of_food,food,weight,description,age);
             pets.add(pet);
+            //Toast.makeText(PetRegister.this, "PET_age= " + pet.getAge() + ".", Toast.LENGTH_SHORT).show();
         }
+        Gson gson = new Gson();
+        String json = gson.toJson(pets);
+        Log.d("HappyPaws", "JSON enviado: " + json);
 
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = preferences.getInt("User_ID",-1);

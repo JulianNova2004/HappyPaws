@@ -3,9 +3,11 @@ package co.edu.unipiloto.happypaws;
 import android.app.DatePickerDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,6 +21,8 @@ import models.History;
 import network.HistoryService;
 import network.Retro;
 import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 
 public class VaccineDateRegister extends AppCompatActivity {
@@ -94,7 +98,28 @@ public class VaccineDateRegister extends AppCompatActivity {
         String commentsStr = comments.getText().toString().trim();
 
         History historyA = new History(dateStr, vaccineStr, doseInt, cuantityDouble, reasonStr, commentsStr);
-        Call<Void> call = historyService.addHistory(historyA, petIdInt);
+        Call<History> call = historyService.addHistory(historyA, petIdInt);
+
+        call.enqueue(new Callback<History>() {
+            @Override
+            public void onResponse(Call<History> call, Response<History> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(VaccineDateRegister.this, Home.class);
+                    startActivity(intent);}
+                else{
+                    Toast.makeText(VaccineDateRegister.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+
+                }
+            }
+
+            @Override
+            public void onFailure(Call<History> call, Throwable t) {
+                Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al agregar consulta", t);
+            }
+        });
     }
 
 
