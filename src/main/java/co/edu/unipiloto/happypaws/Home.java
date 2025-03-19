@@ -34,6 +34,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void viewPets(View view){
+        Intent intent = new Intent(this,ViewPets.class);
+        startActivity(intent);
+    }
+
     public void sendActivityModify(View view){
         Intent intent = new Intent(this,ShowPetsToModify.class);
         startActivity(intent);
