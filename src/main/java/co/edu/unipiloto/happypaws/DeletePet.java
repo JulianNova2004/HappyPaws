@@ -1,11 +1,13 @@
 package co.edu.unipiloto.happypaws;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,6 +24,7 @@ public class DeletePet extends AppCompatActivity {
     private LinearLayout contenedorDelete;
     private EditText petId, confirmation;
     private TextView txtView1, txtView2;
+    private boolean isValid;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,15 +38,32 @@ public class DeletePet extends AppCompatActivity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                search();
+                validateFields();
             }
         });
     }
 
+    public void validateFields(){
+        isValid = true;
+        String petIdStr = petId.getText().toString().trim();
+        if (petIdStr.isEmpty() || !petIdStr.matches("\\d+")) {
+            petId.setError("Debe ingresar un ID de mascota válido");
+            isValid = false;
+        }
+
+        if(isValid) {
+            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            show();
+        }
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+    }
+    /*
     public void search(){
         //buscar mascota y llamar show()
         show();
     }
+     */
+
 
 
     public void show(){
@@ -66,7 +86,7 @@ public class DeletePet extends AppCompatActivity {
         //btnConfirm = new Button(DeletePet.this);
         //btnConfirm = new Button(new ContextThemeWrapper(DeletePet.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
         //btnConfirm = new Button(new ContextThemeWrapper(DeletePet.this, androidx.appcompat.R.style.Widget_AppCompat_Button), null, 0);
-
+        
         btnConfirm = new MaterialButton(new ContextThemeWrapper(DeletePet.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
         btnConfirm.setText("Eliminar mascota");
         btnConfirm.setLayoutParams(layoutParams);
@@ -74,6 +94,13 @@ public class DeletePet extends AppCompatActivity {
         txtView2 = new TextView(DeletePet.this);
         txtView2.setText("Si su contraseña es correcta, se borrará su mascota");
         txtView2.setLayoutParams(layoutParams);
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                review();
+            }
+        });
 
         contenedorDelete.addView(txtView1);
         //contenedorDelete.setPadding(0, 30, 0, 60);
@@ -83,5 +110,30 @@ public class DeletePet extends AppCompatActivity {
         //contenedorDelete.setPadding(0, 30, 0, 60);
         contenedorDelete.addView(txtView2);
         contenedorDelete.setVisibility(View.VISIBLE);
+    }
+
+    public void review(){
+        boolean borrar = true;
+        SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        String password = sharedPreferences.getString("Password", "");
+        String passwordInput = confirmation.getText().toString();
+        if(password.isEmpty()){
+            Toast.makeText(this, "Revisar shared preference", Toast.LENGTH_SHORT).show();
+            borrar = false;
+        }
+        if(passwordInput.isEmpty()){
+            Toast.makeText(this, "No ha ingresado una contraseña", Toast.LENGTH_SHORT).show();
+            borrar = false;
+        }
+
+        if(borrar) {
+            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            deletePet();
+        }
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+    }
+
+    public void deletePet(){
+        //conexion db y rta
     }
 }

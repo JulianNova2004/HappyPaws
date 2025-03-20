@@ -105,14 +105,14 @@ public class LogIn extends AppCompatActivity {
 
         if(username.getText().toString().trim().isEmpty() ||password.getText().toString().trim().isEmpty()){
             loginIsValid=false;
-            Toast.makeText(this, "Bueno pero ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogIn.this, "Bueno pero ponga algo", Toast.LENGTH_SHORT).show();
         }
 
         if(loginIsValid) {
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogIn.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             access();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(LogIn.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 

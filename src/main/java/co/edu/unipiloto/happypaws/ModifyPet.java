@@ -55,8 +55,8 @@ public class ModifyPet extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 modifyPetInformation();
-                Intent intent = new Intent(ModifyPet.this,Home.class);
-                startActivity(intent);
+                //Intent intent = new Intent(ModifyPet.this,Home.class);
+                //startActivity(intent);
             }
         });
     }
@@ -98,8 +98,9 @@ public class ModifyPet extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-
                         Toast.makeText(ModifyPet.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ModifyPet.this,Home.class);
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(ModifyPet.this, "Error al modificar información de la mascota", Toast.LENGTH_SHORT).show();

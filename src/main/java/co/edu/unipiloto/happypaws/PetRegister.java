@@ -69,7 +69,7 @@ public class PetRegister extends AppCompatActivity {
 
         if(container.getChildCount()==0) {
             registerIsValid=false;
-            Toast.makeText(this, "Ingrese el numero de mascotas que tenga", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PetRegister.this, "Ingrese el numero de mascotas que tenga", Toast.LENGTH_SHORT).show();
         }
         //JSONArray petsArray = new JSONArray();
 
@@ -135,10 +135,10 @@ public class PetRegister extends AppCompatActivity {
             }
         }
         if(registerIsValid) {
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PetRegister.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             sendRegisterPets();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(PetRegister.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 
@@ -196,7 +196,7 @@ public class PetRegister extends AppCompatActivity {
         String numberOfPetsStr = numberOfPets.getText().toString().trim();
 
         if (numberOfPetsStr.isEmpty()) {
-            Toast.makeText(this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PetRegister.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
         int numberPets;
@@ -204,12 +204,12 @@ public class PetRegister extends AppCompatActivity {
         try {
             numberPets = Integer.parseInt(numberOfPetsStr);
         } catch (NumberFormatException e) { 
-            Toast.makeText(this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PetRegister.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (numberPets == 0) {
-            Toast.makeText(this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(PetRegister.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 

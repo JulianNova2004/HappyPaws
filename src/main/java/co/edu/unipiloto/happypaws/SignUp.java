@@ -128,10 +128,10 @@ public class SignUp extends AppCompatActivity {
         }
 
         if(registerIsValid){
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUp.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             signUpUser();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(SignUp.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 }

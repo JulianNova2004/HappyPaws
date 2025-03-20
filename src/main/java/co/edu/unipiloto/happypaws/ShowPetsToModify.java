@@ -60,7 +60,7 @@ public class ShowPetsToModify extends AppCompatActivity {
         String idPetStr = petId.getText().toString().trim();
 
         if (idPetStr.isEmpty()) {
-            Toast.makeText(this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
         int idPet;
@@ -68,16 +68,16 @@ public class ShowPetsToModify extends AppCompatActivity {
         try {
             idPet = Integer.parseInt(idPetStr);
         } catch (NumberFormatException e) {
-            Toast.makeText(this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
             return;
         }
 
         if (idPet == 0) {
-            Toast.makeText(this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("Pet_ID", idPet);

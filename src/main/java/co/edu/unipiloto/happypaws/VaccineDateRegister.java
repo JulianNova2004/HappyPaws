@@ -103,10 +103,10 @@ public class VaccineDateRegister extends AppCompatActivity {
         }
 
         if(isValid) {
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(VaccineDateRegister.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             sendVaccineInfo();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(VaccineDateRegister.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
     }
 
     public void showCalendar(){
