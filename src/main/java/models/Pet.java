@@ -18,12 +18,12 @@ public class Pet {
     
     private String description;
     
-    private String age;
+    private double age;
 
     private User user;
 
 
-    public Pet(String name, String race, int amount_of_walks, int amount_of_food, String food, int weight, String description,String age) {
+    public Pet(String name, String race, int amount_of_walks, int amount_of_food, String food, int weight, String description,double age) {
         this.name = name;
         this.race = race;
         this.amount_of_walks = amount_of_walks;
@@ -100,11 +100,11 @@ public class Pet {
         this.description = description;
     }
 
-    public String getAge() {
+    public double getAge() {
         return age;
     }
 
-    public void setAge(String age) {
+    public void setAge(double age) {
         this.age = age;
     }
 

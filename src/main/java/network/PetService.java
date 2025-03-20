@@ -5,6 +5,7 @@ import java.util.List;
 import models.Pet;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -26,4 +27,7 @@ public interface PetService {
         //confirmar
         @GET("pet/getPet/{id_pet}")
         Call<Pet> getPet(@Path("id_pet")int id_pet);
+
+        @DELETE("pet/delete/{id}")
+        Call<Pet> deletePet(@Path("id") int pet_id);
 }

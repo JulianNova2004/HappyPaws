@@ -81,39 +81,44 @@ public class PetRegister extends AppCompatActivity {
                 if (view instanceof EditText) {
                     EditText editText = (EditText) view;
                     String contenido = editText.getText().toString().trim();
-                    int input = editText.getInputType();
 
 
                     if (contenido.isEmpty()) {
                         editText.setError("Debe llenar este campo");
                         registerIsValid = false;
-                        //continue;
+                        continue;
                     }
+                    int input = editText.getInputType();
+                    String tag = (String) editText.getTag();
 
-                    if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER) {
-                        try {
-                            int numero = Integer.parseInt(contenido);
-
-                            if ("dailyWalks".equals(editText.getTag())) {
-                                if (numero <= 0 || numero > 5) {
-                                    editText.setError("Debe ingresar un número entre 1 y 5 para los paseos diarios");
-                                    registerIsValid = false;
-                                }
-                            }
-
-                            if ("amountOfMeals".equals(editText.getTag())) {
-                                if (numero <= 0 || numero > 5) {
-                                    editText.setError("Debe ingresar un número entre 1 y 5 para las comidas diarias");
-                                    registerIsValid = false;
-                                }
-                            }
-
-                        } catch (NumberFormatException e) {
+                    if (tag != null && (tag.equals("dailyWalks") || tag.equals("amountOfMeals"))) {
+                        if (!contenido.matches("\\d+")) {
                             editText.setError("Debe ingresar un número entero válido");
+                            registerIsValid = false;
+                            continue;
+                        }
+                        int numero = Integer.parseInt(contenido);
+                        if (numero <= 0 || numero > 5) {
+                            editText.setError("Debe ingresar un número entre 1 y 5");
                             registerIsValid = false;
                         }
                     }
 
+
+                    if ((input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
+                        if (!contenido.matches("\\d+(\\.\\d+)?")) {
+                            editText.setError("Debe ingresar un número decimal válido");
+                            registerIsValid = false;
+                        }
+                    }
+
+                    if (tag != null && tag.equals("petName")) {
+                        if (!contenido.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
+                            editText.setError("El nombre de la mascota solo debe contener letras");
+                            registerIsValid = false;
+                        }
+                    }
+                    /*
                     if ((input & InputType.TYPE_CLASS_NUMBER) == InputType.TYPE_CLASS_NUMBER &&
                             (input & InputType.TYPE_NUMBER_FLAG_DECIMAL) == InputType.TYPE_NUMBER_FLAG_DECIMAL) {
                         try {
@@ -123,6 +128,7 @@ public class PetRegister extends AppCompatActivity {
                             registerIsValid = false;
                         }
                     }
+                    */
                 }
 
 
@@ -142,7 +148,7 @@ public class PetRegister extends AppCompatActivity {
         for (int i = 1; i<container.getChildCount(); i += 8) {
             if(i!=1) i++;
             String name = ((EditText) container.getChildAt(i)).getText().toString();
-            String age = ((EditText) container.getChildAt(i + 1)).getText().toString();
+            Double age = Double.parseDouble(((EditText) container.getChildAt(i + 1)).getText().toString());
             String race = ((EditText) container.getChildAt(i + 2)).getText().toString();
             int amount_of_walks = Integer.parseInt(((EditText) container.getChildAt(i + 3)).getText().toString());
             String food = ((EditText) container.getChildAt(i + 4)).getText().toString();

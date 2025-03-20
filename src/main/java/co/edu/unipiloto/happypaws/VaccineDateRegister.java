@@ -30,6 +30,7 @@ public class VaccineDateRegister extends AppCompatActivity {
     private EditText petId, date, vaccine, dose, reason, cuantity, comments;
     private Button btnRegisterVaccineInformation;
     private HistoryService historyService;
+    private boolean isValid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,12 +54,59 @@ public class VaccineDateRegister extends AppCompatActivity {
         btnRegisterVaccineInformation.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                sendVaccineInfo();
-                Intent intent = new Intent(VaccineDateRegister.this,Home.class);
-                startActivity(intent);
+                validateFields();
+                //sendVaccineInfo();
+                //Intent intent = new Intent(VaccineDateRegister.this,Home.class);
+                //startActivity(intent);
             }
         });
 
+    }
+
+    public void validateFields(){
+        isValid = true;
+        String petIdStr = petId.getText().toString().trim();
+        if (petIdStr.isEmpty() || !petIdStr.matches("\\d+")) {
+            petId.setError("Debe ingresar un ID de mascota válido");
+            isValid = false;
+        }
+
+
+        String dateStr = date.getText().toString().trim();
+        if (dateStr.isEmpty()) {
+            date.setError("Debe seleccionar una fecha");
+            isValid = false;
+        }
+
+        String vaccineStr = vaccine.getText().toString().trim();
+        if (vaccineStr.isEmpty() || !vaccineStr.matches("^[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+$")) {
+            vaccine.setError("Debe ingresar un nombre válido para la vacuna");
+            isValid = false;
+        }
+
+        String doseStr = dose.getText().toString().trim();
+        if (doseStr.isEmpty() || !doseStr.matches("\\d+")) {
+            dose.setError("Debe ingresar un número válido de dosis");
+            isValid = false;
+        }
+
+        String cuantityStr = cuantity.getText().toString().trim();
+        if (cuantityStr.isEmpty() || !cuantityStr.matches("\\d+(\\.\\d+)?")) {
+            cuantity.setError("Debe ingresar una cantidad válida");
+            isValid = false;
+        }
+
+        String reasonStr = reason.getText().toString().trim();
+        if (reasonStr.isEmpty()) {
+            reason.setError("Debe ingresar una razón");
+            isValid = false;
+        }
+
+        if(isValid) {
+            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            sendVaccineInfo();
+        }
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
     }
 
     public void showCalendar(){
@@ -105,6 +153,7 @@ public class VaccineDateRegister extends AppCompatActivity {
             public void onResponse(Call<History> call, Response<History> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
+                    
                     Intent intent = new Intent(VaccineDateRegister.this, Home.class);
                     startActivity(intent);}
                 else{

@@ -68,8 +68,9 @@ public class ModifyPet extends AppCompatActivity {
         String breedMStr = breedM.getText().toString().trim();
         breedMStr = breedMStr.isEmpty() ? "" : breedMStr;
 
-        String ageDouble = !ageM.getText().toString().trim().isEmpty() ? ageM.getText().toString().trim():"";
-
+        //String ageDouble = !ageM.getText().toString().trim().isEmpty() ? ageM.getText().toString().trim():"";
+        Double ageDouble = (!ageM.getText().toString().trim().isEmpty()) ?
+                Double.parseDouble(ageM.getText().toString().trim()) : 0;
 
         int weightMInt = (!weightM.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(weightM.getText().toString().trim()) : 0;
