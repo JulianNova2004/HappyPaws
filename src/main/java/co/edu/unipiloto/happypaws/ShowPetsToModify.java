@@ -112,17 +112,20 @@ public class ShowPetsToModify extends AppCompatActivity {
                             int i = 1;
                             for(Pet pet: pets){
                                 TextView petD = new TextView(ShowPetsToModify.this);
-                                petD.setText("Pet number " + i);
-                                petD.setTextSize(18);
+                                petD.setText("PET NUMBER " + i);
+                                petD.setTextSize(20);
                                 petD.setGravity(Gravity.CENTER);
                                 petD.setPadding(0, 10, 0, 10);
                                 container.addView(petD);
 
-                                TextView idRecieved = createTextView(String.valueOf(pet.getPetId()));
-                                TextView nameRecieved = createTextView(pet.getName());
+                                TextView idRecieved = createTextView("Id: " + pet.getPetId());
+                                TextView nameRecieved = createTextView("Name: " + pet.getName());
+                                TextView space = createTextView(" ");
+                                space.setTextSize(10);
 
                                 container.addView(idRecieved);
                                 container.addView(nameRecieved);
+                                container.addView(space);
                                 i++;
                             }
                         }

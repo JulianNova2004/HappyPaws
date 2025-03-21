@@ -18,6 +18,7 @@ import java.util.List;
 
 import models.Pet;
 import network.PetService;
+import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -34,6 +35,7 @@ public class ViewPets extends AppCompatActivity {
         setContentView(R.layout.activity_view_pets);
 
         container = findViewById(R.id.containerPetsV);
+        petService = Retro.getClient().create(PetService.class);
         viewPets();
     }
 
@@ -63,21 +65,23 @@ public class ViewPets extends AppCompatActivity {
                             int i = 1;
                             for(Pet pet: pets){
                                 TextView petD = new TextView(ViewPets.this);
-                                petD.setText("Pet number " + i);
-                                petD.setTextSize(18);
+                                petD.setText("PET NUMBER " + i);
+                                petD.setTextSize(20);
                                 petD.setGravity(Gravity.CENTER);
                                 petD.setPadding(0, 10, 0, 10);
                                 container.addView(petD);
 
-                                TextView idRecieved = createTextView("Id:" + pet.getPetId());
-                                TextView nameRecieved = createTextView("Name:" + pet.getName());
-                                TextView braceRecieved = createTextView("Breed:" + pet.getRace());
-                                TextView ageRecieved = createTextView("Age:" + pet.getAge());
-                                TextView weightRecieved = createTextView("Weight:" + pet.getWeight());
-                                TextView foodRecieved = createTextView("Food:" + pet.getFood());
-                                TextView amountFoodRecieved = createTextView("Amount of food:" + pet.getAmount_of_food());
-                                TextView amountWalksRecieved = createTextView("Amount of walks:" + pet.getAmount_of_walks());
-                                TextView descriptionRecieved = createTextView("Description:" + pet.getDescription());
+                                TextView idRecieved = createTextView("Id: " + pet.getPetId());
+                                TextView nameRecieved = createTextView("Name: " + pet.getName());
+                                TextView braceRecieved = createTextView("Breed: " + pet.getRace());
+                                TextView ageRecieved = createTextView("Age: " + pet.getAge());
+                                TextView weightRecieved = createTextView("Weight: " + pet.getWeight());
+                                TextView foodRecieved = createTextView("Food: " + pet.getFood());
+                                TextView amountFoodRecieved = createTextView("Amount of food: " + pet.getAmount_of_food());
+                                TextView amountWalksRecieved = createTextView("Amount of walks: " + pet.getAmount_of_walks());
+                                TextView descriptionRecieved = createTextView("Description: " + pet.getDescription());
+                                TextView space = createTextView(" ");
+                                space.setTextSize(10);
                                 /*
                                 id
                                 name
@@ -98,6 +102,7 @@ public class ViewPets extends AppCompatActivity {
                                 container.addView(amountFoodRecieved);
                                 container.addView(amountWalksRecieved);
                                 container.addView(descriptionRecieved);
+                                container.addView(space);
                                 i++;
                             }
                         }
