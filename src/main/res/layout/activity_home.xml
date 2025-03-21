@@ -13,8 +13,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"
-        android:layout_marginBottom="16dp"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
         android:textSize="24sp"
         android:textStyle="bold" />
 
@@ -23,7 +23,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="sendActivityRegister"
         android:padding="12dp"
         android:text="@string/register" />
@@ -33,7 +33,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="viewPets"
         android:padding="12dp"
         android:text="@string/viewPets" />
@@ -43,7 +43,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="sendActivityModify"
         android:padding="12dp"
         android:text="@string/modifyPet" />
@@ -53,7 +53,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="sendActivityVaccineDateRegister"
         android:padding="12dp"
         android:text="@string/registerVaccine" />
@@ -63,7 +63,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="sendActivityAddConsultationMedicalHistory"
         android:padding="12dp"
         android:text="@string/addConsultation" />
@@ -73,7 +73,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="sendActivityViewMedicalHistory"
         android:padding="12dp"
         android:text="@string/viewMedicalHistory" />
@@ -83,7 +83,7 @@
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginBottom="12dp"
+        android:layout_marginBottom="20dp"
         android:onClick="deletePet"
         android:padding="12dp"
         android:text="@string/deletePet" />

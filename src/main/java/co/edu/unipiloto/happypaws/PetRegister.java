@@ -222,7 +222,8 @@ public class PetRegister extends AppCompatActivity {
             pet.setPadding(0, 10, 0, 10);
             container.addView(pet);
 
-            EditText nameInput = createEditText("Name", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            //EditText nameInput = createEditText("Name", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
+            EditText nameInput = createEditText("Name", InputType.TYPE_CLASS_TEXT);
             EditText age = createEditText("Age", InputType.TYPE_CLASS_NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL);
             EditText breedInput = createEditText("Breed", InputType.TYPE_CLASS_TEXT);
             EditText dailyWalksInput = createEditText("Daily Walks", InputType.TYPE_CLASS_NUMBER);

@@ -99,7 +99,13 @@ public class ShowPetsToModify extends AppCompatActivity {
                         container.removeAllViews();
                         List<Pet> pets = response.body();
                         if(pets.isEmpty()){
-                            Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
+                            TextView noPet = new TextView(ShowPetsToModify.this);
+                            noPet.setText("No tiene mascotas registradas");
+                            noPet.setTextSize(18);
+                            noPet.setGravity(Gravity.CENTER);
+                            noPet.setPadding(0, 10, 0, 10);
+                            container.addView(noPet);
+                            //Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
                         }
                         else{
                            // pets.addAll(response.body());
