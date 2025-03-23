@@ -111,29 +111,36 @@ public class MedicalHistory extends AppCompatActivity {
                             info.setPadding(0, 10, 0, 10);
                             containerC.addView(info);
 
-                            /*
-                            TextView idRecieved = createTextView("Id: " + pet.getPetId());
-                            TextView nameRecieved = createTextView("Name: " + pet.getName());
+                            TextView idRecieved = createTextView("Id: " + c.getId());
+                            TextView dateRecieved = createTextView("Fecha: " + c.getFecha());
+                            TextView reasonRecieved = createTextView("Motivo: " + c.getMotivo());
+                            TextView stateRecieved = createTextView("Estado: " + c.getEstado());
+                            TextView vetRecieved = createTextView("Veterinario: " + c.getVeterinario());
+                            TextView resultsRecieved = createTextView("Veterinario: " + c.getVeterinario());
                             TextView space = createTextView(" ");
                             space.setTextSize(10);
 
                             containerC.addView(idRecieved);
-                            containerC.addView(nameRecieved);
+                            containerC.addView(dateRecieved);
+                            containerC.addView(reasonRecieved);
+                            containerC.addView(stateRecieved);
+                            containerC.addView(vetRecieved);
+                            containerC.addView(resultsRecieved);
+                            //containerC.addView(nameRecieved);
                             containerC.addView(space);
-                            
-                             */
+
                             i++;
                         }
                     }
 
                 } else {
-                    Toast.makeText(MedicalHistory.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Consulta>> call, Throwable t) {
                 Toast.makeText(MedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al iniciar sesión", t);
+                Log.i("HappyPaws", "Error al buscar consultas", t);
             }
 
         });
