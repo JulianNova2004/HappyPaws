@@ -79,6 +79,16 @@
         android:text="@string/viewMedicalHistory" />
 
     <Button
+        android:id="@+id/send_Map_activity"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:onClick="sendActivityMap"
+        android:padding="12dp"
+        android:text="@string/map" />
+
+    <Button
         android:id="@+id/delete_pet"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

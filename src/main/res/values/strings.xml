@@ -16,6 +16,7 @@
     <string name="registerVaccine">Register Pet Vaccine</string>
     <string name="addConsultation">Add Pet Consultation</string>
     <string name="viewMedicalHistory">View Medical History</string>
+    <string name="map">View Live Location Map</string>
     <string name="deletePet">Delete Pet</string>
 
 
