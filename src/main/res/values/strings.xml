@@ -11,18 +11,48 @@
     <string name="sign_up">Sign UP!</string>
 
     <string name="register">Register pet!</string>
-    <!--
-    <string name="name">Name</string>
+    <string name="viewPets">View my pets!</string>
+    <string name="modifyPet">Modify pets</string>
+    <string name="registerVaccine">Register Pet Vaccine</string>
+    <string name="addConsultation">Add Pet Consultation</string>
+    <string name="viewMedicalHistory">View Medical History</string>
+    <string name="map">View Live Location Map</string>
+    <string name="deletePet">Delete Pet</string>
+
+
+    <string name="petName">Pet Name</string>
     <string name="breed">Breed</string>
     <string name="description">Description</string>
     <string name="daily_walks">Amount of daily walks</string>
+    <string name="daily_food">Amount of daily food</string>
     <string name="food">Food</string>
     <string name="weight">Weight (KG)</string>
     <string name="ID_owner">Enter your ID</string>
-    -->
+    <string name="age">Age</string>
+    <string name="modifyPetInformation">Modify Information</string>
+
 
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
+
+    <string name="petIdH">Pet ID</string>
+    <string name="vaccineDate">Date</string>
+    <string name="vaccine">Vaccine</string>
+    <string name="dose">Dose</string>
+    <string name="reason">Reason</string>
+    <string name="cuantity">Cuantity of dose</string>
+    <string name="comments">Comments</string>
+
+    <string name="petIdC">Pet ID</string>
+    <string name="consultationDate">Date</string>
+    <string name="consultationReason">Reason</string>
+    <string name="petState">State of the pet</string>
+    <string name="designatedVeterinary">Designated Veterinary</string>
+    <string name="consultationResults">Results of the Consultation</string>
+
+    <string name="next">Next Step</string>
+
+    <string name="viewInfoC">View Information</string>
 
 
 </resources>

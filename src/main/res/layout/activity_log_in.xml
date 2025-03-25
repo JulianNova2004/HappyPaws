@@ -45,9 +45,11 @@
         android:layout_height="wrap_content"
         android:text="@string/logInFP"
         android:layout_gravity="center"
-        android:onClick="startLogIn"
         android:layout_marginBottom="12dp"
         android:padding="12dp" />
+    <!--
+    android:onClick="startLogIn"
+    -->
 
     <!--
     <Button

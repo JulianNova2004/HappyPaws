@@ -7,97 +7,87 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".SignUp">
+    tools:context=".VaccineDateRegister">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="SIGN UP!"
+        android:text="Vaccine Date Register!"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_margin="16dp"/>
+        android:layout_marginTop="160dp"/>
 
     <EditText
-        android:id="@+id/username"
+        android:id="@+id/petIdH"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="@string/username"
-        android:inputType="text"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-    <EditText
-        android:id="@+id/password"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/password"
-        android:inputType="textPassword"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/firstname"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/first_name"
-        android:inputType="textCapWords"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/lastname"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/last_name"
-        android:inputType="textCapWords"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/ID"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="@string/ID"
+        android:hint="@string/petIdH"
         android:inputType="number"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/address"
+        android:id="@+id/vaccineDate"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="@string/address"
-        android:inputType="text"
+        android:hint="@string/vaccineDate"
+        android:inputType="date"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+    <EditText
+        android:id="@+id/vaccine"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/vaccine"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/mail"
+        android:id="@+id/dose"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="@string/mail"
-        android:inputType="textEmailAddress"
+        android:hint="@string/dose"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/phone_number"
+        android:id="@+id/reason"
         android:layout_width="200dp"
         android:layout_height="50dp"
-        android:hint="@string/phone_number"
-        android:inputType="phone"
+        android:hint="@string/reason"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/cuantity"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/cuantity"
+        android:inputType="numberDecimal"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/comments"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="@string/comments"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <Button
-        android:id="@+id/sign_up"
+        android:id="@+id/registerVaccineInformation"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/sign_up"
+        android:text="Register Vaccine Date"
         android:layout_gravity="center"
         android:layout_margin="16dp"
-        android:padding="12dp"
-        android:onClick="onSendMessage"/>
+        android:padding="12dp"/>
 
 </LinearLayout>
