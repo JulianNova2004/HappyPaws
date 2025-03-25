@@ -108,7 +108,7 @@ public class ShowPetsToModify extends AppCompatActivity {
                             //Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                           // pets.addAll(response.body());
+                            // pets.addAll(response.body());
                             int i = 1;
                             for(Pet pet: pets){
                                 TextView petD = new TextView(ShowPetsToModify.this);

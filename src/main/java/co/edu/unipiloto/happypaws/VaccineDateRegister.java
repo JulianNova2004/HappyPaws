@@ -153,7 +153,7 @@ public class VaccineDateRegister extends AppCompatActivity {
             public void onResponse(Call<History> call, Response<History> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
-                    
+
                     Intent intent = new Intent(VaccineDateRegister.this, Home.class);
                     startActivity(intent);}
                 else{

@@ -153,9 +153,9 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Consulta> call, Response<Consulta> response) {
                         if (response.isSuccessful()) {
-                        Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
-                        startActivity(intent);}
+                            Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
+                            startActivity(intent);}
                         else{
                             Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                         }
