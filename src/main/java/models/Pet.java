@@ -3,21 +3,21 @@ package models;
 public class Pet {
 
     private Integer petId;
-
+    
     private String name;
-
+    
     private String race;
-
+    
     private int amount_of_walks;
-
+    
     private int amount_of_food;
-
+    
     private String food;
-
+    
     private int weight;
-
+    
     private String description;
-
+    
     private double age;
 
     private User user;

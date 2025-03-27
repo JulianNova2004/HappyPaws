@@ -108,19 +108,19 @@ public class ViewPets extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(ViewPets.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewPets.this, "Error al obtener las mascotas", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<List<Pet>> call, Throwable t) {
                     Toast.makeText(ViewPets.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al iniciar sesión", t);
+                    Log.i("HappyPaws", "Error en la visualizacion de mascotas", t);
                 }
 
             });
         }
         else{
-            Toast.makeText(ViewPets.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewPets.this, "Error con el ID de la sesión", Toast.LENGTH_SHORT).show();
         }
 
     }

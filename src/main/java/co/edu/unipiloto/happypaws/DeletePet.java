@@ -99,7 +99,7 @@ public class DeletePet extends AppCompatActivity {
         //btnConfirm = new Button(DeletePet.this);
         //btnConfirm = new Button(new ContextThemeWrapper(DeletePet.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
         //btnConfirm = new Button(new ContextThemeWrapper(DeletePet.this, androidx.appcompat.R.style.Widget_AppCompat_Button), null, 0);
-
+        
         btnConfirm = new MaterialButton(new ContextThemeWrapper(DeletePet.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
         btnConfirm.setText("Eliminar mascota");
         btnConfirm.setLayoutParams(layoutParams);
@@ -169,9 +169,9 @@ public class DeletePet extends AppCompatActivity {
                 Log.i("HappyPaws", "Error al agregar consulta", t);
             }
         });
-        //else {
-        //    Toast.makeText(DeletePet.this, "Toast de error", Toast.LENGTH_SHORT).show();
-        //}
+            //else {
+            //    Toast.makeText(DeletePet.this, "Toast de error", Toast.LENGTH_SHORT).show();
+            //}
 
     }
 }

@@ -153,12 +153,12 @@ public class VaccineDateRegister extends AppCompatActivity {
             public void onResponse(Call<History> call, Response<History> response) {
                 if (response.isSuccessful()) {
                     Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
-
+                    
                     Intent intent = new Intent(VaccineDateRegister.this, Home.class);
                     startActivity(intent);}
                 else{
-                    Toast.makeText(VaccineDateRegister.this, "TAS MAL", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VaccineDateRegister.this, "Error con agregar vacunas", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
 
                 }
             }
@@ -166,7 +166,7 @@ public class VaccineDateRegister extends AppCompatActivity {
             @Override
             public void onFailure(Call<History> call, Throwable t) {
                 Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al agregar consulta", t);
+                Log.i("HappyPaws", "Error al agregar vacuna", t);
             }
         });
     }
