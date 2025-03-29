@@ -149,6 +149,56 @@ public class DeletePet extends AppCompatActivity {
         int petIdInt = (!petId.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(petId.getText().toString().trim()) : 0;
 
+        if(petIdInt != 0){
+            Call<Pet> getCall = petService.getPet(petIdInt);
+            getCall.enqueue(new Callback<Pet>(){
+                @Override
+                public void onResponse(Call<Pet> getCall, Response<Pet> response) {
+                    if (response.isSuccessful()) {
+
+                        Call<Pet> deleteCall = petService.deletePet(petIdInt);
+
+                        deleteCall.enqueue(new Callback<Pet>() {
+                            @Override
+                            public void onResponse(Call<Pet> deleteCall, Response<Pet> response) {
+                                if (response.isSuccessful()) {
+                                    Toast.makeText(DeletePet.this, "Mascota eliminada :c", Toast.LENGTH_SHORT).show();
+                                    Intent intent = new Intent(DeletePet.this, Home.class);
+                                    startActivity(intent);
+                                }
+                                else{
+                                    Toast.makeText(DeletePet.this, "Error al eliminar la mascota. Revisar ID de la mascota", Toast.LENGTH_SHORT).show();
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<Pet> deleteCall, Throwable t) {
+                                Toast.makeText(DeletePet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                                Log.i("HappyPaws", "Error al eliminar mascota", t);
+                            }
+                        });
+
+                        //Toast.makeText(DeletePet.this, "Mascota encontrada", Toast.LENGTH_SHORT).show();
+                        //pet = response.body();
+                        //Log.i("hapi", "callPet: "+response.body().getPetId());
+                        //state = true;
+                        //Log.i("stat", "callPet: "+state);
+                        //onSuccess.run();
+                    } else {
+                        Toast.makeText(DeletePet.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                @Override
+                public void onFailure(Call<Pet> getCall, Throwable t) {
+                    Toast.makeText(DeletePet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al encontrar mascota", t);
+                }
+            });
+
+        }else{Toast.makeText(DeletePet.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
+
+
+        /*
         Call<Pet> call = petService.deletePet(petIdInt);
 
         call.enqueue(new Callback<Pet>() {
@@ -159,19 +209,21 @@ public class DeletePet extends AppCompatActivity {
                     Intent intent = new Intent(DeletePet.this, Home.class);
                     startActivity(intent);}
                 else{
-                    Toast.makeText(DeletePet.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeletePet.this, "Error al eliminar la mascota. Revisar ID de la mascota", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Pet> call, Throwable t) {
                 Toast.makeText(DeletePet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al agregar consulta", t);
+                Log.i("HappyPaws", "Error al eliminar mascota", t);
             }
         });
             //else {
             //    Toast.makeText(DeletePet.this, "Toast de error", Toast.LENGTH_SHORT).show();
             //}
+
+         */
 
     }
 }
