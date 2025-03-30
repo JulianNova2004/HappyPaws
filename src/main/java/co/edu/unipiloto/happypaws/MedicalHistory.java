@@ -134,7 +134,7 @@ public class MedicalHistory extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(MedicalHistory.this, "Error en la consulta de informacion", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override

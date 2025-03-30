@@ -64,7 +64,7 @@ public class Home extends AppCompatActivity {
     public void sendActivityMap(View view){
 
         //view_medical_history_home --> class = ViewMedicalHistory
-        Intent intent = new Intent(this,Maps.class);
+        Intent intent = new Intent(this,SelectPetUbi.class);
         startActivity(intent);
     }
 
@@ -72,6 +72,13 @@ public class Home extends AppCompatActivity {
 
         //view_medical_history_home --> class = DeletePet
         Intent intent = new Intent(this,DeletePet.class);
+        startActivity(intent);
+    }
+
+    public void viewChats(View view){
+
+        //view_medical_history_home --> class = DeletePet
+        Intent intent = new Intent(this,ViewChats.class);
         startActivity(intent);
     }
 

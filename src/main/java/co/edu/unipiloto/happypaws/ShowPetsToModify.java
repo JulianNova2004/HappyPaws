@@ -77,7 +77,7 @@ public class ShowPetsToModify extends AppCompatActivity {
             return;
         }
 
-        //Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         SharedPreferences.Editor editor = preferences.edit();
         editor.putInt("Pet_ID", idPet);
@@ -108,7 +108,7 @@ public class ShowPetsToModify extends AppCompatActivity {
                             //Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
                         }
                         else{
-                           // pets.addAll(response.body());
+                            // pets.addAll(response.body());
                             int i = 1;
                             for(Pet pet: pets){
                                 TextView petD = new TextView(ShowPetsToModify.this);
@@ -131,19 +131,19 @@ public class ShowPetsToModify extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(ShowPetsToModify.this, "Error en la consulta de informacion", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowPetsToModify.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<List<Pet>> call, Throwable t) {
                     Toast.makeText(ShowPetsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al mostrar las mascotas", t);
+                    Log.i("HappyPaws", "Error al iniciar sesión", t);
                 }
 
             });
         }
         else{
-            Toast.makeText(ShowPetsToModify.this, "Error en el ID de la sesión", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowPetsToModify.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
         }
 
     }

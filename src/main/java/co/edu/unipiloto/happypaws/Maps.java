@@ -3,11 +3,6 @@ package co.edu.unipiloto.happypaws;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import androidx.fragment.app.FragmentActivity;
 
@@ -27,20 +22,8 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
-import models.Pet;
-import network.PetService;
-import network.Retro;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
-    private EditText petId;
-    private Button btnSearchPet;
-    private FrameLayout mapContainer;
-
-    private PetService petService;
     private GoogleMap mMap;
     private Marker mascotaMarker;
     private Polyline rutaPolyline;
@@ -48,6 +31,71 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     private int index = 0;
 
     private List<LatLng> rutaSimulada;
+
+    /*
+    private List<List<LatLng>> rutasBogota = Arrays.asList(
+            Arrays.asList( // Ruta 1: Chapiyork
+                    new LatLng(4.648620, -74.064710),
+                    new LatLng(4.650320, -74.062810),
+                    new LatLng(4.652000, -74.061500),
+                    new LatLng(4.653600, -74.060200),
+                    new LatLng(4.655200, -74.059000),
+                    new LatLng(4.657000, -74.058000),
+                    new LatLng(4.658500, -74.056800),
+                    new LatLng(4.660000, -74.055600),
+                    new LatLng(4.661500, -74.054400),
+                    new LatLng(4.663000, -74.053200),
+                    new LatLng(4.664500, -74.052000),
+                    new LatLng(4.666000, -74.051000),
+                    new LatLng(4.668000, -74.050000)
+            ),
+            Arrays.asList( // Ruta 2: La Candelaria
+                    new LatLng(4.598080, -74.076043),
+                    new LatLng(4.599500, -74.075100),
+                    new LatLng(4.600800, -74.074200),
+                    new LatLng(4.602100, -74.073300),
+                    new LatLng(4.603400, -74.072400),
+                    new LatLng(4.605000, -74.071500),
+                    new LatLng(4.606500, -74.070400),
+                    new LatLng(4.608000, -74.069300),
+                    new LatLng(4.609500, -74.068200),
+                    new LatLng(4.611000, -74.067100),
+                    new LatLng(4.612500, -74.066000),
+                    new LatLng(4.614000, -74.065000),
+                    new LatLng(4.615500, -74.064000)
+            ),
+            Arrays.asList( // Ruta 3: Usaquén
+                    new LatLng(4.693000, -74.030800),
+                    new LatLng(4.694500, -74.029900),
+                    new LatLng(4.696000, -74.029000),
+                    new LatLng(4.697500, -74.028100),
+                    new LatLng(4.698800, -74.027500),
+                    new LatLng(4.700200, -74.027000),
+                    new LatLng(4.701800, -74.026500),
+                    new LatLng(4.703400, -74.026000),
+                    new LatLng(4.705000, -74.025500),
+                    new LatLng(4.706500, -74.025000),
+                    new LatLng(4.708000, -74.024500),
+                    new LatLng(4.709500, -74.024000),
+                    new LatLng(4.711000, -74.023500)
+            ),
+            Arrays.asList( // Ruta 4: Suba
+                    new LatLng(4.742500, -74.098000),
+                    new LatLng(4.744000, -74.096800),
+                    new LatLng(4.745500, -74.095600),
+                    new LatLng(4.747000, -74.094400),
+                    new LatLng(4.748500, -74.093200),
+                    new LatLng(4.750000, -74.092000),
+                    new LatLng(4.751500, -74.090800),
+                    new LatLng(4.753000, -74.089600),
+                    new LatLng(4.754500, -74.088400),
+                    new LatLng(4.756000, -74.087200),
+                    new LatLng(4.757500, -74.086000),
+                    new LatLng(4.759000, -74.085000),
+                    new LatLng(4.760500, -74.084000)  
+            )
+    );
+     */
 
     private List<List<LatLng>> rutasBogota = Arrays.asList(
             Arrays.asList( // Ruta 1: Chapiyork
@@ -92,35 +140,29 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             )
     );
 
+    /*
+    private List<LatLng> rutaSimulada = Arrays.asList(
+            new LatLng(-12.046374, -77.042793),
+            new LatLng(-12.046500, -77.042900),
+            new LatLng(-12.046650, -77.043050),
+            new LatLng(-12.046800, -77.043200),
+            new LatLng(-12.046950, -77.043350),
+            new LatLng(-12.047100, -77.043500),
+            new LatLng(-12.047250, -77.043650),
+            new LatLng(-12.047400, -77.043800),
+            new LatLng(-12.047550, -77.043950),
+            new LatLng(-12.047700, -77.044100),
+            new LatLng(-12.047850, -77.044250)
+    );
+     */
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_maps);
-        petId = findViewById(R.id.petIdM);
-        btnSearchPet = findViewById(R.id.search_pet);
-        mapContainer = findViewById(R.id.map_container);
-        petService = Retro.getClient().create(PetService.class);
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
-
-        if (mapFragment != null) {
-            mapFragment.getMapAsync(this);
-        } else {
-            Toast.makeText(this, "Error al cargar el mapa", Toast.LENGTH_SHORT).show();
-        }
-
-        //mapFragment.getMapAsync(this);
-        btnSearchPet.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String petIdStr = petId.getText().toString().trim();
-                if (!petIdStr.isEmpty()) {
-                    trackPet(Integer.parseInt(petIdStr));
-                } else {
-                    Toast.makeText(Maps.this, "Ingrese un ID de mascota", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
+        mapFragment.getMapAsync(this);
     }
 
     @Override
@@ -140,32 +182,7 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
         mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rutaSimulada.get(0), 16));
 
-        //iniciarSimulacion();
-    }
-
-    private void trackPet(int petIdInt){
-
-        Call<Pet> call = petService.getPet(petIdInt);
-        call.enqueue(new Callback<Pet>(){
-            @Override
-            public void onResponse(Call<Pet> call, Response<Pet> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    //Pet pet = response.body();
-                    //showPetOnMap(new LatLng(pet.getLatitude(), pet.getLongitude()));
-                    mapContainer.setVisibility(View.VISIBLE);
-                    iniciarSimulacion();
-
-                } else {
-                    Toast.makeText(Maps.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Pet> call, Throwable t) {
-                Toast.makeText(Maps.this, "Error al conectar con el servidor", Toast.LENGTH_SHORT).show();
-            }
-        });
-
+        iniciarSimulacion();
     }
 
     private void seleccionarRutaAleatoria() {

@@ -167,7 +167,7 @@ public class PetRegister extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = preferences.getInt("User_ID",-1);
 
-        //Toast.makeText(PetRegister.this, "User_ID = " + userId + ".", Toast.LENGTH_SHORT).show();
+        Toast.makeText(PetRegister.this, "User_ID = " + userId + ".", Toast.LENGTH_SHORT).show();
         Call<Void> call = petService.savePets(pets,userId);
         call.enqueue(new Callback<Void>() {
             @Override

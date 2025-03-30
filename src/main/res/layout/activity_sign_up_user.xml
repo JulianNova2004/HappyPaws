@@ -98,8 +98,8 @@
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:padding="12dp"/>
-        <!--
-        android:onClick="onSendMessage"/>
-        -->
+    <!--
+    android:onClick="onSendMessage"/>
+    -->
 
 </LinearLayout>
