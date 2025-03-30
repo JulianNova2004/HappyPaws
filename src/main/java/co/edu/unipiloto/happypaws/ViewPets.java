@@ -1,13 +1,9 @@
 package co.edu.unipiloto.happypaws;
 
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -18,75 +14,32 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import models.Pet;
-import models.User;
 import network.PetService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShowPetsToModify extends AppCompatActivity {
+public class ViewPets extends AppCompatActivity {
 
     private PetService petService;
     private LinearLayout container;
-    private Button btnSendModifyPets;
-    private EditText petId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_show_pets_to_modify);
-        container = findViewById(R.id.containerPets);
-        btnSendModifyPets = findViewById(R.id.send_modify_pet);
-        petId = findViewById(R.id.petID);
+        setContentView(R.layout.activity_view_pets);
+
+        container = findViewById(R.id.containerPetsV);
         petService = Retro.getClient().create(PetService.class);
-        btnSendModifyPets.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                sendPetId();
-
-            }
-        });
-        sendPets();
+        viewPets();
     }
 
-    public void sendPetId(){
-
-        String idPetStr = petId.getText().toString().trim();
-
-        if (idPetStr.isEmpty()) {
-            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        int idPet;
-
-        try {
-            idPet = Integer.parseInt(idPetStr);
-        } catch (NumberFormatException e) {
-            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        if (idPet == 0) {
-            Toast.makeText(ShowPetsToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("Pet_ID", idPet);
-        editor.apply();
-        Intent intent = new Intent(ShowPetsToModify.this, ModifyPet.class);
-        startActivity(intent);
-    }
-
-    public void sendPets(){
+    public void viewPets(){
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = sharedPreferences.getInt("User_ID", -1);
 
@@ -99,19 +52,19 @@ public class ShowPetsToModify extends AppCompatActivity {
                         container.removeAllViews();
                         List<Pet> pets = response.body();
                         if(pets.isEmpty()){
-                            TextView noPet = new TextView(ShowPetsToModify.this);
+                            TextView noPet = new TextView(ViewPets.this);
                             noPet.setText("No tiene mascotas registradas");
                             noPet.setTextSize(18);
                             noPet.setGravity(Gravity.CENTER);
                             noPet.setPadding(0, 10, 0, 10);
                             container.addView(noPet);
-                            //Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(ViewPets.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
                         }
                         else{
                             // pets.addAll(response.body());
                             int i = 1;
                             for(Pet pet: pets){
-                                TextView petD = new TextView(ShowPetsToModify.this);
+                                TextView petD = new TextView(ViewPets.this);
                                 petD.setText("PET NUMBER " + i);
                                 petD.setTextSize(20);
                                 petD.setGravity(Gravity.CENTER);
@@ -120,30 +73,54 @@ public class ShowPetsToModify extends AppCompatActivity {
 
                                 TextView idRecieved = createTextView("Id: " + pet.getPetId());
                                 TextView nameRecieved = createTextView("Name: " + pet.getName());
+                                TextView braceRecieved = createTextView("Breed: " + pet.getRace());
+                                TextView ageRecieved = createTextView("Age: " + pet.getAge());
+                                TextView weightRecieved = createTextView("Weight: " + pet.getWeight());
+                                TextView foodRecieved = createTextView("Food: " + pet.getFood());
+                                TextView amountFoodRecieved = createTextView("Amount of food: " + pet.getAmount_of_food());
+                                TextView amountWalksRecieved = createTextView("Amount of walks: " + pet.getAmount_of_walks());
+                                TextView descriptionRecieved = createTextView("Description: " + pet.getDescription());
                                 TextView space = createTextView(" ");
                                 space.setTextSize(10);
-
+                                /*
+                                id
+                                name
+                                brace
+                                age
+                                weight
+                                food
+                                amount_of_food
+                                amount_of_walks
+                                description
+                                 */
                                 container.addView(idRecieved);
                                 container.addView(nameRecieved);
+                                container.addView(braceRecieved);
+                                container.addView(ageRecieved);
+                                container.addView(weightRecieved);
+                                container.addView(foodRecieved);
+                                container.addView(amountFoodRecieved);
+                                container.addView(amountWalksRecieved);
+                                container.addView(descriptionRecieved);
                                 container.addView(space);
                                 i++;
                             }
                         }
 
                     } else {
-                        Toast.makeText(ShowPetsToModify.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ViewPets.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<List<Pet>> call, Throwable t) {
-                    Toast.makeText(ShowPetsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(ViewPets.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     Log.i("HappyPaws", "Error al iniciar sesión", t);
                 }
 
             });
         }
         else{
-            Toast.makeText(ShowPetsToModify.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewPets.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
         }
 
     }

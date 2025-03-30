@@ -107,7 +107,7 @@ public class SignUp extends AppCompatActivity {
         String phoneNumberStr = phoneNumber.getText().toString().trim();
 
         if(usernameStr.isEmpty() || passwordStr.isEmpty() || firstnameStr.isEmpty() || lastnameStr.isEmpty() ||
-            IDStr.isEmpty() || addressStr.isEmpty() || mailStr.isEmpty() || phoneNumberStr.isEmpty()){
+                IDStr.isEmpty() || addressStr.isEmpty() || mailStr.isEmpty() || phoneNumberStr.isEmpty()){
             Toast.makeText(this, "Bot, ningún campo puede quedar vacio", Toast.LENGTH_SHORT).show();
             registerIsValid = false;
         }
@@ -128,10 +128,10 @@ public class SignUp extends AppCompatActivity {
         }
 
         if(registerIsValid){
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(SignUp.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             signUpUser();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(SignUp.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 }

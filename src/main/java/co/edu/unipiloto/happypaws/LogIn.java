@@ -74,9 +74,13 @@ public class LogIn extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
 
                     int userId = response.body().getUserId();
+                    String usernameStrR = response.body().getUsername();
+                    String passwordStrR = response.body().getPassword();
 
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putInt("User_ID", userId);
+                    editor.putString("Username", usernameStrR);
+                    editor.putString("Password", passwordStrR);
                     editor.apply();
 
                     Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
@@ -101,14 +105,14 @@ public class LogIn extends AppCompatActivity {
 
         if(username.getText().toString().trim().isEmpty() ||password.getText().toString().trim().isEmpty()){
             loginIsValid=false;
-            Toast.makeText(this, "Bueno pero ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogIn.this, "Bueno pero ponga algo", Toast.LENGTH_SHORT).show();
         }
 
         if(loginIsValid) {
-            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            Toast.makeText(LogIn.this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
             access();
         }
-        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        else Toast.makeText(LogIn.this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
 
     }
 

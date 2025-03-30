@@ -33,7 +33,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
     private EditText date, reason, petState, vet, result, petId;
 
     private Button btnSendInformationMedicalHistory;
-    boolean state = false;
+    boolean state = false, isValid;
 
     private Pet pet;
     private ConsultationService consultationService;
@@ -60,12 +60,58 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
         btnSendInformationMedicalHistory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                sendConsultationInfo();
+                validateFields();
                 Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
                 startActivity(intent);
             }
         });
     }
+
+    public void validateFields(){
+        isValid = true;
+        String petIdStr = petId.getText().toString().trim();
+        if (petIdStr.isEmpty() || !petIdStr.matches("\\d+")) {
+            petId.setError("Debe ingresar un ID de mascota válido");
+            isValid = false;
+        }
+
+        String dateStr = date.getText().toString().trim();
+        if (dateStr.isEmpty()) {
+            date.setError("Debe seleccionar una fecha");
+            isValid = false;
+        }
+
+        String reasonStr = reason.getText().toString().trim();
+        if (reasonStr.isEmpty()) {
+            reason.setError("Este campo es obligatorio");
+            isValid = false;
+        }
+
+        String petStateStr = petState.getText().toString().trim();
+        if (petStateStr.isEmpty()) {
+            petState.setError("Este campo es obligatorio");
+            isValid = false;
+        }
+
+        String vetStr = vet.getText().toString().trim();
+        if (vetStr.isEmpty()) {
+            vet.setError("Este campo es obligatorio");
+            isValid = false;
+        }
+
+        String resultStr = result.getText().toString().trim();
+        if (resultStr.isEmpty()) {
+            result.setError("Este campo es obligatorio");
+            isValid = false;
+        }
+
+        if(isValid) {
+            Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
+            sendConsultationInfo();
+        }
+        else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+    }
+
 
     public void showCalendar(){
         final Calendar calendar = Calendar.getInstance();
@@ -107,9 +153,9 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<Consulta> call, Response<Consulta> response) {
                         if (response.isSuccessful()) {
-                        Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
-                        startActivity(intent);}
+                            Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
+                            startActivity(intent);}
                         else{
                             Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                         }

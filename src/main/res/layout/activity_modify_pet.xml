@@ -34,7 +34,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/petName"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
@@ -43,7 +43,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/breed"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
@@ -70,7 +70,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/food"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
@@ -98,7 +98,7 @@
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="@string/description"
-        android:inputType="text"
+        android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 

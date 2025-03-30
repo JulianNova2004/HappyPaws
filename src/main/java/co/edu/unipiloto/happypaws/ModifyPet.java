@@ -20,6 +20,7 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.List;
 
 import models.Pet;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import network.PetService;
@@ -54,8 +55,8 @@ public class ModifyPet extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 modifyPetInformation();
-                Intent intent = new Intent(ModifyPet.this,Home.class);
-                startActivity(intent);
+                //Intent intent = new Intent(ModifyPet.this,Home.class);
+                //startActivity(intent);
             }
         });
     }
@@ -67,8 +68,9 @@ public class ModifyPet extends AppCompatActivity {
         String breedMStr = breedM.getText().toString().trim();
         breedMStr = breedMStr.isEmpty() ? "" : breedMStr;
 
-        String ageDouble = !ageM.getText().toString().trim().isEmpty() ? ageM.getText().toString().trim():"";
-
+        //String ageDouble = !ageM.getText().toString().trim().isEmpty() ? ageM.getText().toString().trim():"";
+        Double ageDouble = (!ageM.getText().toString().trim().isEmpty()) ?
+                Double.parseDouble(ageM.getText().toString().trim()) : 0;
 
         int weightMInt = (!weightM.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(weightM.getText().toString().trim()) : 0;
@@ -96,8 +98,9 @@ public class ModifyPet extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-
                         Toast.makeText(ModifyPet.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(ModifyPet.this,Home.class);
+                        startActivity(intent);
 
                     } else {
                         Toast.makeText(ModifyPet.this, "Error al modificar información de la mascota", Toast.LENGTH_SHORT).show();
