@@ -14,6 +14,9 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonSyntaxException;
+
 import org.java_websocket.client.WebSocketClient;
 import org.java_websocket.handshake.ServerHandshake;
 
@@ -24,6 +27,7 @@ import java.util.List;
 
 import models.Mensaje;
 import models.MessageAdapter;
+import models.StompClient;
 import network.ChatService;
 import network.Retro;
 import retrofit2.Call;
@@ -39,7 +43,12 @@ public class Chat extends AppCompatActivity {
     private Button btnSend;
     private ChatService chatService;
     private int chatId;
-    private WebSocketClient webSocketClient;
+    private int userId;
+    private static final String WEBSOCKET_URL = "ws://192.168.1.9:8080/chat-websocket";
+
+    private StompClient stompClient;
+    //private Disposable stompSubscription;
+    //private WebSocketClient webSocketClient;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,8 +62,8 @@ public class Chat extends AppCompatActivity {
 
         chatId = getIntent().getIntExtra("chatId", -1);
         if (chatId == -1) {
-            Log.e("ChatActivity", "Error: chatId no recibido");
-            //finish();
+            Log.e("ChatActivity", "Error: chatId no recibido, revisar ViewChats");
+            finish();
             return;
         }
 
@@ -74,13 +83,15 @@ public class Chat extends AppCompatActivity {
     }
 
     private void cargarMensajes() {
-        chatService.obtenerMensajes(chatId).enqueue(new Callback<List<Mensaje>>() {
+        Call<List<Mensaje>> call = chatService.obtenerMensajes(chatId);
+        call.enqueue(new Callback<List<Mensaje>>() {
+        //chatService.obtenerMensajes(chatId).enqueue(new Callback<List<Mensaje>>() {
             @Override
             public void onResponse(Call<List<Mensaje>> call, Response<List<Mensaje>> response) {
                 if (response.isSuccessful() && response.body() != null) {
                     messageList.clear();
                     messageList.addAll(response.body());
-                    //messageAdapter.notifyDataSetChanged();
+                    messageAdapter.notifyDataSetChanged();
                 }
             }
 
@@ -92,45 +103,38 @@ public class Chat extends AppCompatActivity {
     }
 
     private void conectarWebSocket() {
-        try {
-            webSocketClient = new WebSocketClient(new URI("ws://tu-servidor/chat/" + chatId)) {
-                @Override
-                public void onOpen(ServerHandshake handshakedata) {
-                    Log.d("WebSocket", "Conectado");
-                }
+        stompClient = new StompClient(WEBSOCKET_URL);
+        stompClient.setMessageListener((topic, message) -> runOnUiThread(() -> {
+            Gson gson = new Gson();
+            Mensaje nuevoMensaje = gson.fromJson(message, Mensaje.class);
+            messageList.add(nuevoMensaje);
+            messageAdapter.notifyDataSetChanged();
+            recyclerMessages.scrollToPosition(messageList.size() - 1);
+        }));
 
-                @Override
-                public void onMessage(String message) {
-                    runOnUiThread(() -> {
-                        Mensaje nuevoMensaje = new Mensaje(); // Aquí debes convertir el mensaje JSON a objeto
-                        nuevoMensaje.setContent(message);
-                        messageList.add(nuevoMensaje);
-                        messageAdapter.notifyDataSetChanged();
-                        recyclerMessages.scrollToPosition(messageList.size() - 1);
-                    });
-                }
-
-                @Override
-                public void onClose(int code, String reason, boolean remote) {
-                    Log.d("WebSocket", "Desconectado: " + reason);
-                }
-
-                @Override
-                public void onError(Exception ex) {
-                    Log.e("WebSocket", "Error", ex);
-                }
-            };
-            webSocketClient.connect();
-        } catch (URISyntaxException e) {
-            e.printStackTrace();
-        }
+        stompClient.connect();
+        stompClient.subscribe("/chat/" + chatId);
     }
 
     private void enviarMensaje() {
         String contenido = editMessage.getText().toString().trim();
         if (!contenido.isEmpty()) {
-            webSocketClient.send(contenido);
+            Mensaje nuevoMensaje = new Mensaje(userId, 0, contenido, true);
+            Gson gson = new Gson();
+            String jsonMensaje = gson.toJson(nuevoMensaje);
+
+            stompClient.sendMessage("/app/chat", jsonMensaje);
+
             editMessage.setText("");
         }
     }
+
+    @Override
+    protected void onDestroy() {
+        if (stompClient != null) {
+            stompClient.disconnect();
+        }
+        super.onDestroy();
+    }
+
 }

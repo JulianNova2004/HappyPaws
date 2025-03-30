@@ -19,6 +19,10 @@ public class Mensaje {
         this.esDeUsuario = esDeUsuario;
     }
 
+    public Mensaje(){
+
+    }
+
     public Integer getId() {
         return id;
     }

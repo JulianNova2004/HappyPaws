@@ -12,7 +12,7 @@ import java.util.List;
 
 import co.edu.unipiloto.happypaws.R;
 
-public class MessageAdapter {
+public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageViewHolder> {
 
     private List<Mensaje> mensajeList;
     private int userId;
