@@ -13,6 +13,7 @@
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
     <string name="modifyPet">Modify pets</string>
+    <string name="viewChats">Chats</string>
     <string name="registerVaccine">Register Pet Vaccine</string>
     <string name="addConsultation">Add Pet Consultation</string>
     <string name="viewMedicalHistory">View Medical History</string>

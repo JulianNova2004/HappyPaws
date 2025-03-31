@@ -67,7 +67,7 @@ public class LogIn extends AppCompatActivity {
         User user = new User(usernameStr,passwordStr,null,null,null,null,null,null);
 
         Call<User> call = userService.login(user);
-
+        //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
         call.enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
@@ -94,9 +94,9 @@ public class LogIn extends AppCompatActivity {
             @Override
             public void onFailure(Call<User> call, Throwable t) {
                 Toast.makeText(LogIn.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al iniciar sesión", t);
+                Log.e("HappyPaws", "Error al iniciar sesión", t);
+                //Log.e("HappyPaws", "Estado call" + call.toString());
             }
-
         });
     }
 
