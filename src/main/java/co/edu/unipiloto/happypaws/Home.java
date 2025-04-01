@@ -4,7 +4,9 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,6 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class Home extends AppCompatActivity {
 
     private TextView txtView;
+    private Button registerPet, viewPets, modifyPets, chats, petVaccine, petConsultation, medicalHistory, liveLocation, deletePet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,9 +26,37 @@ public class Home extends AppCompatActivity {
         EdgeToEdge.enable(this);
 
         txtView = findViewById(R.id.titleUsr);
+        registerPet = findViewById(R.id.register_pet_Home);
+        viewPets = findViewById(R.id.viewPets);
+        modifyPets = findViewById(R.id.modify_pet_Home);
+        chats = findViewById(R.id.viewChats);
+        petVaccine = findViewById(R.id.vaccine_date_register_Home);
+        petConsultation = findViewById(R.id.add_consultation_medical_history_home);
+        medicalHistory = findViewById(R.id.view_medical_history_home);
+        liveLocation = findViewById(R.id.send_Map_activity);
+        deletePet = findViewById(R.id.delete_pet);
+
+
+
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
+        boolean isUser = preferences.getBoolean("isUser", false);
         txtView.setText("Welcome " + username + "!");
+        //Toast.makeText(Home.this, "Nombre: " + username + " BOOL: " + isUser, Toast.LENGTH_SHORT).show();
+
+        //Paseador
+        if(!isUser){
+            registerPet.setVisibility(View.GONE);
+            viewPets.setVisibility(View.GONE);
+            modifyPets.setVisibility(View.GONE);
+            //chats.setVisibility(View.VISIBLE);
+            petVaccine.setVisibility(View.GONE);
+            petConsultation.setVisibility(View.GONE);
+            medicalHistory.setVisibility(View.GONE);
+            liveLocation.setVisibility(View.GONE);
+            deletePet.setVisibility(View.GONE);
+        }
+        //Usuario normalongo
 
     }
 

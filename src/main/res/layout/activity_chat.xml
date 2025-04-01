@@ -21,10 +21,10 @@
             android:orientation="horizontal"
             android:padding="8dp">
 
-            <EditText
+             <EditText
                 android:id="@+id/etMensaje"
-                android:layout_width="0dp"
-                android:layout_weight="48dp"
+                android:layout_width="10dp"
+                android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:hint="Escribe un mensaje"/>
 

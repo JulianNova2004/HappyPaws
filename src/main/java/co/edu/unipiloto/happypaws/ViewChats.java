@@ -21,6 +21,7 @@ import network.PaseadorService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
+import android.content.SharedPreferences;
 import retrofit2.Response;
 
 public class ViewChats extends AppCompatActivity {
@@ -29,6 +30,7 @@ public class ViewChats extends AppCompatActivity {
     private ChatAdapter chatAdapter;
     private List<Paseador> chatList;
     private PaseadorService paseadorService;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +44,8 @@ public class ViewChats extends AppCompatActivity {
         chatAdapter = new ChatAdapter(chatList, paseador -> abrirChat(paseador));
         recyclerChats.setAdapter(chatAdapter);
         paseadorService = Retro.getClient().create(PaseadorService.class);
+        //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        //boolean isUser = preferences.getBoolean("isUser", false);
 
         cargarChats();
     }
@@ -65,8 +69,9 @@ public class ViewChats extends AppCompatActivity {
     }
 
     private void abrirChat(Paseador paseador) {
+        Log.i("PAS_ID",paseador.getId()+"");
         Intent intent = new Intent(this, Chat.class);
-        intent.putExtra("chatId", paseador.getId());
+        intent.putExtra("paseId", paseador.getId());
         startActivity(intent);
     }
 }

@@ -7,13 +7,15 @@ public class Paseador {
     public String name;
 
     public String email;
+    public String passw;
 
     public String phoneNum;
 
-    public Paseador(String name, String email, String phoneNum) {
+    public Paseador(String email, String passw, String name, String phoneNum) {
         this.name = name;
         this.email = email;
         this.phoneNum = phoneNum;
+        this.passw = passw;
     }
 
     public Integer getId() {
@@ -30,6 +32,14 @@ public class Paseador {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getPassw() {
+        return passw;
+    }
+
+    public void setPassw(String passw) {
+        this.passw = passw;
     }
 
     public String getEmail() {

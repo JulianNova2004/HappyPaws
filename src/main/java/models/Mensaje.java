@@ -8,14 +8,14 @@ public class Mensaje {
 
     private int paseadorId;
 
-    private String contenido;
+    private String content;
 
     private boolean esDeUsuario;
 
     public Mensaje(int usuarioId, int paseadorId, String contenido, boolean esDeUsuario) {
         this.usuarioId = usuarioId;
         this.paseadorId = paseadorId;
-        this.contenido = contenido;
+        this.content = contenido;
         this.esDeUsuario = esDeUsuario;
     }
 
@@ -47,12 +47,12 @@ public class Mensaje {
         this.paseadorId = paseadorId;
     }
 
-    public String getContenido() {
-        return contenido;
+    public String getContent() {
+        return content;
     }
 
-    public void setContenido(String contenido) {
-        this.contenido = contenido;
+    public void setContent(String contenido) {
+        this.content = contenido;
     }
 
     public boolean isEsDeUsuario() {
