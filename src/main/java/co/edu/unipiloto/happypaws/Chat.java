@@ -40,7 +40,7 @@ public class Chat extends AppCompatActivity {
     private int userId;
 
     private int pasId;
-    private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket"; // Asegúrate de que la URL es correcta
+    private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
 
     private StompClient stompClient;
     private Disposable stompSubscription;
@@ -55,9 +55,12 @@ public class Chat extends AppCompatActivity {
         editMessage = findViewById(R.id.etMensaje);
         btnSend = findViewById(R.id.btnEnviar);
 
-        pasId = getIntent().getIntExtra("paseId", -1);
-        //chatId = getIntent().getIntExtra("pasId", -1);
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        boolean isUser = preferences.getBoolean("isUser", false);
 
+        if (isUser){
+        pasId = getIntent().getIntExtra("paseId", -1);
+            userId = preferences.getInt("User_ID", -1);
 
         if (pasId == -1) {
             Log.e("ChatActivity", "Error: paseId no recibido, revisar ViewChats");
@@ -65,8 +68,13 @@ public class Chat extends AppCompatActivity {
             return;
         }
 
-        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        userId = preferences.getInt("User_ID", -1);
+        }else{
+            pasId = preferences.getInt("pasId",-1);
+            userId = getIntent().getIntExtra("UserViewId",-1);
+        }
+
+        //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+
 
 
         messageList = new ArrayList<>();
@@ -122,40 +130,6 @@ public class Chat extends AppCompatActivity {
     }
 
     private void conectarWebSocket() {
-        // 🔹 Correcta inicialización del StompClient
-//        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, WEBSOCKET_URL);
-//
-//        stompClient.lifecycle().subscribe(lifecycleEvent -> {
-//            switch (lifecycleEvent.getType()) {
-//                case OPENED:
-//                    Log.d("WebSocket", "Conectado al WebSocket");
-//                    break;
-//                case ERROR:
-//                    Log.e("WebSocket", "Error en la conexión", lifecycleEvent.getException());
-//                    break;
-//                case CLOSED:
-//                    Log.d("WebSocket", "WebSocket cerrado");
-//                    break;
-//            }
-//        });
-//
-//        stompClient.connect();
-//
-//        // 🔹 Suscribirse a un canal para recibir mensajes
-//        stompSubscription = stompClient.topic("/chat/" + chatId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(message -> {
-//                    Gson gson = new Gson();
-//                    Mensaje nuevoMensaje = gson.fromJson(message.getPayload(), Mensaje.class);
-//
-//                    runOnUiThread(() -> {
-//                        messageList.add(nuevoMensaje);
-//                        messageAdapter.notifyDataSetChanged();
-//                        recyclerMessages.scrollToPosition(messageList.size() - 1);
-//                        Log.i("WebSocket", "Suscribio");
-//                    });
-//                }, throwable -> Log.e("WebSocket", "Error en suscripción", throwable));
 
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, WEBSOCKET_URL);
         stompClient.connect();
@@ -174,7 +148,6 @@ public class Chat extends AppCompatActivity {
             }
         });
 
-        // 🔹 Espera a que `chatId` esté inicializado antes de suscribirse
         if (chatId == 0) {
             Log.e("WebSocket", "Error: chatId no inicializado.");
             return;
@@ -193,19 +166,17 @@ public class Chat extends AppCompatActivity {
                     messageAdapter.notifyItemInserted(messageList.size() - 1);
                 }, throwable -> Log.e("WebSocket", "❌ Error en suscripción", throwable));
 
-
-
-
     }
 
     private void enviarMensaje() {
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        boolean isUser = preferences.getBoolean("isUser", false);
         String contenido = editMessage.getText().toString().trim();
         if (!contenido.isEmpty()) {
-            Mensaje nuevoMensaje = new Mensaje(userId, pasId, contenido, true); //COREGIRRR
+            Mensaje nuevoMensaje = new Mensaje(userId, pasId, contenido, isUser);
             Gson gson = new Gson();
             String jsonMensaje = gson.toJson(nuevoMensaje);
 
-            // 🔹 Enviar mensaje usando stompClient.send(...)
             stompClient.send("/app/chat", jsonMensaje).subscribe();
 
             editMessage.setText("");
