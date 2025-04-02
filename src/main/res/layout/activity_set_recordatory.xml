@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SetRecordatory">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccine Recordatory Register"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_marginTop="160dp"/>
+
+    <EditText
+        android:id="@+id/petIdR"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:hint="@string/petIdC"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/recordatoryDate"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:hint="@string/recordatoryDate"
+        android:inputType="date"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/vaccineR"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:hint="@string/vaccineR"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+
+    <Button
+        android:id="@+id/registerRecordatory"
+        android:layout_width="270dp"
+        android:layout_height="wrap_content"
+        android:text="Register Recordatory"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+
+</LinearLayout>

@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat;
 public class Home extends AppCompatActivity {
 
     private TextView txtView;
-    private Button registerPet, viewPets, modifyPets, chats, petVaccine, petConsultation, medicalHistory, liveLocation, deletePet;
+    private Button registerPet, viewPets, modifyPets, recordatoryVaccine, chats, petVaccine, petConsultation, medicalHistory, liveLocation, deletePet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +29,7 @@ public class Home extends AppCompatActivity {
         registerPet = findViewById(R.id.register_pet_Home);
         viewPets = findViewById(R.id.viewPets);
         modifyPets = findViewById(R.id.modify_pet_Home);
+        recordatoryVaccine = findViewById(R.id.recordatory_vaccine);
         chats = findViewById(R.id.viewChats);
         petVaccine = findViewById(R.id.vaccine_date_register_Home);
         petConsultation = findViewById(R.id.add_consultation_medical_history_home);
@@ -49,6 +50,7 @@ public class Home extends AppCompatActivity {
             registerPet.setVisibility(View.GONE);
             viewPets.setVisibility(View.GONE);
             modifyPets.setVisibility(View.GONE);
+            recordatoryVaccine.setVisibility(View.GONE);
             //chats.setVisibility(View.VISIBLE);
             petVaccine.setVisibility(View.GONE);
             petConsultation.setVisibility(View.GONE);
@@ -113,5 +115,11 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setVaccineRecordatory(View view){
+
+        //view_medical_history_home --> class = DeletePet
+        Intent intent = new Intent(this,SetRecordatory.class);
+        startActivity(intent);
+    }
 
 }

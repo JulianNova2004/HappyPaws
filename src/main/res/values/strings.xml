@@ -13,6 +13,7 @@
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
     <string name="modifyPet">Modify pets</string>
+    <string name="recordatoryVaccine">Make Vaccine Recordatory</string>
     <string name="viewChats">Chats</string>
     <string name="registerVaccine">Register Pet Vaccine</string>
     <string name="addConsultation">Add Pet Consultation</string>
@@ -54,6 +55,10 @@
     <string name="next">Next Step</string>
 
     <string name="viewInfoC">View Information</string>
+
+    <string name="petIdR">Pet ID</string>
+    <string name="recordatoryDate">Date To Send Recordatory</string>
+    <string name="vaccineR">Name Of Vaccine</string>
 
 
 </resources>

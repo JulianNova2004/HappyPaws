@@ -49,6 +49,16 @@
         android:text="@string/modifyPet" />
 
     <Button
+        android:id="@+id/recordatory_vaccine"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginBottom="20dp"
+        android:onClick="setVaccineRecordatory"
+        android:padding="12dp"
+        android:text="@string/recordatoryVaccine" />
+
+    <Button
         android:id="@+id/viewChats"
         android:layout_width="200dp"
         android:layout_height="wrap_content"

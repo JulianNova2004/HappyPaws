@@ -55,9 +55,12 @@ public class Chat extends AppCompatActivity {
         editMessage = findViewById(R.id.etMensaje);
         btnSend = findViewById(R.id.btnEnviar);
 
-        pasId = getIntent().getIntExtra("paseId", -1);
-        //chatId = getIntent().getIntExtra("pasId", -1);
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        boolean isUser = preferences.getBoolean("isUser", false);
 
+        if (isUser){
+        pasId = getIntent().getIntExtra("paseId", -1);
+            userId = preferences.getInt("User_ID", -1);
 
         if (pasId == -1) {
             Log.e("ChatActivity", "Error: paseId no recibido, revisar ViewChats");
@@ -65,8 +68,13 @@ public class Chat extends AppCompatActivity {
             return;
         }
 
-        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        userId = preferences.getInt("User_ID", -1);
+        }else{
+            pasId = preferences.getInt("pasId",-1);
+            userId = getIntent().getIntExtra("UserViewId",-1);
+        }
+
+        //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+
 
 
         messageList = new ArrayList<>();
@@ -122,38 +130,6 @@ public class Chat extends AppCompatActivity {
     }
 
     private void conectarWebSocket() {
-//        stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, WEBSOCKET_URL);
-//
-//        stompClient.lifecycle().subscribe(lifecycleEvent -> {
-//            switch (lifecycleEvent.getType()) {
-//                case OPENED:
-//                    Log.d("WebSocket", "Conectado al WebSocket");
-//                    break;
-//                case ERROR:
-//                    Log.e("WebSocket", "Error en la conexión", lifecycleEvent.getException());
-//                    break;
-//                case CLOSED:
-//                    Log.d("WebSocket", "WebSocket cerrado");
-//                    break;
-//            }
-//        });
-//
-//        stompClient.connect();
-//
-//        stompSubscription = stompClient.topic("/chat/" + chatId)
-//                .subscribeOn(Schedulers.io())
-//                .observeOn(AndroidSchedulers.mainThread())
-//                .subscribe(message -> {
-//                    Gson gson = new Gson();
-//                    Mensaje nuevoMensaje = gson.fromJson(message.getPayload(), Mensaje.class);
-//
-//                    runOnUiThread(() -> {
-//                        messageList.add(nuevoMensaje);
-//                        messageAdapter.notifyDataSetChanged();
-//                        recyclerMessages.scrollToPosition(messageList.size() - 1);
-//                        Log.i("WebSocket", "Suscribio");
-//                    });
-//                }, throwable -> Log.e("WebSocket", "Error en suscripción", throwable));
 
         stompClient = Stomp.over(Stomp.ConnectionProvider.OKHTTP, WEBSOCKET_URL);
         stompClient.connect();

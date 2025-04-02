@@ -82,8 +82,8 @@ public class LogIn extends AppCompatActivity {
                         //String passwordStrR = response.body().getPassw();
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("User_ID", userId);
-                        editor.putString("Username", usernameStrR);
+                        editor.putInt("pasId", userId);
+                        editor.putString("nombre", usernameStrR);
                         //editor.putString("Password", passwordStrR);
                         editor.putBoolean("isUser", false);
                         editor.apply();

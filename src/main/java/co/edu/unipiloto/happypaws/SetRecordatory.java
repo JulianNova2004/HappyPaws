@@ -11,32 +11,31 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.sql.Date;
-import java.util.Locale;
-
 
 import models.Consulta;
 import models.Pet;
+import models.Recordatorio;
 import network.ConsultationService;
 import network.PetService;
+import network.RecordatoryService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class AddConsultationMedicalHistory extends AppCompatActivity {
+public class SetRecordatory extends AppCompatActivity {
 
-    private EditText date, reason, petState, vet, result, petId;
+    private EditText date, vaccine, petId;
 
-    private Button btnSendInformationMedicalHistory;
+    private Button btnSendRecordatory;
     boolean state = false, isValid;
-
     private Pet pet;
-    private ConsultationService consultationService;
+    private RecordatoryService recordatoryService;
 
     private PetService petService;
 
@@ -44,24 +43,22 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_add_consultation_medical_history);
+        setContentView(R.layout.activity_set_recordatory);
 
-        petId = findViewById(R.id.petIdC);
-        date = findViewById(R.id.consultationDate);
-        reason = findViewById(R.id.consultationReason);
-        petState = findViewById(R.id.petState);
-        vet = findViewById(R.id.designatedVeterinary);
-        result = findViewById(R.id.consultationResults);
-        consultationService = Retro.getClient().create(ConsultationService.class);
+        petId = findViewById(R.id.petIdR);
+        date = findViewById(R.id.recordatoryDate);
+        vaccine = findViewById(R.id.vaccineR);
+
+        recordatoryService = Retro.getClient().create(RecordatoryService.class);
         petService = Retro.getClient().create(PetService.class);
-        btnSendInformationMedicalHistory = findViewById(R.id.registerConsultationInformation);
+        btnSendRecordatory = findViewById(R.id.registerRecordatory);
         date.setOnClickListener(v -> showCalendar());
 
-        btnSendInformationMedicalHistory.setOnClickListener(new View.OnClickListener(){
+        btnSendRecordatory.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
                 validateFields();
-                //Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
+                //Intent intent = new Intent(SetRecordatory.this,Home.class);
                 //startActivity(intent);
             }
         });
@@ -81,29 +78,12 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
             isValid = false;
         }
 
-        String reasonStr = reason.getText().toString().trim();
-        if (reasonStr.isEmpty()) {
-            reason.setError("Este campo es obligatorio");
+        String vaccineStr = vaccine.getText().toString().trim();
+        if (vaccineStr.isEmpty()) {
+            vaccine.setError("Este campo es obligatorio");
             isValid = false;
         }
 
-        String petStateStr = petState.getText().toString().trim();
-        if (petStateStr.isEmpty()) {
-            petState.setError("Este campo es obligatorio");
-            isValid = false;
-        }
-
-        String vetStr = vet.getText().toString().trim();
-        if (vetStr.isEmpty()) {
-            vet.setError("Este campo es obligatorio");
-            isValid = false;
-        }
-
-        String resultStr = result.getText().toString().trim();
-        if (resultStr.isEmpty()) {
-            result.setError("Este campo es obligatorio");
-            isValid = false;
-        }
 
         if(isValid) {
             Toast.makeText(this, "Lleno todos los campos correctamente", Toast.LENGTH_SHORT).show();
@@ -141,34 +121,35 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 String dateStr = date.getText().toString().trim();
                 dateStr = dateStr.isEmpty() ? "" : dateStr;
 
-                String reasonStr = reason.getText().toString().trim();
-                String petStateStr = petState.getText().toString().trim();
-                String vetStr = vet.getText().toString().trim();
-                String resultStr = result.getText().toString().trim();
+                String vaccineStr = vaccine.getText().toString().trim();
+                //String petStateStr = petState.getText().toString().trim();
+                //String vetStr = vet.getText().toString().trim();
+                //String resultStr = result.getText().toString().trim();
 
-                Consulta consultaA = new Consulta(dateStr, reasonStr, petStateStr, vetStr, resultStr, pet);
-                Call<Consulta> call = consultationService.addConsulta(consultaA, petIdInt);
+                Recordatorio recordatorio = new Recordatorio(dateStr, vaccineStr);
 
-                call.enqueue(new Callback<Consulta>() {
+                Call<Recordatorio> call = recordatoryService.add(recordatorio, petIdInt);
+
+                call.enqueue(new Callback<Recordatorio>() {
                     @Override
-                    public void onResponse(Call<Consulta> call, Response<Consulta> response) {
+                    public void onResponse(Call<Recordatorio> call, Response<Recordatorio> response) {
                         if (response.isSuccessful()) {
-                            Toast.makeText(AddConsultationMedicalHistory.this, "Consulta agregada exitosamente", Toast.LENGTH_SHORT).show();
-                            Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
+                            Toast.makeText(SetRecordatory.this, "Recordatorio de " + pet.getName() +" programado exitosamente :D", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(SetRecordatory.this, Home.class);
                             startActivity(intent);}
                         else{
-                            Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(SetRecordatory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                         }
                     }
 
                     @Override
-                    public void onFailure(Call<Consulta> call, Throwable t) {
-                        Toast.makeText(AddConsultationMedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                        Log.i("HappyPaws", "Error al agregar consulta", t);
+                    public void onFailure(Call<Recordatorio> call, Throwable t) {
+                        Toast.makeText(SetRecordatory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.i("HappyPaws", "Error al agregar recordatorio", t);
                     }
                 });
             } else {
-                Toast.makeText(AddConsultationMedicalHistory.this, "Toast de error", Toast.LENGTH_SHORT).show();
+                Toast.makeText(SetRecordatory.this, "Toast de error", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -182,24 +163,24 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Pet> call, Response<Pet> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(AddConsultationMedicalHistory.this, "Mascota encontrada", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(SetRecordatory.this, "Mascota encontrada", Toast.LENGTH_SHORT).show();
                         pet = response.body();
                         Log.i("hapi", "callPet: "+response.body().getPetId());
                         state = true;
                         Log.i("stat", "callPet: "+state);
                         onSuccess.run();
                     } else {
-                        Toast.makeText(AddConsultationMedicalHistory.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(SetRecordatory.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<Pet> call, Throwable t) {
-                    Toast.makeText(AddConsultationMedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Toast.makeText(SetRecordatory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
                     Log.i("HappyPaws", "Error al encontrar mascota", t);
                 }
             });
 
-        }else{Toast.makeText(AddConsultationMedicalHistory.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
+        }else{Toast.makeText(SetRecordatory.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
         //return called;
     }
 
