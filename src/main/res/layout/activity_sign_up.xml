@@ -190,6 +190,90 @@
                     android:text="Recuerde iniciar sesión con:&#10;'Correo' y 'Password'"/>
 
             </LinearLayout>
+
+
+            <LinearLayout
+                android:id="@+id/tipo3_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="gone">
+
+                <EditText
+                    android:id="@+id/identificationV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/ID"
+                    android:inputType="number"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+                <EditText
+                    android:id="@+id/passwordV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/password"
+                    android:inputType="textPassword"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+                <EditText
+                    android:id="@+id/phone_numberV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/phone_number"
+                    android:inputType="phone"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+                <EditText
+                    android:id="@+id/mailV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/mail"
+                    android:inputType="textEmailAddress"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+
+                <EditText
+                    android:id="@+id/firstnameV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/first_name"
+                    android:inputType="textCapWords"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+                <EditText
+                    android:id="@+id/lastnameV"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/last_name"
+                    android:inputType="textCapWords"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+                <EditText
+                    android:id="@+id/speciality"
+                    android:layout_width="200dp"
+                    android:layout_height="50dp"
+                    android:hint="@string/last_name"
+                    android:inputType="textCapWords"
+                    android:layout_gravity="center"
+                    android:layout_margin="12dp"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="50dp"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:layout_gravity="center"
+                    android:text="Recuerde iniciar sesión con:&#10;'ID' y 'Password'"/>
+
+            </LinearLayout>
+
         </LinearLayout>
 
     </ScrollView>

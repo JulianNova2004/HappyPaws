@@ -20,9 +20,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import models.Paseador;
 import models.User;
+import models.Vet;
 import network.PaseadorService;
 import network.Retro;
 import network.UserService;
+import network.VetService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -30,12 +32,14 @@ import retrofit2.Response;
 public class SignUp extends AppCompatActivity {
 
     private Spinner userTypeSpinner;
-    private LinearLayout container1U, container2P;
+    private LinearLayout container1U, container2P, container3P;
     private EditText username, password, firstname, lastname, ID, address, mail, phoneNumber;
     private EditText mailP, passwordP, firstnameP, lastnameP, phoneNumberP;
+    private EditText idV, passwordV, firstnameV, lastnameV, phoneNumberV, speciality, mailV;
     private Button btnSend;
     private UserService userService;
     private PaseadorService paseadorService;
+    private VetService vetService;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -46,6 +50,7 @@ public class SignUp extends AppCompatActivity {
         userTypeSpinner = findViewById(R.id.user_type_spinner);
         container1U = findViewById(R.id.tipo1_container);
         container2P = findViewById(R.id.tipo2_container);
+        container3P = findViewById(R.id.tipo3_container);
         //sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
 
         //Usuario normalito
@@ -65,11 +70,22 @@ public class SignUp extends AppCompatActivity {
         lastnameP = findViewById(R.id.lastnameP);
         phoneNumberP = findViewById(R.id.phone_numberP);
 
+        //Veterinario
+        idV = findViewById(R.id.identificationV);
+        passwordV = findViewById(R.id.passwordV);
+        phoneNumberV = findViewById(R.id.phone_numberV);
+        mailV = findViewById(R.id.mailV);
+        firstnameV = findViewById(R.id.firstnameV);
+        lastnameV = findViewById(R.id.lastnameV);
+        speciality = findViewById(R.id.speciality);
+
         btnSend = findViewById(R.id.sign_up);
+
         userService = Retro.getClient().create(UserService.class);
         paseadorService = Retro.getClient().create(PaseadorService.class);
+        vetService = Retro.getClient().create(VetService.class);
 
-        String[] opciones = {"Seleccione tipo", "Usuario", "Paseador"};
+        String[] opciones = {"Seleccione tipo", "Usuario", "Paseador", "Veterinario"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         userTypeSpinner.setAdapter(adapter);
@@ -80,14 +96,21 @@ public class SignUp extends AppCompatActivity {
                     case 1:
                         container1U.setVisibility(View.VISIBLE);
                         container2P.setVisibility(View.GONE);
+                        container3P.setVisibility(View.GONE);
                         break;
                     case 2:
                         container1U.setVisibility(View.GONE);
                         container2P.setVisibility(View.VISIBLE);
+                        container3P.setVisibility(View.GONE);
                         break;
+                    case 3:
+                        container1U.setVisibility(View.GONE);
+                        container2P.setVisibility(View.GONE);
+                        container3P.setVisibility(View.VISIBLE);
                     default:
                         container1U.setVisibility(View.GONE);
                         container2P.setVisibility(View.GONE);
+                        container3P.setVisibility(View.GONE);
                         break;
                 }
             }
@@ -96,6 +119,7 @@ public class SignUp extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> parent) {
                 container1U.setVisibility(View.GONE);
                 container2P.setVisibility(View.GONE);
+                container3P.setVisibility(View.GONE);
             }
         });
 
@@ -117,6 +141,9 @@ public class SignUp extends AppCompatActivity {
         } else if (selectedType.equals("Paseador")) {
             registerIsValid = validateWalkerFields();
             if (registerIsValid) signUpWalker();
+        } else if (selectedType.equals("Veterinario")){
+            registerIsValid = validateVetFields();
+            if (registerIsValid) signUpVet();
         }
 
         if (!registerIsValid) {
@@ -156,6 +183,24 @@ public class SignUp extends AppCompatActivity {
             return false;
         }
         return true;
+    }
+
+    private boolean validateVetFields() {
+
+        String idVStr = idV.getText().toString().trim();
+        String passwordVStr = passwordV.getText().toString().trim();
+        String phoneNumberVStr = phoneNumberV.getText().toString().trim();
+        String mailVStr = mailV.getText().toString().trim();
+        String firstnameVStr = firstnameV.getText().toString().trim();
+        String lastnameVStr = lastnameV.getText().toString().trim();
+        String specialityStr = speciality.getText().toString().trim();
+
+        if(idVStr.isEmpty() || passwordVStr.isEmpty() || phoneNumberVStr.isEmpty() || mailVStr.isEmpty() || firstnameVStr.isEmpty() || lastnameVStr.isEmpty() || specialityStr.isEmpty()) {
+            Toast.makeText(this, "Bot, ningún campo puede quedar vacio", Toast.LENGTH_SHORT).show();
+            return false;
+        }
+        return true;
+
     }
 
     private void signUpUser() {
@@ -222,6 +267,42 @@ public class SignUp extends AppCompatActivity {
                 Toast.makeText(SignUp.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
+    }
+
+    private void signUpVet(){
+
+        String idVStr = idV.getText().toString().trim();
+        String passwordVStr = passwordV.getText().toString().trim();
+        String phoneNumberVStr = phoneNumberV.getText().toString().trim();
+        String mailVStr = mailV.getText().toString().trim();
+        String firstnameVStr = firstnameV.getText().toString().trim();
+        String lastnameVStr = lastnameV.getText().toString().trim();
+        String specialityStr = speciality.getText().toString().trim();
+
+        String fullName = firstnameVStr + " " + lastnameVStr;
+
+        Vet veterinario = new Vet(fullName, idVStr, mailVStr, phoneNumberVStr, passwordVStr, specialityStr);
+
+        Call<Vet> call = vetService.addVet(veterinario);
+        call.enqueue(new Callback<Vet>() {
+            @Override
+            public void onResponse(Call<Vet> call, Response<Vet> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    Toast.makeText(SignUp.this, "Veterinario registrado con éxito", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SignUp.this,FirstPage.class);
+                    startActivity(intent);
+
+                } else {
+                    Toast.makeText(SignUp.this, "Error al registrar veterinario", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Vet> call, Throwable t) {
+                Toast.makeText(SignUp.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        });
+
     }
 
 

@@ -59,16 +59,16 @@ public class Chat extends AppCompatActivity {
         boolean isUser = preferences.getBoolean("isUser", false);
 
         if (isUser){
-        pasId = getIntent().getIntExtra("paseId", -1);
+            pasId = getIntent().getIntExtra("paseId", -1);
             userId = preferences.getInt("User_ID", -1);
 
-        if (pasId == -1) {
-            Log.e("ChatActivity", "Error: paseId no recibido, revisar ViewChats");
-            finish();
-            return;
-        }
+            if (pasId == -1) {
+                Log.e("ChatActivity", "Error: paseId no recibido, revisar ViewChats");
+                finish();
+                return;
+            }
 
-        }else{
+        } else{
             pasId = preferences.getInt("pasId",-1);
             userId = getIntent().getIntExtra("UserViewId",-1);
         }

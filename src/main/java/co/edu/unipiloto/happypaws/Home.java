@@ -16,8 +16,8 @@ import androidx.core.view.WindowInsetsCompat;
 
 public class Home extends AppCompatActivity {
 
-    private TextView txtView;
-    private Button registerPet, viewPets, modifyPets, recordatoryVaccine, chats, petVaccine, petConsultation, medicalHistory, liveLocation, deletePet;
+    private TextView title;
+    private Button registerPet, viewPets, viewAllPets, modifyPets, recordatoryVaccine, chats, petVaccine, petConsultation, medicalHistory, liveLocation, deletePet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +25,10 @@ public class Home extends AppCompatActivity {
         setContentView(R.layout.activity_home);
         EdgeToEdge.enable(this);
 
-        txtView = findViewById(R.id.titleUsr);
+        title = findViewById(R.id.titleUsr);
         registerPet = findViewById(R.id.register_pet_Home);
         viewPets = findViewById(R.id.viewPets);
+        viewAllPets = findViewById(R.id.viewAllPets);
         modifyPets = findViewById(R.id.modify_pet_Home);
         recordatoryVaccine = findViewById(R.id.recordatory_vaccine);
         chats = findViewById(R.id.viewChats);
@@ -42,7 +43,7 @@ public class Home extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
         boolean isUser = preferences.getBoolean("isUser", false);
-        txtView.setText("Welcome " + username + "!");
+        title.setText("Welcome " + username + "!");
         //Toast.makeText(Home.this, "Nombre: " + username + " BOOL: " + isUser, Toast.LENGTH_SHORT).show();
 
         //Paseador
@@ -57,6 +58,8 @@ public class Home extends AppCompatActivity {
             medicalHistory.setVisibility(View.GONE);
             liveLocation.setVisibility(View.GONE);
             deletePet.setVisibility(View.GONE);
+        }else{
+            viewAllPets.setVisibility(View.GONE);
         }
         //Usuario normalongo
 
@@ -68,6 +71,13 @@ public class Home extends AppCompatActivity {
     }
 
     public void viewPets(View view){
+        Intent intent = new Intent(this,ViewPets.class);
+        startActivity(intent);
+    }
+
+    public void viewAllPets(View view){
+
+        //Activity --> ver todas las mascotas de la db
         Intent intent = new Intent(this,ViewPets.class);
         startActivity(intent);
     }

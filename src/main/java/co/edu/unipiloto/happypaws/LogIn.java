@@ -18,9 +18,11 @@ import androidx.core.view.WindowInsetsCompat;
 //import models.LoginR;
 import models.Paseador;
 import models.User;
+import models.Vet;
 import network.PaseadorService;
 import network.Retro;
 import network.UserService;
+import network.VetService;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -32,6 +34,7 @@ public class LogIn extends AppCompatActivity {
     private Button btnAccess;
     private UserService userService;
     private PaseadorService paseadorService;
+    private VetService vetService;
     private SharedPreferences sharedPreferences;
 
     @Override
@@ -44,6 +47,7 @@ public class LogIn extends AppCompatActivity {
         btnAccess = findViewById(R.id.logInLI);
         userService = Retro.getClient().create(UserService.class);
         paseadorService = Retro.getClient().create(PaseadorService.class);
+        vetService = Retro.getClient().create(VetService.class);
         sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
 
         btnAccess.setOnClickListener(new View.OnClickListener(){
@@ -68,7 +72,8 @@ public class LogIn extends AppCompatActivity {
         String usernameStr = username.getText().toString().trim();
         String passwordStr = password.getText().toString().trim();
 
-        if(usernameStr.contains("@")){
+        if(usernameStr.contains("@") &&(usernameStr.contains(".com") || usernameStr.contains(".co"))){
+            //Paseador
             Paseador paseador = new Paseador(usernameStr, passwordStr, null, null);
             Call<Paseador> call = paseadorService.login(paseador);
             //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
@@ -85,7 +90,8 @@ public class LogIn extends AppCompatActivity {
                         editor.putInt("pasId", userId);
                         editor.putString("nombre", usernameStrR);
                         //editor.putString("Password", passwordStrR);
-                        editor.putBoolean("isUser", false);
+                        //Cambiar todos los booleanos por -1 paseador, 0 veterinario, 1 usuario ; revisar bien Chat, viewChats y Mensajes
+                        //editor.putBoolean("isUser", false);
                         editor.apply();
 
                         Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
@@ -104,41 +110,78 @@ public class LogIn extends AppCompatActivity {
                 }
             });
         }
-        else {
-            User user = new User(usernameStr, passwordStr, null, null, null, null, null, null);
-            Call<User> call = userService.login(user);
-            //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
-            call.enqueue(new Callback<User>() {
-                @Override
-                public void onResponse(Call<User> call, Response<User> response) {
-                    if (response.isSuccessful() && response.body() != null) {
+        else if(usernameStr.matches("\\d+")) {
+                //Veterinario
+                Vet veterinario = new Vet(null, usernameStr, null, null, passwordStr, null);
+                Call<Vet> call = vetService.login(veterinario);
+                call.enqueue(new Callback<Vet>() {
+                    @Override
+                    public void onResponse(Call<Vet> call, Response<Vet> response) {
+                        if (response.isSuccessful() && response.body() != null) {
 
-                        int userId = response.body().getUserId();
-                        String usernameStrR = response.body().getUsername();
-                        String passwordStrR = response.body().getPassword();
+                            int userId = response.body().getId();
+                            String usernameStrR = response.body().getName();
+                            String passwordStrR = response.body().getPassw();
 
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putInt("User_ID", userId);
-                        editor.putString("Username", usernameStrR);
-                        editor.putString("Password", passwordStrR);
-                        editor.putBoolean("isUser", true);
-                        editor.apply();
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putInt("User_ID", userId);
+                            editor.putString("Username", usernameStrR);
+                            editor.putString("Password", passwordStrR);
+                            editor.putBoolean("isUser", true);
+                            editor.apply();
 
-                        Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(LogIn.this,Home.class);
-                        startActivity(intent);
+                            Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LogIn.this,Home.class);
+                            startActivity(intent);
 
-                    } else {
-                        Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        }
                     }
-                }
-                @Override
-                public void onFailure(Call<User> call, Throwable t) {
-                    Toast.makeText(LogIn.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.e("HappyPaws", "Error al iniciar sesión", t);
-                    //Log.e("HappyPaws", "Estado call" + call.toString());
-                }
-            });
+                    @Override
+                    public void onFailure(Call<Vet> call, Throwable t) {
+                        Toast.makeText(LogIn.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("HappyPaws", "Error al iniciar sesión", t);
+                        //Log.e("HappyPaws", "Estado call" + call.toString());
+                    }
+                });
+        }
+        else {
+                //Usuario
+                User user = new User(usernameStr, passwordStr, null, null, null, null, null, null);
+                Call<User> call = userService.login(user);
+                //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
+                call.enqueue(new Callback<User>() {
+                    @Override
+                    public void onResponse(Call<User> call, Response<User> response) {
+                        if (response.isSuccessful() && response.body() != null) {
+
+                            int userId = response.body().getUserId();
+                            String usernameStrR = response.body().getUsername();
+                            String passwordStrR = response.body().getPassword();
+
+                            SharedPreferences.Editor editor = sharedPreferences.edit();
+                            editor.putInt("User_ID", userId);
+                            editor.putString("Username", usernameStrR);
+                            editor.putString("Password", passwordStrR);
+                            editor.putBoolean("isUser", true);
+                            editor.apply();
+
+                            Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(LogIn.this,Home.class);
+                            startActivity(intent);
+
+                        } else {
+                            Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                    @Override
+                    public void onFailure(Call<User> call, Throwable t) {
+                        Toast.makeText(LogIn.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("HappyPaws", "Error al iniciar sesión", t);
+                        //Log.e("HappyPaws", "Estado call" + call.toString());
+                    }
+                });
         }
 //        Call<User> call = userService.login(user);
 //        //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
@@ -172,7 +215,7 @@ public class LogIn extends AppCompatActivity {
 //                //Log.e("HappyPaws", "Estado call" + call.toString());
 //            }
 //        });
-    }
+        }
 
     public void review(){
         boolean loginIsValid = true;

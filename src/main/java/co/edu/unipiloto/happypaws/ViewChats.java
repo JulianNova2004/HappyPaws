@@ -85,7 +85,8 @@ public class ViewChats extends AppCompatActivity {
             public void onFailure(Call<List<Paseador>> call, Throwable t) {
                 Log.e("ChatListActivity", "Error al cargar chats de Usuario", t);
             }
-        });}else {
+            });
+        } else {
             userService.getAllUsers().enqueue(new Callback<List<User>>() {
                 @Override
                 public void onResponse(Call<List<User>> call, Response<List<User>> response) {
