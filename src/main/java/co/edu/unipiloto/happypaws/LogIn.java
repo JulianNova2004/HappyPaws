@@ -32,6 +32,7 @@ public class LogIn extends AppCompatActivity {
 
     private EditText username, password;
     private Button btnAccess;
+    private int typeUser = 0;
     private UserService userService;
     private PaseadorService paseadorService;
     private VetService vetService;
@@ -83,15 +84,19 @@ public class LogIn extends AppCompatActivity {
                     if (response.isSuccessful() && response.body() != null) {
 
                         int userId = response.body().getId();
+                        typeUser = -1;
                         String usernameStrR = response.body().getName();
+                        Toast.makeText(LogIn.this, "Name = " + usernameStrR + ".", Toast.LENGTH_SHORT).show();
                         //String passwordStrR = response.body().getPassw();
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
                         editor.putInt("pasId", userId);
-                        editor.putString("nombre", usernameStrR);
+                        editor.putInt("typeUser", typeUser);
+                        editor.putString("Username", usernameStrR);
                         //editor.putString("Password", passwordStrR);
                         //Cambiar todos los booleanos por -1 paseador, 0 veterinario, 1 usuario ; revisar bien Chat, viewChats y Mensajes
-                        //editor.putBoolean("isUser", false);
+                        editor.putBoolean("isUser", false);
+                        editor.putInt("typeUser", typeUser);
                         editor.apply();
 
                         Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
@@ -110,7 +115,7 @@ public class LogIn extends AppCompatActivity {
                 }
             });
         }
-        else if(usernameStr.matches("\\d+")) {
+        else if(usernameStr.matches("^[0-9]+$")) {
                 //Veterinario
                 Vet veterinario = new Vet(null, usernameStr, null, null, passwordStr, null);
                 Call<Vet> call = vetService.login(veterinario);
@@ -119,12 +124,14 @@ public class LogIn extends AppCompatActivity {
                     public void onResponse(Call<Vet> call, Response<Vet> response) {
                         if (response.isSuccessful() && response.body() != null) {
 
-                            int userId = response.body().getId();
+                            int userId = Integer.parseInt(response.body().getIdentification());
+                            typeUser = 1;
                             String usernameStrR = response.body().getName();
                             String passwordStrR = response.body().getPassw();
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putInt("User_ID", userId);
+                            editor.putInt("typeUser", typeUser);
                             editor.putString("Username", usernameStrR);
                             editor.putString("Password", passwordStrR);
                             editor.putBoolean("isUser", true);
@@ -157,11 +164,13 @@ public class LogIn extends AppCompatActivity {
                         if (response.isSuccessful() && response.body() != null) {
 
                             int userId = response.body().getUserId();
+                            typeUser = 0;
                             String usernameStrR = response.body().getUsername();
                             String passwordStrR = response.body().getPassword();
 
                             SharedPreferences.Editor editor = sharedPreferences.edit();
                             editor.putInt("User_ID", userId);
+                            editor.putInt("typeUser", typeUser);
                             editor.putString("Username", usernameStrR);
                             editor.putString("Password", passwordStrR);
                             editor.putBoolean("isUser", true);

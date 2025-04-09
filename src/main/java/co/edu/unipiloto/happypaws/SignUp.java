@@ -107,6 +107,7 @@ public class SignUp extends AppCompatActivity {
                         container1U.setVisibility(View.GONE);
                         container2P.setVisibility(View.GONE);
                         container3P.setVisibility(View.VISIBLE);
+                        break;
                     default:
                         container1U.setVisibility(View.GONE);
                         container2P.setVisibility(View.GONE);

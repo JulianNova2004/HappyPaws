@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RecordatorySection">
+
+    <TextView
+        android:id="@+id/titleUsrR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/register_recordatory_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="registerVaccineRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+
+            <Button
+                android:id="@+id/view_recordatories_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewVaccinesRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+
+            <Button
+                android:id="@+id/view_all_recordatories_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewAllVaccinesRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+
+            <Button
+                android:id="@+id/modify_recordatory_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="modifyVaccineRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+
+            <Button
+                android:id="@+id/delete_recordatory_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="deleteVaccineRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>

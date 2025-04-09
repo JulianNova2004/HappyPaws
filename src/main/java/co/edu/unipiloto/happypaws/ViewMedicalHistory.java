@@ -12,22 +12,17 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.List;
 
 import models.Consulta;
-import models.Pet;
 import network.ConsultationService;
-import network.PetService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MedicalHistory extends AppCompatActivity {
+public class ViewMedicalHistory extends AppCompatActivity {
 
     private ConsultationService consultationService;
     private LinearLayout containerC;
@@ -59,7 +54,7 @@ public class MedicalHistory extends AppCompatActivity {
         int idPet = Integer.parseInt(idPetStr);
         if (idPetStr.isEmpty()) {
             petId.setError("No deje este campo vacio");
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewMedicalHistory.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
         /*
@@ -68,18 +63,18 @@ public class MedicalHistory extends AppCompatActivity {
         try {
             idPet = Integer.parseInt(idPetStr);
         } catch (NumberFormatException e) {
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewMedicalHistory.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
             return;
         }
          */
 
         if (idPet == 0) {
             petId.setError("Ingrese un número válido");
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ViewMedicalHistory.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(MedicalHistory.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ViewMedicalHistory.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
         bringInfo(idPet);
     }
 
@@ -92,7 +87,7 @@ public class MedicalHistory extends AppCompatActivity {
                     containerC.removeAllViews();
                     List<Consulta> consultas = response.body();
                     if(consultas.isEmpty()){
-                        TextView noConsulta = new TextView(MedicalHistory.this);
+                        TextView noConsulta = new TextView(ViewMedicalHistory.this);
                         noConsulta.setText("No tiene informacion de consulta para esta mascota");
                         noConsulta.setTextSize(18);
                         noConsulta.setGravity(Gravity.CENTER);
@@ -104,7 +99,7 @@ public class MedicalHistory extends AppCompatActivity {
                         // pets.addAll(response.body());
                         int i = 1;
                         for(Consulta c: consultas){
-                            TextView info = new TextView(MedicalHistory.this);
+                            TextView info = new TextView(ViewMedicalHistory.this);
                             info.setText("CONSULTA NÚMERO " + i);
                             info.setTextSize(20);
                             info.setGravity(Gravity.CENTER);
@@ -134,12 +129,12 @@ public class MedicalHistory extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(MedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Consulta>> call, Throwable t) {
-                Toast.makeText(MedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewMedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.i("HappyPaws", "Error al buscar consultas", t);
             }
 

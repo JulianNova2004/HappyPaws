@@ -29,54 +29,44 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/register_pet_Home"
+                android:id="@+id/send_pet_section"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendActivityRegister"
+                android:onClick="sendPetSection"
                 android:padding="12dp"
-                android:text="@string/register" />
+                android:text="@string/petSection" />
 
             <Button
-                android:id="@+id/viewPets"
+                android:id="@+id/send_vaccine_section"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="viewPets"
+                android:onClick="sendVaccineSection"
                 android:padding="12dp"
-                android:text="@string/viewPets" />
+                android:text="@string/vaccineSection" />
 
             <Button
-                android:id="@+id/viewAllPets"
+                android:id="@+id/send_medicalHistory_section"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="viewAllPets"
+                android:onClick="sendMedicalHistorySection"
                 android:padding="12dp"
-                android:text="@string/viewAllPets" />
+                android:text="@string/medicalHistorySection" />
 
             <Button
-                android:id="@+id/modify_pet_Home"
+                android:id="@+id/send_recordatory_section"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendActivityModify"
+                android:onClick="sendRecordatorySection"
                 android:padding="12dp"
-                android:text="@string/modifyPet" />
-
-            <Button
-                android:id="@+id/recordatory_vaccine"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:onClick="setVaccineRecordatory"
-                android:padding="12dp"
-                android:text="@string/recordatoryVaccine" />
+                android:text="@string/recordatorySection" />
 
             <Button
                 android:id="@+id/viewChats"
@@ -89,36 +79,6 @@
                 android:text="@string/viewChats" />
 
             <Button
-                android:id="@+id/vaccine_date_register_Home"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:onClick="sendActivityVaccineDateRegister"
-                android:padding="12dp"
-                android:text="@string/registerVaccine" />
-
-            <Button
-                android:id="@+id/add_consultation_medical_history_home"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:onClick="sendActivityAddConsultationMedicalHistory"
-                android:padding="12dp"
-                android:text="@string/addConsultation" />
-
-            <Button
-                android:id="@+id/view_medical_history_home"
-                android:layout_width="200dp"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginBottom="20dp"
-                android:onClick="sendActivityViewMedicalHistory"
-                android:padding="12dp"
-                android:text="@string/viewMedicalHistory" />
-
-            <Button
                 android:id="@+id/send_Map_activity"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
@@ -128,6 +88,103 @@
                 android:padding="12dp"
                 android:text="@string/map" />
 
+            <!--
+            <Button
+                android:id="@+id/register_pet_Home"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityRegister"
+                android:padding="12dp"
+                android:text="@string/register" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/viewPets"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewPets"
+                android:padding="12dp"
+                android:text="@string/viewPets" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/viewAllPets"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewAllPets"
+                android:padding="12dp"
+                android:text="@string/viewAllPets" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/modify_pet_Home"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityModify"
+                android:padding="12dp"
+                android:text="@string/modifyPet" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/recordatory_vaccine"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="setVaccineRecordatory"
+                android:padding="12dp"
+                android:text="@string/recordatoryVaccine" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/vaccine_date_register_Home"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityVaccineDateRegister"
+                android:padding="12dp"
+                android:text="@string/registerVaccine" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/add_consultation_medical_history_home"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityAddConsultationMedicalHistory"
+                android:padding="12dp"
+                android:text="@string/addConsultation" />
+                -->
+
+            <!--
+            <Button
+                android:id="@+id/view_medical_history_home"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityViewMedicalHistory"
+                android:padding="12dp"
+                android:text="@string/viewMedicalHistory" />
+                -->
+
+            <!--
             <Button
                 android:id="@+id/delete_pet"
                 android:layout_width="200dp"
@@ -137,6 +194,8 @@
                 android:onClick="deletePet"
                 android:padding="12dp"
                 android:text="@string/deletePet" />
+                -->
+
 
         </LinearLayout>
     </ScrollView>
