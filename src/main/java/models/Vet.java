@@ -2,7 +2,7 @@ package models;
 
 public class Vet {
 
-    private Integer id;
+    private Integer vet_id;
 
     private String name;
 
@@ -25,12 +25,12 @@ public class Vet {
         this.speciality = speciality;
     }
 
-    public Integer getId() {
-        return id;
+    public Integer getVetId() {
+        return vet_id;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setVetId(Integer vet_id) {
+        this.vet_id = vet_id;
     }
 
     public String getName() {

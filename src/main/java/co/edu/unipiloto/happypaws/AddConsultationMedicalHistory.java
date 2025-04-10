@@ -157,7 +157,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                             Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
                             startActivity(intent);}
                         else{
-                            Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddConsultationMedicalHistory.this, "Error al agregar la consulta", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -199,7 +199,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 }
             });
 
-        }else{Toast.makeText(AddConsultationMedicalHistory.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
+        }else{Toast.makeText(AddConsultationMedicalHistory.this, "Toast ->nNo ha entrado", Toast.LENGTH_SHORT).show();}
         //return called;
     }
 

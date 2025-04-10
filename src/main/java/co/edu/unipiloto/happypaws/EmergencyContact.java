@@ -1,14 +1,21 @@
 package co.edu.unipiloto.happypaws;
 
+import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
+import android.view.View;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -27,6 +34,7 @@ public class EmergencyContact extends AppCompatActivity {
     private VetService vetService;
 
     private LinearLayout container;
+    private String phoneNumber;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,21 +71,19 @@ public class EmergencyContact extends AppCompatActivity {
                         int i = 1;
                         for(Vet vet: vets){
                             TextView vetD = new TextView(EmergencyContact.this);
-                            vetD.setText("vet NUMBER " + i);
+                            vetD.setText("VET NUMBER " + i);
                             vetD.setTextSize(20);
                             vetD.setGravity(Gravity.CENTER);
                             vetD.setPadding(0, 10, 0, 10);
                             container.addView(vetD);
 
-                            TextView idRecieved = createTextView("Id: " + vet.getId());
+                            //Log.i("HappyPaws", "Objeto JSON recibido" + response.body().toString());
+                            Toast.makeText(EmergencyContact.this, "VET_ID = " + vet.getVetId(), Toast.LENGTH_SHORT).show();
+                            TextView idRecieved = createTextView("Id: " + vet.getVetId());
                             TextView nameRecieved = createTextView("Name: " + vet.getName());
                             TextView phoneNumberRecieved = createTextView("Phone: " + vet.getPhoneNumber());
                             TextView specialityRecieved = createTextView("Speciality: " + vet.getSpeciality());
                             TextView emailRecieved = createTextView("Email: " + vet.getEmail());
-                            //TextView foodRecieved = createTextView("Food: " + vet.getFood());
-                            //TextView amountFoodRecieved = createTextView("Amount of food: " + vet.getAmount_of_food());
-                            //TextView amountWalksRecieved = createTextView("Amount of walks: " + vet.getAmount_of_walks());
-                            //TextView descriptionRecieved = createTextView("Description: " + vet.getDescription());
                             TextView space = createTextView(" ");
                             space.setTextSize(10);
 
@@ -86,27 +92,65 @@ public class EmergencyContact extends AppCompatActivity {
                             container.addView(phoneNumberRecieved);
                             container.addView(specialityRecieved);
                             container.addView(emailRecieved);
-                            //container.addView(foodRecieved);
-                            //container.addView(amountFoodRecieved);
-                            //container.addView(amountWalksRecieved);
-                            //container.addView(descriptionRecieved);
                             container.addView(space);
+
+                            View.OnClickListener vetClickListener = new View.OnClickListener() {
+                                @Override
+                                public void onClick(View v) {
+                                    //Intentar redirigir a la aplicación de teléfono para llamar
+                                    phoneNumber = vet.getPhoneNumber();
+                                    if (ContextCompat.checkSelfPermission(EmergencyContact.this, android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                                        makeCall(phoneNumber);
+                                    } else {
+                                        ActivityCompat.requestPermissions(EmergencyContact.this, new String[]{android.Manifest.permission.CALL_PHONE}, 1);
+                                    }
+                                    //Intent intent = new Intent(Intent.ACTION_DIAL);
+                                    //intent.setData(Uri.parse("tel:" + phoneNumber));
+                                    //startActivity(intent);
+                                }
+                            };
+
+                            idRecieved.setOnClickListener(vetClickListener);
+                            nameRecieved.setOnClickListener(vetClickListener);
+                            phoneNumberRecieved.setOnClickListener(vetClickListener);
+                            specialityRecieved.setOnClickListener(vetClickListener);
+                            emailRecieved.setOnClickListener(vetClickListener);
+
                             i++;
                         }
                     }
 
                 } else {
-                    Toast.makeText(EmergencyContact.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(EmergencyContact.this, "Error al mostrar veterinarios", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Vet>> call, Throwable t) {
                 Toast.makeText(EmergencyContact.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al iniciar sesión", t);
+                Log.i("HappyPaws", "Error en la app", t);
             }
 
         });
         
+    }
+
+    private void makeCall(String phoneNumber) {
+        Intent intent = new Intent(Intent.ACTION_CALL);
+        intent.setData(Uri.parse("tel:" + phoneNumber));
+        startActivity(intent);
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == 1) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                makeCall(phoneNumber);
+            } else {
+                Toast.makeText(this, "El permiso de llamada fue denegado", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     private TextView createTextView(String data){

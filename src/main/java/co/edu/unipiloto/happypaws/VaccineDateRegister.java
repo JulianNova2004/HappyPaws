@@ -157,8 +157,8 @@ public class VaccineDateRegister extends AppCompatActivity {
                     Intent intent = new Intent(VaccineDateRegister.this, Home.class);
                     startActivity(intent);}
                 else{
-                    Toast.makeText(VaccineDateRegister.this, "TAS MAL", Toast.LENGTH_SHORT).show();
-                    Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(VaccineDateRegister.this, "Error al agregar vacuna", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
 
                 }
             }

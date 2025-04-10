@@ -159,14 +159,14 @@ public class DeletePet extends AppCompatActivity {
                     Intent intent = new Intent(DeletePet.this, Home.class);
                     startActivity(intent);}
                 else{
-                    Toast.makeText(DeletePet.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeletePet.this, "Error al eliminar mascota", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Pet> call, Throwable t) {
                 Toast.makeText(DeletePet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al agregar consulta", t);
+                Log.i("HappyPaws", "Error al eliminar mascota", t);
             }
         });
         //else {

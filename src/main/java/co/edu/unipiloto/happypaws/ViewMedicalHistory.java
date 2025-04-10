@@ -129,7 +129,7 @@ public class ViewMedicalHistory extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(ViewMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewMedicalHistory.this, "Error al buscar consultas", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
