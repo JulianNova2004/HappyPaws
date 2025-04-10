@@ -45,7 +45,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="viewVaccinesRecordatory"
                 android:padding="12dp"
-                android:text="@string/recordatoryVaccine" />
+                android:text="@string/viewRecordatoriesVaccine" />
 
             <Button
                 android:id="@+id/view_all_recordatories_vaccine"
@@ -55,7 +55,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="viewAllVaccinesRecordatory"
                 android:padding="12dp"
-                android:text="@string/recordatoryVaccine" />
+                android:text="@string/viewAllRecordatoriesVaccine" />
 
             <Button
                 android:id="@+id/modify_recordatory_vaccine"
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="modifyVaccineRecordatory"
                 android:padding="12dp"
-                android:text="@string/recordatoryVaccine" />
+                android:text="@string/modifyRecordatoryVaccine" />
 
             <Button
                 android:id="@+id/delete_recordatory_vaccine"
@@ -75,7 +75,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="deleteVaccineRecordatory"
                 android:padding="12dp"
-                android:text="@string/recordatoryVaccine" />
+                android:text="@string/deleteRecordatoryVaccine" />
 
 
 

@@ -55,7 +55,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="sendActivityViewAllMedicalHistories"
                 android:padding="12dp"
-                android:text="@string/viewMedicalHistory" />
+                android:text="@string/viewAllMedicalHistories" />
 
             <Button
                 android:id="@+id/modify_medical_history"
@@ -65,7 +65,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="sendActivityModifyMedicalHistory"
                 android:padding="12dp"
-                android:text="@string/viewMedicalHistory" />
+                android:text="@string/modifyMedicalHistory" />
 
             <Button
                 android:id="@+id/delete_medical_history"
@@ -75,7 +75,7 @@
                 android:layout_marginBottom="20dp"
                 android:onClick="sendActivityDeleteMedicalHistory"
                 android:padding="12dp"
-                android:text="@string/viewMedicalHistory" />
+                android:text="@string/deleteMedicalHistory" />
 
         </LinearLayout>
     </ScrollView>

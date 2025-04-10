@@ -25,7 +25,7 @@
     <string name="viewChats">Chats</string>
     <string name="registerVaccine">Register Pet Vaccine</string>
     <string name="addConsultation">Add Medical History</string>
-    <string name="viewMedicalHistory">View Medical History</string>
+    <string name="viewMedicalHistory">View The Medical History Of My Pets</string>
     <string name="map">View Live Location Map</string>
     <string name="deletePet">Delete Pet</string>
 
@@ -68,7 +68,7 @@
     <string name="recordatoryDate">Date To Send Recordatory</string>
     <string name="vaccineR">Name Of Vaccine</string>
 
-    <string name="viewVaccine">View Vaccines</string>
+    <string name="viewVaccine">View  My Pet Vaccines</string>
     <string name="viewAllVacines">View All Vaccines</string>
     <string name="modifyVaccine">Modify Vaccine</string>
     <string name="deleteVaccine">Delete Vaccine</string>
@@ -77,5 +77,11 @@
     <string name="modifyMedicalHistory">Modify Medical History</string>
     <string name="deleteMedicalHistory">Delete Medical History</string>
 
+    <string name="viewRecordatoriesVaccine">View Vaccine Recordatories</string>
+    <string name="viewAllRecordatoriesVaccine">View All Vaccine Recordatories</string>
+    <string name="modifyRecordatoryVaccine">Modify Vaccine Recordatory</string>
+    <string name="deleteRecordatoryVaccine">Delete Vaccine Recordatory</string>
+
+    <string name="emergency">Emergency Contact</string>
 
 </resources>

@@ -16,7 +16,7 @@ public class Home extends AppCompatActivity {
     private TextView title;
     private Button registerPet, viewPets, viewAllPets, modifyPets, recordatoryVaccine, petVaccine, petConsultation, medicalHistory, deletePet;
 
-    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, chats, liveLocation;
+    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, chats, liveLocation, emergency;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,6 +30,7 @@ public class Home extends AppCompatActivity {
         recordatorySection = findViewById(R.id.send_recordatory_section);
         chats = findViewById(R.id.viewChats);
         liveLocation = findViewById(R.id.send_Map_activity);
+        emergency = findViewById(R.id.emergency);
 
 //        registerPet = findViewById(R.id.register_pet_Home);
 //        viewPets = findViewById(R.id.viewPets);
@@ -56,26 +57,16 @@ public class Home extends AppCompatActivity {
             vaccineSection.setVisibility(View.GONE);
             recordatorySection.setVisibility(View.GONE);
             liveLocation.setVisibility(View.GONE);
-//            registerPet.setVisibility(View.GONE);
-//            viewPets.setVisibility(View.GONE);
-//            modifyPets.setVisibility(View.GONE);
-//            recordatoryVaccine.setVisibility(View.GONE);
-//            chats.setVisibility(View.VISIBLE);
-//            petVaccine.setVisibility(View.GONE);
-//            petConsultation.setVisibility(View.GONE);
-//            medicalHistory.setVisibility(View.GONE);
-//            liveLocation.setVisibility(View.GONE);
-//            deletePet.setVisibility(View.GONE);
+            emergency.setVisibility(View.GONE);
+
         }else if(typeUser==0){
             //Solo no puede ver el ViewAllPets
-//            registerPet.setVisibility(View.GONE);
-//            modifyPets.setVisibility(View.GONE);
-//            chats.setVisibility(View.GONE);
-//            liveLocation.setVisibility(View.GONE);
+
         }else if(typeUser==1){
             chats.setVisibility(View.GONE);
             liveLocation.setVisibility(View.GONE);
-//            viewAllPets.setVisibility(View.GONE);
+            emergency.setVisibility(View.GONE);
+
         }else {
             Toast.makeText(Home.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
         }
@@ -101,59 +92,12 @@ public class Home extends AppCompatActivity {
         Intent intent = new Intent(this,RecordatorySection.class);
         startActivity(intent);
     }
-
-//    public void sendActivityRegister(View view){
-//        Intent intent = new Intent(this,PetRegister.class);
-//        startActivity(intent);
-//    }
-//
-//    public void viewPets(View view){
-//        Intent intent = new Intent(this,ViewPets.class);
-//        startActivity(intent);
-//    }
-//
-//    public void viewAllPets(View view){
-//
-//        //Activity --> ver todas las mascotas de la db
-//        Intent intent = new Intent(this,ViewPets.class);
-//        startActivity(intent);
-//    }
-//
-//    public void sendActivityModify(View view){
-//        Intent intent = new Intent(this,ShowPetsToModify.class);
-//        startActivity(intent);
-//    }
-
-    public void sendActivityVaccineDateRegister(View view){
-        Intent intent = new Intent(this,VaccineDateRegister.class);
-        startActivity(intent);
-    }
-
-    public void sendActivityAddConsultationMedicalHistory(View view){
-        Intent intent = new Intent(this,AddConsultationMedicalHistory.class);
-        startActivity(intent);
-    }
-
-    public void sendActivityViewMedicalHistory(View view){
-
-        //view_medical_history_home --> class = ViewMedicalHistory
-        Intent intent = new Intent(this, ViewMedicalHistory.class);
-        startActivity(intent);
-    }
-
     public void sendActivityMap(View view){
 
         //view_medical_history_home --> class = ViewMedicalHistory
         Intent intent = new Intent(this,SelectPetUbi.class);
         startActivity(intent);
     }
-
-//    public void deletePet(View view){
-//
-//        //view_medical_history_home --> class = DeletePet
-//        Intent intent = new Intent(this,DeletePet.class);
-//        startActivity(intent);
-//    }
 
     public void viewChats(View view){
 
@@ -162,10 +106,8 @@ public class Home extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void setVaccineRecordatory(View view){
-
-        //view_medical_history_home --> class = DeletePet
-        Intent intent = new Intent(this,SetRecordatory.class);
+    public void emergencyContact(View view){
+        Intent intent = new Intent(this,EmergencyContact.class);
         startActivity(intent);
     }
 
