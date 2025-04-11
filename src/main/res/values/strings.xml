@@ -39,8 +39,7 @@
     <string name="weight">Weight (KG)</string>
     <string name="ID_owner">Enter your ID</string>
     <string name="age">Age</string>
-    <string name="modifyPetInformation">Modify Information</string>
-
+    <string name="modifyPetInformation">Modify Pet Information</string>
 
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
@@ -83,5 +82,11 @@
     <string name="deleteRecordatoryVaccine">Delete Vaccine Recordatory</string>
 
     <string name="emergency">Emergency Contact</string>
+
+    <string name="modifyPetS">Modify Pet</string>
+
+    <string name="modifyRecordatoryV">Modify Recordatory</string>
+
+    <string name="modifyRecordatoryInformation">Modify Recordatory Information</string>
 
 </resources>

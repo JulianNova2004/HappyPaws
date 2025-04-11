@@ -3,69 +3,54 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
+    android:id="@+id/main"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShowPetsToModify">
+    tools:context=".ShowRecsToModify">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="These are your pets!"
+        android:text="All your vaccine recordatories"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_margin="16dp"/>
-    <!--
-    <EditText
-        android:id="@+id/number_pets"
-        android:layout_width="200dp"
-        android:layout_height="50dp"
-        android:hint="Number of pets"
-        android:inputType="number"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"/>
+        android:layout_marginTop="30dp"/>
 
-    <Button
-        android:id="@+id/generate_fields"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Generate Fields"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"/>
-    -->
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:contentDescription="Registro de mascotas"
+        android:contentDescription="Visualizacion de recordatorios para modificar"
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/containerPets"
+            android:id="@+id/containerRecordatoriesM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="16dp" />
+            android:padding="16dp"
+            android:orientation="vertical">
+
+        </LinearLayout>
 
     </ScrollView>
 
     <EditText
-        android:id="@+id/petID"
-        android:layout_width="200dp"
+        android:id="@+id/recID"
+        android:layout_width="230dp"
         android:layout_height="50dp"
-        android:hint="Insert your pet ID"
+        android:hint="Insert your recordatory ID"
         android:inputType="number"
         android:layout_gravity="center"
         android:layout_margin="16dp"/>
 
     <Button
-        android:id="@+id/send_modify_pet"
-        android:layout_width="200dp"
+        android:id="@+id/send_modify_recordatory"
+        android:layout_width="230dp"
         android:layout_height="wrap_content"
-        android:text="@string/modifyPetS"
+        android:text="@string/modifyRecordatoryV"
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:padding="12dp"/>

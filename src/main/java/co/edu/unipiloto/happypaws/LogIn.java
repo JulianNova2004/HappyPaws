@@ -61,14 +61,6 @@ public class LogIn extends AppCompatActivity {
 
     }
 
-    /*
-    public void startLogIn(View view){
-        access();
-        Intent intent = new Intent(this,Home.class);
-        startActivity(intent);
-    }
-     */
-
     public void access(){
         String usernameStr = username.getText().toString().trim();
         String passwordStr = password.getText().toString().trim();
@@ -86,7 +78,7 @@ public class LogIn extends AppCompatActivity {
                         int userId = response.body().getId();
                         typeUser = -1;
                         String usernameStrR = response.body().getName();
-                        Toast.makeText(LogIn.this, "Name = " + usernameStrR + ".", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(LogIn.this, "Name = " + usernameStrR + ".", Toast.LENGTH_SHORT).show();
                         //String passwordStrR = response.body().getPassw();
 
                         SharedPreferences.Editor editor = sharedPreferences.edit();
@@ -192,39 +184,7 @@ public class LogIn extends AppCompatActivity {
                     }
                 });
         }
-//        Call<User> call = userService.login(user);
-//        //Toast.makeText(LogIn.this, "Se instanció call", Toast.LENGTH_SHORT).show();
-//        call.enqueue(new Callback<User>() {
-//            @Override
-//            public void onResponse(Call<User> call, Response<User> response) {
-//                if (response.isSuccessful() && response.body() != null) {
-//
-//                    int userId = response.body().getUserId();
-//                    String usernameStrR = response.body().getUsername();
-//                    String passwordStrR = response.body().getPassword();
-//
-//                    SharedPreferences.Editor editor = sharedPreferences.edit();
-//                    editor.putInt("User_ID", userId);
-//                    editor.putString("Username", usernameStrR);
-//                    editor.putString("Password", passwordStrR);
-//                    editor.apply();
-//
-//                    Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();
-//                    Intent intent = new Intent(LogIn.this,Home.class);
-//                    startActivity(intent);
-//
-//                } else {
-//                    Toast.makeText(LogIn.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
-//                }
-//            }
-//            @Override
-//            public void onFailure(Call<User> call, Throwable t) {
-//                Toast.makeText(LogIn.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-//                Log.e("HappyPaws", "Error al iniciar sesión", t);
-//                //Log.e("HappyPaws", "Estado call" + call.toString());
-//            }
-//        });
-        }
+    }
 
     public void review(){
         boolean loginIsValid = true;

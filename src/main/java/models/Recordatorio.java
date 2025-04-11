@@ -6,7 +6,7 @@ public class Recordatorio {
     private String date;
     private String vaccine;
     private Pet pet;
-    private boolean state;
+    private boolean estado;
 
     public Recordatorio(String date, String vaccine) {
         this.date = date;
@@ -45,11 +45,11 @@ public class Recordatorio {
         this.pet = pet;
     }
 
-    public boolean isState() {
-        return state;
+    public boolean getEstado() {
+        return estado;
     }
 
-    public void setState(boolean state) {
-        this.state = state;
+    public void setEstado(boolean estado) {
+        this.estado = estado;
     }
 }

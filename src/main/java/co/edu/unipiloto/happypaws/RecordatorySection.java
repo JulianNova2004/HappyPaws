@@ -57,7 +57,8 @@ public class RecordatorySection extends AppCompatActivity {
     }
 
     public void viewVaccinesRecordatory(View view){
-
+        Intent intent = new Intent(this,ViewVaccineRecordatories.class);
+        startActivity(intent);
     }
 
     public void viewAllVaccinesRecordatory(View view){
@@ -65,10 +66,12 @@ public class RecordatorySection extends AppCompatActivity {
     }
 
     public void modifyVaccineRecordatory(View view){
-
+        Intent intent = new Intent(this,ShowRecsToModify.class);
+        startActivity(intent);
     }
 
     public void deleteVaccineRecordatory(View view){
-
+        Intent intent = new Intent(this,DeleteRecordatory.class);
+        startActivity(intent);
     }
 }

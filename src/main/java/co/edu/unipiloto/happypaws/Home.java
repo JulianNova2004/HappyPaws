@@ -32,18 +32,6 @@ public class Home extends AppCompatActivity {
         liveLocation = findViewById(R.id.send_Map_activity);
         emergency = findViewById(R.id.emergency);
 
-//        registerPet = findViewById(R.id.register_pet_Home);
-//        viewPets = findViewById(R.id.viewPets);
-//        viewAllPets = findViewById(R.id.viewAllPets);
-//        modifyPets = findViewById(R.id.modify_pet_Home);
-//        recordatoryVaccine = findViewById(R.id.recordatory_vaccine);
-//        petVaccine = findViewById(R.id.vaccine_date_register_Home);
-//        petConsultation = findViewById(R.id.add_consultation_medical_history_home);
-//        medicalHistory = findViewById(R.id.view_medical_history_home);
-//        deletePet = findViewById(R.id.delete_pet);
-
-
-
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
         boolean isUser = preferences.getBoolean("isUser", false);
