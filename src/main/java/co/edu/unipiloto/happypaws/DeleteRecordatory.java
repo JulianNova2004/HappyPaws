@@ -159,14 +159,14 @@ public class DeleteRecordatory extends AppCompatActivity {
                     Intent intent = new Intent(DeleteRecordatory.this, Home.class);
                     startActivity(intent);}
                 else{
-                    Toast.makeText(DeleteRecordatory.this, "Error al eliminar mascota", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(DeleteRecordatory.this, "Error al eliminar recordatorio", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Recordatorio> call, Throwable t) {
                 Toast.makeText(DeleteRecordatory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al eliminar mascota", t);
+                Log.i("HappyPaws", "Error al eliminar recordatorio", t);
             }
         });
         //else {
