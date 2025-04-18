@@ -68,6 +68,7 @@ public class MedicalHistorySection extends AppCompatActivity {
     }
 
     public void sendActivityDeleteMedicalHistory(View view){
-
+        Intent intent = new Intent(this, DeleteConsulta.class);
+        startActivity(intent);
     }
 }

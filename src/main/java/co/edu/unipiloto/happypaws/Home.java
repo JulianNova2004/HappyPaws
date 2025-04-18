@@ -67,16 +67,19 @@ public class Home extends AppCompatActivity {
     }
 
     public void sendMedicalHistorySection(View view){
+        //Consulta
         Intent intent = new Intent(this,MedicalHistorySection.class);
         startActivity(intent);
     }
 
     public void sendVaccineSection(View view){
+        //Vacuna --> History
         Intent intent = new Intent(this,VaccineSection.class);
         startActivity(intent);
     }
 
     public void sendRecordatorySection(View view){
+        //Recordatorio
         Intent intent = new Intent(this,RecordatorySection.class);
         startActivity(intent);
     }

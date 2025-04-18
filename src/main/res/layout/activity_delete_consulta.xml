@@ -6,13 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".DeleteRecordatory">
+    tools:context=".DeleteConsulta">
 
     <EditText
-        android:id="@+id/recIdD"
+        android:id="@+id/conIdD"
         android:layout_width="230dp"
         android:layout_height="50dp"
-        android:hint="Insert your Recordatory ID"
+        android:hint="Insert your Consultation ID"
         android:inputType="number"
         android:layout_gravity="center"
         android:layout_marginTop="80dp"/>
@@ -51,7 +51,7 @@
         android:id="@+id/btnConfirm"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
-        android:text="@string/deleteRecordatoryVaccine"
+        android:text="@string/deleteMedicalHistory"
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:visibility="gone"
@@ -61,7 +61,7 @@
         android:id="@+id/warning"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Si su contraseña es correcta,\nse borrará su recordatorio"
+        android:text="Si su contraseña es correcta,\nse borrará su consulta"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"

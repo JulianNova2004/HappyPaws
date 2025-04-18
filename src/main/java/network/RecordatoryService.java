@@ -21,6 +21,9 @@ public interface RecordatoryService {
     @GET("recordatory/recs/{user_id}")
     Call<List<Recordatorio>> verRecs(@Path("user_id")int user_id);
 
+    @GET("recordatory/allRecs")
+    Call<List<Recordatorio>> allRecs();
+
     @PATCH("recordatory/update/{rec_id}")
     Call<Recordatorio> updateRec(@Body Recordatorio recordatorio, @Path("rec_id")int rec_id);
 

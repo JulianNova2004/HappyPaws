@@ -12,7 +12,7 @@
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Modify your recordatory!"
+        android:text="Modify your consultation!"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
@@ -29,19 +29,19 @@
         android:layout_margin="16dp"/>
 
     <EditText
-        android:id="@+id/petIDM"
-        android:layout_width="200dp"
+        android:id="@+id/consultationIDM"
+        android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/petIdC"
+        android:hint="@string/consultationId"
         android:inputType="number"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/recordatoryDateM"
-        android:layout_width="200dp"
+        android:id="@+id/consultationDateM"
+        android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/recordatoryDate"
+        android:hint="@string/consultationDate"
         android:inputType="date"
         android:layout_gravity="center"
         android:layout_margin="12dp"
@@ -49,17 +49,44 @@
         android:clickable="true"/>
 
     <EditText
-        android:id="@+id/vaccineM"
-        android:layout_width="200dp"
+        android:id="@+id/reasonM"
+        android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/vaccineR"
+        android:hint="@string/consultationReason"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/stateM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/petState"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/vetM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/designatedVeterinary"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/resultsM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationResults"
         android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <Button
         android:id="@+id/btnSendModifyInformation"
-        android:layout_width="200dp"
+        android:layout_width="240dp"
         android:layout_height="wrap_content"
         android:text="@string/modifyRecordatoryInformation"
         android:layout_gravity="center"

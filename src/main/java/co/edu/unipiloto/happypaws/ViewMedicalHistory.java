@@ -79,7 +79,7 @@ public class ViewMedicalHistory extends AppCompatActivity {
     }
 
     public void bringInfo(int idPet){
-        Call<List<Consulta>> call = consultationService.getConsultas(idPet);
+        Call<List<Consulta>> call = consultationService.getConsultasByPetId(idPet);
         call.enqueue(new Callback<List<Consulta>>() {
             @Override
             public void onResponse(Call<List<Consulta>> call, Response<List<Consulta>> response) {

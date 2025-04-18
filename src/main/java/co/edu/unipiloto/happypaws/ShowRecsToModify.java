@@ -107,7 +107,7 @@ public class ShowRecsToModify extends AppCompatActivity {
                                 String jsonR = gson.toJson(response.body());
                                 Log.i("HappyPaws", "JSON GSON " + jsonR);
                                 TextView recoC = new TextView(ShowRecsToModify.this);
-                                recoC.setText("PET NUMBER " + i);
+                                recoC.setText("REC NUMBER " + i);
                                 recoC.setTextSize(20);
                                 recoC.setGravity(Gravity.CENTER);
                                 recoC.setPadding(0, 10, 0, 10);

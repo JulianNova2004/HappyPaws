@@ -24,6 +24,18 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ShowConsultasToModify"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyConsulta"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteConsulta"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllRecordatories"
+            android:exported="false" />
+        <activity
             android:name=".DeleteRecordatory"
             android:exported="false" />
         <activity

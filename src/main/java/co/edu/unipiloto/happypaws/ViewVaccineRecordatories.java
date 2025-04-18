@@ -93,7 +93,7 @@ public class ViewVaccineRecordatories extends AppCompatActivity {
                                 String jsonR = gson.toJson(response.body());
                                 Log.i("HappyPaws", "JSON GSON " + jsonR);
                                 TextView recoC = new TextView(ViewVaccineRecordatories.this);
-                                recoC.setText("VET NUMBER " + i);
+                                recoC.setText("RECORDATORY NUMBER " + i);
                                 recoC.setTextSize(20);
                                 recoC.setGravity(Gravity.CENTER);
                                 recoC.setPadding(0, 10, 0, 10);
@@ -108,9 +108,9 @@ public class ViewVaccineRecordatories extends AppCompatActivity {
                                 space.setTextSize(10);
 
                                 container.addView(idRecieved);
+                                container.addView(petRecieved);
                                 container.addView(dateRecieved);
                                 container.addView(vaccineRecieved);
-                                container.addView(petRecieved);
                                 container.addView(stateRecieved);
                                 container.addView(space);
                                 i++;

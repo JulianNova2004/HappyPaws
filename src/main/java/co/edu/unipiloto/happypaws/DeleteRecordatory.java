@@ -31,9 +31,9 @@ import retrofit2.Response;
 public class DeleteRecordatory extends AppCompatActivity {
 
     private Button btnNext, btnConfirm;
-    private LinearLayout contenedorDelete;
+    //private LinearLayout contenedorDelete;
     private EditText recId, confirmation;
-    private TextView txtView1, txtView2;
+    private TextView continue1, warning;
     private boolean isValid;
     private RecordatoryService recordatoryService;
     //private Pet pet;
@@ -45,13 +45,25 @@ public class DeleteRecordatory extends AppCompatActivity {
 
         recId = findViewById(R.id.recIdD);
         btnNext = findViewById(R.id.send_comprobation);
+        btnConfirm = findViewById(R.id.btnConfirm);
+        confirmation = findViewById(R.id.confirmation);
+        continue1 = findViewById(R.id.continue1);
+        warning = findViewById(R.id.warning);
+
         recordatoryService = Retro.getClient().create(RecordatoryService.class);
-        contenedorDelete = findViewById(R.id.contenedorDelete);
+        //contenedorDelete = findViewById(R.id.contenedorDelete);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 validateFields();
+            }
+        });
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                review();
             }
         });
     }
@@ -70,59 +82,57 @@ public class DeleteRecordatory extends AppCompatActivity {
         }
         else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
     }
-    /*
-    public void search(){
-        //buscar mascota y llamar show()
-        show();
-    }
-     */
-
 
 
     public void show(){
-        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
-                LinearLayout.LayoutParams.WRAP_CONTENT,
-                LinearLayout.LayoutParams.WRAP_CONTENT
-        );
 
-        layoutParams.setMargins(0, 30, 0, 30);
-
-        txtView1 = new TextView(DeleteRecordatory.this);
-        txtView1.setText("Llene el siguiente campo para verificar su identidad");
-        txtView1.setLayoutParams(layoutParams);
-        //txtView1.setGravity(1);
-
-        confirmation = new EditText(DeleteRecordatory.this);
-        confirmation.setHint("Ingrese su contraseña");
-        confirmation.setLayoutParams(layoutParams);
-
-        //btnConfirm = new Button(DeleteRecordatory.this);
-        //btnConfirm = new Button(new ContextThemeWrapper(DeleteRecordatory.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
-        //btnConfirm = new Button(new ContextThemeWrapper(DeleteRecordatory.this, androidx.appcompat.R.style.Widget_AppCompat_Button), null, 0);
-
-        btnConfirm = new MaterialButton(new ContextThemeWrapper(DeleteRecordatory.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
-        btnConfirm.setText("Eliminar recordatorio");
-        btnConfirm.setLayoutParams(layoutParams);
-
-        txtView2 = new TextView(DeleteRecordatory.this);
-        txtView2.setText("Si su contraseña es correcta, se borrará su recordatorio");
-        txtView2.setLayoutParams(layoutParams);
-
-        btnConfirm.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                review();
-            }
-        });
-
-        contenedorDelete.addView(txtView1);
-        //contenedorDelete.setPadding(0, 30, 0, 60);
-        contenedorDelete.addView(confirmation);
-        //contenedorDelete.setPadding(0, 30, 0, 60);
-        contenedorDelete.addView(btnConfirm);
-        //contenedorDelete.setPadding(0, 30, 0, 60);
-        contenedorDelete.addView(txtView2);
-        contenedorDelete.setVisibility(View.VISIBLE);
+        continue1.setVisibility(View.VISIBLE);
+        confirmation.setVisibility(View.VISIBLE);
+        btnConfirm.setVisibility(View.VISIBLE);
+        warning.setVisibility(View.VISIBLE);
+//        LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+//                LinearLayout.LayoutParams.WRAP_CONTENT,
+//                LinearLayout.LayoutParams.WRAP_CONTENT
+//        );
+//
+//        layoutParams.setMargins(0, 30, 0, 30);
+//
+//        txtView1 = new TextView(DeleteRecordatory.this);
+//        txtView1.setText("Llene el siguiente campo para verificar su identidad");
+//        txtView1.setLayoutParams(layoutParams);
+//        //txtView1.setGravity(1);
+//
+//        confirmation = new EditText(DeleteRecordatory.this);
+//        confirmation.setHint("Ingrese su contraseña");
+//        confirmation.setLayoutParams(layoutParams);
+//
+//        //btnConfirm = new Button(DeleteRecordatory.this);
+//        //btnConfirm = new Button(new ContextThemeWrapper(DeleteRecordatory.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
+//        //btnConfirm = new Button(new ContextThemeWrapper(DeleteRecordatory.this, androidx.appcompat.R.style.Widget_AppCompat_Button), null, 0);
+//
+//        btnConfirm = new MaterialButton(new ContextThemeWrapper(DeleteRecordatory.this, com.google.android.material.R.style.Widget_Material3_Button), null, 0);
+//        btnConfirm.setText("Eliminar recordatorio");
+//        btnConfirm.setLayoutParams(layoutParams);
+//
+//        txtView2 = new TextView(DeleteRecordatory.this);
+//        txtView2.setText("Si su contraseña es correcta, se borrará su recordatorio");
+//        txtView2.setLayoutParams(layoutParams);
+//
+//        btnConfirm.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                review();
+//            }
+//        });
+//
+//        contenedorDelete.addView(txtView1);
+//        //contenedorDelete.setPadding(0, 30, 0, 60);
+//        contenedorDelete.addView(confirmation);
+//        //contenedorDelete.setPadding(0, 30, 0, 60);
+//        contenedorDelete.addView(btnConfirm);
+//        //contenedorDelete.setPadding(0, 30, 0, 60);
+//        contenedorDelete.addView(txtView2);
+//        contenedorDelete.setVisibility(View.VISIBLE);
     }
 
     public void review(){

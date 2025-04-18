@@ -60,6 +60,13 @@ public class DeletePet extends AppCompatActivity {
                 validateFields();
             }
         });
+
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                review();
+            }
+        });
     }
 
     public void validateFields(){
