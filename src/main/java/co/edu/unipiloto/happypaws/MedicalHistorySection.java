@@ -60,11 +60,13 @@ public class MedicalHistorySection extends AppCompatActivity {
     }
 
     public void sendActivityViewAllMedicalHistories(View view){
-
+        Intent intent = new Intent(this, ViewAllConsultations.class);
+        startActivity(intent);
     }
 
     public void sendActivityModifyMedicalHistory(View view){
-
+        Intent intent = new Intent(this, ShowConsultasToModify.class);
+        startActivity(intent);
     }
 
     public void sendActivityDeleteMedicalHistory(View view){

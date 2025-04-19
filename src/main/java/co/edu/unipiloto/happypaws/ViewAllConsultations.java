@@ -1,13 +1,8 @@
 package co.edu.unipiloto.happypaws;
 
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,71 +21,30 @@ import java.util.List;
 
 import models.Consulta;
 import network.ConsultationService;
-import network.RecordatoryService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class ShowConsultasToModify extends AppCompatActivity {
+public class ViewAllConsultations extends AppCompatActivity {
 
-    private LinearLayout containerC;
-    private Button btnSendModifyConsultas, btnBringConsultationInfo;
-    private EditText consultaId, petId;
     private ConsultationService consultationService;
+    private LinearLayout containerC;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_show_consultas_to_modify);
+        setContentView(R.layout.activity_view_all_consultations);
 
-        containerC = findViewById(R.id.containerConsultasM);
-        btnSendModifyConsultas = findViewById(R.id.btnSendModifyConsultas);
-        consultaId = findViewById(R.id.consultaID);
-        petId = findViewById(R.id.petIDC);
-        btnBringConsultationInfo = findViewById(R.id.btn_bring_consultation_info);
-
+        containerC = findViewById(R.id.containerAllInformationC);
         consultationService = Retro.getClient().create(ConsultationService.class);
 
-        btnBringConsultationInfo.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                reviewPetId();
-
-            }
-        });
-
-        btnSendModifyConsultas.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                reviewConsultaId();
-            }
-        });
+        bringInfo();
     }
 
-    public void reviewPetId(){
-        String idPetStr = petId.getText().toString().trim();
-        int idPet = Integer.parseInt(idPetStr);
-        if (idPetStr.isEmpty()) {
-            petId.setError("No deje este campo vacio");
-            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (idPet == 0) {
-            petId.setError("Ingrese un número válido");
-            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Toast.makeText(ShowConsultasToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        viewConsultas(idPet);
-
-    }
-
-    public void viewConsultas(int idPet){
-
-        Call<List<Consulta>> call = consultationService.getConsultasByPetId(idPet);
+    public void bringInfo(){
+        Call<List<Consulta>> call = consultationService.getConsultas();
         call.enqueue(new Callback<List<Consulta>>() {
             @Override
             public void onResponse(Call<List<Consulta>> call, Response<List<Consulta>> response) {
@@ -98,7 +52,7 @@ public class ShowConsultasToModify extends AppCompatActivity {
                     containerC.removeAllViews();
                     List<Consulta> consultas = response.body();
                     if(consultas.isEmpty()){
-                        TextView noConsulta = new TextView(ShowConsultasToModify.this);
+                        TextView noConsulta = new TextView(ViewAllConsultations.this);
                         noConsulta.setText("No tiene informacion de consulta para esta mascota");
                         noConsulta.setTextSize(18);
                         noConsulta.setGravity(Gravity.CENTER);
@@ -134,7 +88,7 @@ public class ShowConsultasToModify extends AppCompatActivity {
                             String jsonR = gson.toJson(response.body());
                             Log.i("HappyPaws", "JSON GSON " + jsonR);
 
-                            TextView info = new TextView(ShowConsultasToModify.this);
+                            TextView info = new TextView(ViewAllConsultations.this);
                             info.setText("CONSULTA NÚMERO " + i);
                             info.setTextSize(20);
                             info.setGravity(Gravity.CENTER);
@@ -146,7 +100,7 @@ public class ShowConsultasToModify extends AppCompatActivity {
                             TextView reasonRecieved = createTextView("Motivo: " + c.getMotivo());
                             TextView stateRecieved = createTextView("Estado: " + c.getEstado());
                             TextView vetRecieved = createTextView("Veterinario: " + c.getVeterinario());
-                            TextView resultsRecieved = createTextView("Resultados: " + c.getVeterinario());
+                            TextView resultsRecieved = createTextView("Veterinario: " + c.getVeterinario());
                             TextView space = createTextView(" ");
                             space.setTextSize(10);
 
@@ -164,17 +118,16 @@ public class ShowConsultasToModify extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(ShowConsultasToModify.this, "Error al buscar consultas", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ViewAllConsultations.this, "Error al buscar consultas", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Consulta>> call, Throwable t) {
-                Toast.makeText(ShowConsultasToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ViewAllConsultations.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.i("HappyPaws", "Error al buscar consultas", t);
             }
 
         });
-
     }
 
     private TextView createTextView(String data){
@@ -200,29 +153,4 @@ public class ShowConsultasToModify extends AppCompatActivity {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
 
-    public void reviewConsultaId(){
-        String idConsultaStr = consultaId.getText().toString().trim();
-        int idConsulta = Integer.parseInt(idConsultaStr);
-        if (idConsultaStr.isEmpty()) {
-            petId.setError("No deje este campo vacio");
-            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        if (idConsulta == 0) {
-            petId.setError("Ingrese un número válido");
-            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
-            return;
-        }
-
-        Toast.makeText(ShowConsultasToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        sendConsultaId(idConsulta);
-    }
-    public void sendConsultaId(int idConsulta){
-        //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        //SharedPreferences.Editor editor = preferences.edit();
-        //editor.putInt("Consulta_ID", idConsulta);
-        //editor.apply();
-        Intent intent = new Intent(ShowConsultasToModify.this, ModifyConsulta.class);
-        startActivity(intent);
-    }
 }

@@ -91,4 +91,6 @@
 
     <string name="consultationId">Consultation ID</string>
 
+    <string name="historyId">History ID</string>
+
 </resources>

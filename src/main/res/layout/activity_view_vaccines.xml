@@ -3,24 +3,24 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
     android:id="@+id/main"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShowConsultasToModify">
+    tools:context=".ViewVaccines">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Consultation Information"
+        android:text="View Vaccines Information"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_margin="16dp"/>
 
     <EditText
-        android:id="@+id/petIDC"
+        android:id="@+id/petIDV"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Insert your pet ID"
@@ -30,7 +30,7 @@
 
 
     <Button
-        android:id="@+id/btn_bring_consultation_info"
+        android:id="@+id/btn_bring_vaccines_info"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/viewInfoC"
@@ -42,36 +42,16 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:contentDescription="Visualizacion de consultas para modificar"
+        android:contentDescription="Vaccines Information"
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/containerConsultasM"
+            android:id="@+id/containerVaccinesC"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp"
-            android:orientation="vertical">
-
-        </LinearLayout>
+            android:orientation="vertical"
+            android:padding="16dp" />
 
     </ScrollView>
-
-    <EditText
-        android:id="@+id/consultaID"
-        android:layout_width="230dp"
-        android:layout_height="50dp"
-        android:hint="Insert your consultation ID"
-        android:inputType="number"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"/>
-
-    <Button
-        android:id="@+id/btnSendModifyConsultas"
-        android:layout_width="230dp"
-        android:layout_height="wrap_content"
-        android:text="@string/modifyMedicalHistory"
-        android:layout_gravity="center"
-        android:layout_margin="16dp"
-        android:padding="12dp"/>
 
 </LinearLayout>

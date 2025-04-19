@@ -52,25 +52,30 @@ public class VaccineSection extends AppCompatActivity {
 
     }
 
+    //HISTORY
     public void sendActivityVaccineDateRegister(View view){
         Intent intent = new Intent(this,VaccineDateRegister.class);
         startActivity(intent);
     }
 
     public void sendActivityViewVaccine(View view){
-
+        Intent intent = new Intent(this,ViewVaccines.class);
+        startActivity(intent);
     }
 
     public void sendActivityViewAllVaccines(View view){
-
+        Intent intent = new Intent(this,ViewAllHistories.class);
+        startActivity(intent);
     }
 
     public void sendActivityModifyVaccine(View view){
-
+        Intent intent = new Intent(this,ShowHistoriesToModify.class);
+        startActivity(intent);
     }
 
     public void sendActivityDeleteVaccine(View view){
-
+        Intent intent = new Intent(this,DeleteVaccine.class);
+        startActivity(intent);
     }
 
 

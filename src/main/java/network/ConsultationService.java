@@ -23,11 +23,11 @@ public interface ConsultationService {
     @GET("consulta/consultas")
     Call<List<Consulta>> getConsultas();
 
-    @GET("consulta/consultaC/{con_id}")
+    @GET("consulta/find/{con_id}")
     Call<Consulta> getConsulta(@Path("con_id")int con_id);
 
-    @GET("consulta/consultaU/{user_id}")
-    Call<List<Consulta>> getConsultaU(@Path("user_id")int user_id);
+    //@GET("consulta/consultaU/{user_id}")
+    //Call<List<Consulta>> getConsultaU(@Path("user_id")int user_id);
 
     @PATCH("consulta/update/{con_id}")
     Call<Consulta> updateConsulta(@Body Consulta consulta, @Path("con_id")int con_id);

@@ -7,20 +7,20 @@
     android:id="@+id/main"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ShowConsultasToModify">
+    tools:context=".ShowHistoriesToModify">
 
     <TextView
         android:id="@+id/title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="View Consultation Information"
+        android:text="View Medical History Information"
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"/>
 
     <EditText
-        android:id="@+id/petIDC"
+        android:id="@+id/petIDH"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:hint="Insert your pet ID"
@@ -30,7 +30,7 @@
 
 
     <Button
-        android:id="@+id/btn_bring_consultation_info"
+        android:id="@+id/btn_bring_medical_history_info"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:text="@string/viewInfoC"
@@ -42,11 +42,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
-        android:contentDescription="Visualizacion de consultas para modificar"
+        android:contentDescription="Visualizacion de Historia Médica para modificar"
         android:fillViewport="true">
 
         <LinearLayout
-            android:id="@+id/containerConsultasM"
+            android:id="@+id/containerHistoriaM"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:padding="16dp"
@@ -57,7 +57,7 @@
     </ScrollView>
 
     <EditText
-        android:id="@+id/consultaID"
+        android:id="@+id/historyID"
         android:layout_width="230dp"
         android:layout_height="50dp"
         android:hint="Insert your consultation ID"
@@ -66,7 +66,7 @@
         android:layout_margin="16dp"/>
 
     <Button
-        android:id="@+id/btnSendModifyConsultas"
+        android:id="@+id/btnSendModifyHistory"
         android:layout_width="230dp"
         android:layout_height="wrap_content"
         android:text="@string/modifyMedicalHistory"

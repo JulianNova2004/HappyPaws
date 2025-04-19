@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".ModifyRecordatory">
+    tools:context=".ModifyHistory">
 
     <TextView
         android:id="@+id/title"
@@ -29,16 +29,16 @@
         android:layout_margin="16dp"/>
 
     <EditText
-        android:id="@+id/consultationIDM"
+        android:id="@+id/historyIDM"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/consultationId"
+        android:hint="@string/historyId"
         android:inputType="number"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/consultationDateM"
+        android:id="@+id/historyDateM"
         android:layout_width="240dp"
         android:layout_height="50dp"
         android:hint="@string/consultationDate"
@@ -49,35 +49,47 @@
         android:clickable="true"/>
 
     <EditText
+        android:id="@+id/vaccineM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/vaccine"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+
+    <EditText
+        android:id="@+id/doseM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/dose"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/cuantityM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/cuantity"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
         android:id="@+id/reasonM"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/consultationReason"
-        android:inputType="textCapWords"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <Spinner
-        android:id="@+id/state_pet_spinner"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:layout_gravity="center"
-        android:layout_margin="12dp"/>
-
-    <EditText
-        android:id="@+id/vetM"
-        android:layout_width="240dp"
-        android:layout_height="50dp"
-        android:hint="@string/designatedVeterinary"
+        android:hint="@string/reason"
         android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
 
     <EditText
-        android:id="@+id/resultsM"
+        android:id="@+id/commentsM"
         android:layout_width="240dp"
         android:layout_height="50dp"
-        android:hint="@string/consultationResults"
+        android:hint="@string/comments"
         android:inputType="textCapWords"
         android:layout_gravity="center"
         android:layout_margin="12dp"/>
@@ -86,7 +98,7 @@
         android:id="@+id/btnSendModifyInformation"
         android:layout_width="240dp"
         android:layout_height="wrap_content"
-        android:text="@string/modifyRecordatoryInformation"
+        android:text="@string/modifyMedicalHistory"
         android:layout_gravity="center"
         android:layout_margin="16dp"
         android:padding="12dp"/>

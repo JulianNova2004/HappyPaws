@@ -67,7 +67,7 @@ public class Home extends AppCompatActivity {
     }
 
     public void sendMedicalHistorySection(View view){
-        //Consulta
+        //Consulta --> Cita veterinario
         Intent intent = new Intent(this,MedicalHistorySection.class);
         startActivity(intent);
     }
