@@ -39,8 +39,10 @@ public class PetSection extends AppCompatActivity {
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
+            //Usuario
             viewAllPets.setVisibility(View.GONE);
         }else if(typeUser==1){
+            //Veterinario
             registerPet.setVisibility(View.GONE);
             viewPets.setVisibility(View.GONE);
             modifyPet.setVisibility(View.GONE);

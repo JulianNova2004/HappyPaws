@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".Home">
+    tools:context=".StatsSection">
 
     <TextView
-        android:id="@+id/titleUsr"
+        android:id="@+id/titleStatsS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
@@ -29,86 +28,89 @@
             android:orientation="vertical">
 
             <Button
-                android:id="@+id/send_pet_section"
+                android:id="@+id/allPetsS"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendPetSection"
+                android:onClick="allPets"
                 android:padding="12dp"
-                android:text="@string/petSection" />
+                android:text="@string/viewAllPets" />
+
 
             <Button
-                android:id="@+id/send_vaccine_section"
+                android:id="@+id/allVaccinesS"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendVaccineSection"
+                android:onClick="allVaccines"
                 android:padding="12dp"
-                android:text="@string/vaccineSection" />
+                android:text="@string/viewAllVacines" />
 
             <Button
-                android:id="@+id/send_medicalHistory_section"
+                android:id="@+id/allMedicalHistoriesS"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendMedicalHistorySection"
+                android:onClick="allMedicalHistories"
                 android:padding="12dp"
-                android:text="@string/medicalHistorySection" />
+                android:text="@string/viewAllMedicalHistories" />
 
             <Button
-                android:id="@+id/send_recordatory_section"
+                android:id="@+id/allRecordatoriesS"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendRecordatorySection"
+                android:onClick="allRecordatories"
                 android:padding="12dp"
-                android:text="@string/recordatorySection" />
+                android:text="@string/viewAllRecordatoriesVaccine" />
 
             <Button
-                android:id="@+id/send_stats_section"
+                android:id="@+id/medicalHistoryStats"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendStatsSection"
+                android:onClick="medicalHistoryStats"
                 android:padding="12dp"
-                android:text="@string/statsSection" />
+                android:text="@string/medicalHistoryStats" />
 
             <Button
-                android:id="@+id/viewChats"
+                android:id="@+id/vaccineStats"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="viewChats"
+                android:onClick="vaccineStats"
                 android:padding="12dp"
-                android:text="@string/viewChats" />
+                android:text="@string/vaccineStats" />
 
             <Button
-                android:id="@+id/emergency"
+                android:id="@+id/recordatoryStats"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="emergencyContact"
+                android:onClick="recordatoryStats"
                 android:padding="12dp"
-                android:text="@string/emergency" />
+                android:text="@string/recordatoryStats" />
 
             <Button
-                android:id="@+id/send_Map_activity"
+                android:id="@+id/userStats"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginBottom="20dp"
-                android:onClick="sendActivityMap"
+                android:onClick="userStats"
                 android:padding="12dp"
-                android:text="@string/map" />
-
+                android:text="@string/userStats" />
 
         </LinearLayout>
     </ScrollView>
+
+
+
 </LinearLayout>

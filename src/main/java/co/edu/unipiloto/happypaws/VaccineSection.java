@@ -39,8 +39,10 @@ public class VaccineSection extends AppCompatActivity {
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
+            //Usuario
             viewAllVaccines.setVisibility(View.GONE);
         }else if(typeUser==1){
+            //Veterinario
             //registerVaccine.setVisibility(View.GONE);
             viewVaccines.setVisibility(View.GONE);
             //modifyVaccine.setVisibility(View.GONE);

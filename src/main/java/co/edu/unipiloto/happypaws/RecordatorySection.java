@@ -39,8 +39,10 @@ public class RecordatorySection extends AppCompatActivity {
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
+            //Usuario
             viewAllRecordatories.setVisibility(View.GONE);
         }else if(typeUser==1){
+            //Veterinario
             //registerRecordatory.setVisibility(View.GONE);
             viewRecordatories.setVisibility(View.GONE);
             //modifyRecordatory.setVisibility(View.GONE);

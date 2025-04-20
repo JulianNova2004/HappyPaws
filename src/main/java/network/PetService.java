@@ -28,6 +28,9 @@ public interface PetService {
         Call<Void> updatePet(@Path("id_owner")int idPet, @Body Pet pet);
 
         //confirmar
+        @GET("pet/getAllPets")
+        Call<List<Pet>> getAllPets();
+
         @GET("pet/getPet/{id_pet}")
         Call<Pet> getPet(@Path("id_pet")int id_pet);
 

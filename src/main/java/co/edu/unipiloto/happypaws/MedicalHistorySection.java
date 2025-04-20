@@ -36,8 +36,10 @@ public class MedicalHistorySection extends AppCompatActivity {
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
+            //Usuario
             viewAllMedicalHistorys.setVisibility(View.GONE);
         }else if(typeUser==1){
+            //Veterinario
             //registerMedicalHistory.setVisibility(View.GONE);
             viewMedicalHistorys.setVisibility(View.GONE);
             //modifyMedicalHistory.setVisibility(View.GONE);

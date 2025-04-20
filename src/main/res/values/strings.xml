@@ -16,6 +16,7 @@
     <string name="vaccineSection">Vaccine Section!</string>
     <string name="medicalHistorySection">Medical History Section!</string>
     <string name="recordatorySection">Recordatory Section!</string>
+    <string name="statsSection">Stats Section!</string>
 
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
@@ -92,5 +93,11 @@
     <string name="consultationId">Consultation ID</string>
 
     <string name="historyId">History ID</string>
+
+    <string name="medicalHistoryStats">Medical History Stats!</string>
+    <string name="vaccineStats">Vaccine Stats!</string>
+    <string name="recordatoryStats">Recordatory Stats!</string>
+    <string name="userStats">User Stats!</string>
+
 
 </resources>
