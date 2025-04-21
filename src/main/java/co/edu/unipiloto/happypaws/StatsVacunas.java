@@ -58,11 +58,11 @@ public class StatsVacunas extends AppCompatActivity {
         btnBringAmountOfVaccines = findViewById(R.id.btnBringAmountOfVaccines);
         amountVaccines = findViewById(R.id.amountVaccines);
 
+        historyService = Retro.getClient().create(HistoryService.class);
+
         firstDate.setOnClickListener(v -> showCalendarF());
         secondDate.setOnClickListener(v -> showCalendarS());
         loadVaccineTypes();
-
-        historyService = Retro.getClient().create(HistoryService.class);
 
         btnSearchVaccinesBetweenTwoDates.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -123,22 +123,28 @@ public class StatsVacunas extends AppCompatActivity {
             if(secondDateStr.isEmpty()){
                 secondDate.setError("Este campo no puede quedar vacio");
             }
+            return;
         }
         else{
             Call<List<History>> call = historyService.getVaccinesBetween(firstDateStr, secondDateStr);
             call.enqueue(new Callback<List<History>>() {
                 @Override
                 public void onResponse(Call<List<History>> call, Response<List<History>> response) {
+                    Log.i("HappyPaws", "Revisar " + response.body());
+                    Log.i("HappyPaws", "Booleano 1 " + (response.body() == null));
+                    Log.i("HappyPaws", "Booleano 2 " + (response.body().isEmpty()));
+                    Log.i("HappyPaws", "IsSuccesfull? " + (response.isSuccessful()));
                     if (response.isSuccessful()) {
                         containerVaccinesBetweenDates.removeAllViews();
                         List<History> histories = response.body();
-                        if(histories == null){
+                        if(histories.isEmpty()){
                             TextView noVaccines = new TextView(StatsVacunas.this);
                             noVaccines.setText("No hay vacunas registradas");
                             noVaccines.setTextSize(18);
                             noVaccines.setGravity(Gravity.CENTER);
                             noVaccines.setPadding(0, 10, 0, 10);
                             containerVaccinesBetweenDates.addView(noVaccines);
+                            Log.i("HappyPaws", "Revisar" + noVaccines.getText().toString());
                         }else{
                             int i = 1;
                             for(History history: histories){
@@ -225,6 +231,9 @@ public class StatsVacunas extends AppCompatActivity {
                     vaccine_spinnerS.setAdapter(adapter);
                 } else {
                     Toast.makeText(StatsVacunas.this, "Error al cargar tipos de vacuna", Toast.LENGTH_SHORT).show();
+                    Log.e("HappyPaws", "ResponseBody: " + response.body());
+                    Log.e("HappyPaws", "ResponseMessage: " + response.message());
+
                 }
             }
 
@@ -244,27 +253,50 @@ public class StatsVacunas extends AppCompatActivity {
             View selectedView = vaccine_spinnerS.getSelectedView();
             if (selectedView instanceof TextView) {
                 TextView errorText = (TextView) selectedView;
-                errorText.setError("Seleccione un estado");
+                errorText.setError("Seleccione una vacuna");
                 errorText.setTextColor(Color.RED);
             }
 
             Toast.makeText(this, "Por favor seleccione un tipo de vacuna", Toast.LENGTH_SHORT).show();
             return;
         }
-        String tipoVacuna = (String) vaccine_spinnerS.getSelectedItem();
+        vaccineStr = (String) vaccine_spinnerS.getSelectedItem();
         //Toast.makeText(this, "Seleccionaste: " + tipoVacuna, Toast.LENGTH_SHORT).show();
-        bringAmountOfVaccines(tipoVacuna);
+        bringAmountOfVaccines(vaccineStr);
     }
 
-    private void bringAmountOfVaccines(String tipoVacuna) {
-        Call<Integer> call = historyService.getNumVaccines(tipoVacuna);
+    private void bringAmountOfVaccines(String vaccineStr) {
+        Call<Integer> call = historyService.getNumVaccines(vaccineStr);
         call.enqueue(new Callback<Integer>() {
             @Override
             public void onResponse(Call<Integer> call, Response<Integer> response) {
-                if (response.isSuccessful() && response.body() != null) {
+                if (response.isSuccessful()) {
+                    int number = response.body();
+                    String l1 = "Vacuna seleccionada: " + vaccineStr + "\n";
+                    if(number == 0){
+                        String l2 = "No se han aplicado dosis de esa vacuna";
+                        String put = l1 + l2;
+                        amountVaccines.setText(put);
+                        amountVaccines.setVisibility(View.VISIBLE);
+                    }else{
+                        if(number == 1){
+                            String l2 = "Se ha aplicado " + number + " vez";
+                            String put = l1 + l2;
+                            amountVaccines.setText(put);
+                            amountVaccines.setVisibility(View.VISIBLE);
+                        }else{
+                            String l2 = "Se ha aplicado " + number + " veces";
+                            String put = l1 + l2;
+                            amountVaccines.setText(put);
+                            amountVaccines.setVisibility(View.VISIBLE);
+                        }
+                    }
 
                 } else {
                     Toast.makeText(StatsVacunas.this, "Error al cargar tipos de vacuna", Toast.LENGTH_SHORT).show();
+                    //Log.e("HappyPaws", "ResponseBody: " + response.body());
+                    //Log.e("HappyPaws", "ResponseMessage: " + response.message());
+
                 }
             }
 

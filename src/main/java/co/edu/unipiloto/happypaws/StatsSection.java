@@ -65,7 +65,7 @@ public class StatsSection extends AppCompatActivity {
 
     public void vaccineStats(View view){
         //Crear actividad de stats de vacunas
-        Intent intent = new Intent(this,PetSection.class);
+        Intent intent = new Intent(this,StatsVacunas.class);
         startActivity(intent);
     }
 

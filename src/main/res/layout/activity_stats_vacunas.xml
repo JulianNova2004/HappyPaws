@@ -7,7 +7,7 @@
     android:id="@+id/main"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".StatsConsultas">
+    tools:context=".StatsVacunas">
 
     <TextView
         android:id="@+id/title"
@@ -23,8 +23,9 @@
         android:id="@+id/vaccinesBetweenDatesS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Vaccines applied between 2 dates!"
+        android:text="Vaccines applied between\n2 dates!"
         android:textSize="25sp"
+        android:gravity="center"
         android:textStyle="bold"
         android:layout_gravity="center"
         android:layout_marginTop="15dp"/>
@@ -50,7 +51,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="normal"
             android:layout_marginLeft="30dp"
@@ -60,7 +61,7 @@
         <TextView
             android:layout_width="0dp"
             android:layout_height="30dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:textSize="20sp"
             android:textStyle="normal"
             android:layout_gravity="center"
@@ -76,9 +77,9 @@
 
         <EditText
             android:id="@+id/firstDate"
-            android:layout_width="10dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:layout_marginLeft="15dp"
             android:layout_marginRight="10dp"
             android:gravity="center"
@@ -86,9 +87,9 @@
 
         <EditText
             android:id="@+id/secondDate"
-            android:layout_width="10dp"
+            android:layout_width="0dp"
             android:layout_height="48dp"
-            android:layout_weight="0.5"
+            android:layout_weight="1"
             android:gravity="center"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="15dp"
@@ -170,6 +171,8 @@
         android:textStyle="normal"
         android:layout_gravity="center"
         android:visibility="gone"
-        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
         android:layout_marginTop="5dp"/>
+
 </LinearLayout>
