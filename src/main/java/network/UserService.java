@@ -25,5 +25,8 @@ public interface UserService {
         @GET("user/getUsers")
         Call<List<User>> getAllUsers();
 
+        //stats
+        @GET("user/most")
+        Call<List<User>> most();
 
 }

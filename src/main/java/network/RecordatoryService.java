@@ -33,4 +33,9 @@ public interface RecordatoryService {
 
     @DELETE("recordatory/del/{rec_id}")
     Call<Recordatorio> deleteRec(@Path("rec_id") int rec_id);
+
+    //stats
+
+    @GET("recordatory/between/{fecha1}/{fecha2}")
+    Call<List<Recordatorio>> getBetween(@Path("fecha1")String fecha1, @Path("fecha2")String fecha2);
 }

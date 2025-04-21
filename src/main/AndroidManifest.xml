@@ -24,6 +24,12 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".StatsUser"
+            android:exported="false" />
+        <activity
+            android:name=".StatsRecordatory"
+            android:exported="false" />
+        <activity
             android:name=".StatsVacunas"
             android:exported="false" />
         <activity

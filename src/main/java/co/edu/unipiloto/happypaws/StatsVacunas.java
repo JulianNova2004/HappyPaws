@@ -23,7 +23,11 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import models.History;
@@ -130,10 +134,10 @@ public class StatsVacunas extends AppCompatActivity {
             call.enqueue(new Callback<List<History>>() {
                 @Override
                 public void onResponse(Call<List<History>> call, Response<List<History>> response) {
-                    Log.i("HappyPaws", "Revisar " + response.body());
-                    Log.i("HappyPaws", "Booleano 1 " + (response.body() == null));
-                    Log.i("HappyPaws", "Booleano 2 " + (response.body().isEmpty()));
-                    Log.i("HappyPaws", "IsSuccesfull? " + (response.isSuccessful()));
+                    //Log.i("HappyPaws", "Revisar " + response.body());
+                    //Log.i("HappyPaws", "Booleano 1 " + (response.body() == null));
+                    //Log.i("HappyPaws", "Booleano 2 " + (response.body().isEmpty()));
+                    //Log.i("HappyPaws", "IsSuccesfull? " + (response.isSuccessful()));
                     if (response.isSuccessful()) {
                         containerVaccinesBetweenDates.removeAllViews();
                         List<History> histories = response.body();
@@ -148,10 +152,35 @@ public class StatsVacunas extends AppCompatActivity {
                         }else{
                             int i = 1;
                             for(History history: histories){
+                                Date fechaFormateada = null;
+                                String dateString = history.getDate();
+
+                                if (dateString != null && !dateString.isEmpty()) {
+                                    try {
+
+                                        long timestamp = Long.parseLong(dateString);
+                                        fechaFormateada = new Date(timestamp);
+
+                                        //Log.i("HappyPaws", "Fecha convertida: " + fechaFormateada);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                        Log.e("HappyPaws", "Error al convertir el timestamp: " + e.getMessage());
+                                    }
+                                }
+
+                                String fechaStr = (fechaFormateada != null) ? new SimpleDateFormat("yyyy-MM-dd").format(fechaFormateada) : "Fecha no disponible";
+
+                                Log.i("HappyPaws", "Fecha formateada: " + fechaStr);
+
+                                Gson gson = new Gson();
+                                String jsonR = gson.toJson(response.body());
+                                Log.i("HappyPaws", "JSON GSON " + jsonR);
+
                                 TextView petD = createHeaderTextView("VACCINE NUMBER " + i);
                                 containerVaccinesBetweenDates.addView(petD);
                                 TextView idRecieved = createTextView("Id: " + history.getId());
                                 TextView vaccineRecieved = createTextView("Vaccine applied: " + history.getVaccine());
+                                TextView dateRecieved = createTextView("Date applied: " + fechaStr);
                                 TextView reasonRecieved = createTextView("Reason: " + history.getReason());
                                 TextView petRecieved = createTextView("Vaccine applied: " + history.getPet().getName());
                                 TextView doseRecieved = createTextView("Dose applied: " + history.getDosis());
@@ -160,6 +189,7 @@ public class StatsVacunas extends AppCompatActivity {
 
                                 containerVaccinesBetweenDates.addView(idRecieved);
                                 containerVaccinesBetweenDates.addView(vaccineRecieved);
+                                containerVaccinesBetweenDates.addView(dateRecieved);
                                 containerVaccinesBetweenDates.addView(reasonRecieved);
                                 containerVaccinesBetweenDates.addView(petRecieved);
                                 containerVaccinesBetweenDates.addView(doseRecieved);

@@ -71,13 +71,13 @@ public class StatsSection extends AppCompatActivity {
 
     public void recordatoryStats(View view){
         //Crear actividad de stats de recordatorios
-        Intent intent = new Intent(this,PetSection.class);
+        Intent intent = new Intent(this,StatsRecordatory.class);
         startActivity(intent);
     }
 
     public void userStats(View view){
         //Crear actividad de stats de users
-        Intent intent = new Intent(this,PetSection.class);
+        Intent intent = new Intent(this,StatsUser.class);
         startActivity(intent);
     }
 

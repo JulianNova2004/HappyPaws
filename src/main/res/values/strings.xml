@@ -105,4 +105,8 @@
 
     <string name="searchVaccines">Search Vaccines!</string>
 
+    <string name="searchRecordatories">Search Recordatories!</string>
+
+    <string name="searchUsers">Search Users!</string>
+
 </resources>

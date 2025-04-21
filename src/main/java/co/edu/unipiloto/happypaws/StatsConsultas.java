@@ -201,10 +201,6 @@ public class StatsConsultas extends AppCompatActivity {
                         int i = 1;
                         for(Pet pet: pets){
 
-                            //TextView petD = new TextView(StatsConsultas.this);
-                            //petD.setText("PET NUMBER " + i);
-                            //containerPetsDesc.addView(petD);
-
                             TextView petD = createHeaderTextView("PET NUMBER " + i);
                             containerPetsDesc.addView(petD);
 
