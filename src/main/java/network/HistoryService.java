@@ -18,6 +18,9 @@ public interface HistoryService {
     @GET("history/getAll")
     Call<List<History>> getAllHistories();
 
+    @GET("history/tipos")
+    Call<List<String>> getVaccineTypes();
+
     @GET("history/get/{id}")
     Call<List<History>> getHistoryByPetId(@Path("id") int id);
 
@@ -30,4 +33,10 @@ public interface HistoryService {
     @DELETE("history/delete/{id}")
     Call<History> deleteHistory(@Path("id") int id);
 
+    //Stats
+    @GET("history/between/{fecha1}/{fecha2}")
+    Call<List<History>> getVaccinesBetween(@Path("fecha1")String fecha1, @Path("fecha2")String fecha2);
+
+    @GET("history/numVac/{vaccine}")
+    Call<Integer> getNumVaccines(@Path("vaccine")String vaccine);
 }

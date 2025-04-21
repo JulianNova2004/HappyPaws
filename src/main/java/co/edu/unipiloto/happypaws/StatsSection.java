@@ -59,7 +59,7 @@ public class StatsSection extends AppCompatActivity {
 
     public void medicalHistoryStats(View view){
         //Crear actividad de stats de medicalHistories
-        Intent intent = new Intent(this,PetSection.class);
+        Intent intent = new Intent(this,StatsConsultas.class);
         startActivity(intent);
     }
 

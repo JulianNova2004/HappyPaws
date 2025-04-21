@@ -96,7 +96,8 @@ public class Home extends AppCompatActivity {
     }
 
     public void sendStatsSection(View view){
-
+        Intent intent = new Intent(this,StatsSection.class);
+        startActivity(intent);
     }
     public void sendActivityMap(View view){
 

@@ -34,4 +34,14 @@ public interface ConsultationService {
 
     @DELETE("consulta/delete/{con_id}")
     Call<Consulta> deleteCons(@Path("con_id") int con_id);
+
+    //Stats
+    @GET("consulta/freq")
+    Call<Pet> mostFreq();
+
+    @GET("consulta/state/{estado}")
+    Call<List<Pet>> findByEstado(@Path("estado") String estado);
+
+    @GET("consulta/contarV/{pet_id}")
+    Call<Integer> countVisitsPetId(@Path("pet_id") int pet_id);
 }

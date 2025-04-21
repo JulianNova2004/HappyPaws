@@ -99,5 +99,10 @@
     <string name="recordatoryStats">Recordatory Stats!</string>
     <string name="userStats">User Stats!</string>
 
+    <string name="petStatR">Search Pet!</string>
+    <string name="petStateStatR">Search Pets!</string>
+    <string name="petVisits">Search Pet Visits!</string>
+
+    <string name="searchVaccines">Search Vaccines!</string>
 
 </resources>

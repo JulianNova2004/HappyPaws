@@ -167,7 +167,7 @@ public class LogIn extends AppCompatActivity {
                 public void onResponse(Call<Vet> call, Response<Vet> response) {
                     if (response.isSuccessful() && response.body() != null) {
 
-                        int userId = Integer.parseInt(response.body().getIdentification());
+                        int userId = response.body().getVetId();
                         typeUser = 1;
                         String usernameStrR = response.body().getName();
                         String passwordStrR = response.body().getPassw();
