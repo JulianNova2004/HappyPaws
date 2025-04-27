@@ -17,7 +17,6 @@
         android:layout_gravity="center"
         android:layout_marginTop="80dp"/>
 
-
     <Button
         android:id="@+id/send_comprobation"
         android:layout_width="200dp"
@@ -27,6 +26,50 @@
         android:layout_margin="16dp"
         android:padding="12dp"/>
 
+
+    <TextView
+        android:id="@+id/continue1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Llene el siguiente campo\npara verificar su identidad"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/confirmation"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="Ingrese su contraseña"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:padding="12dp"/>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/deletePet"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        android:padding="12dp"/>
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Si su contraseña es correcta,\nse borrará su mascota"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_margin="16dp"/>
+
+    <!--
     <LinearLayout
         android:id="@+id/contenedorDelete"
         android:layout_width="wrap_content"
@@ -38,4 +81,5 @@
         android:visibility="gone">
     </LinearLayout>
 
+    -->
 </LinearLayout>

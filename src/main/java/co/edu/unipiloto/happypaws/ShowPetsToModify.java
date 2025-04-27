@@ -131,13 +131,13 @@ public class ShowPetsToModify extends AppCompatActivity {
                         }
 
                     } else {
-                        Toast.makeText(ShowPetsToModify.this, "Correo o contraseña incorrectos, revise sus credenciales", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShowPetsToModify.this, "Error al buscar mascotas", Toast.LENGTH_SHORT).show();
                     }
                 }
                 @Override
                 public void onFailure(Call<List<Pet>> call, Throwable t) {
                     Toast.makeText(ShowPetsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al iniciar sesión", t);
+                    Log.i("HappyPaws", "Error al buscar mascotas", t);
                 }
 
             });

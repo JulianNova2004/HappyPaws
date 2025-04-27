@@ -140,22 +140,6 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
             )
     );
 
-    /*
-    private List<LatLng> rutaSimulada = Arrays.asList(
-            new LatLng(-12.046374, -77.042793),
-            new LatLng(-12.046500, -77.042900),
-            new LatLng(-12.046650, -77.043050),
-            new LatLng(-12.046800, -77.043200),
-            new LatLng(-12.046950, -77.043350),
-            new LatLng(-12.047100, -77.043500),
-            new LatLng(-12.047250, -77.043650),
-            new LatLng(-12.047400, -77.043800),
-            new LatLng(-12.047550, -77.043950),
-            new LatLng(-12.047700, -77.044100),
-            new LatLng(-12.047850, -77.044250)
-    );
-     */
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

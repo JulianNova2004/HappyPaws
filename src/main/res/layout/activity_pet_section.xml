@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".PetSection">
+
+    <TextView
+        android:id="@+id/titleUsrP"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/register_pet"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityRegister"
+                android:padding="12dp"
+                android:text="@string/register" />
+
+
+            <Button
+                android:id="@+id/viewPets"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewPets"
+                android:padding="12dp"
+                android:text="@string/viewPets" />
+
+            <Button
+                android:id="@+id/viewAllPets"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewAllPets"
+                android:padding="12dp"
+                android:text="@string/viewAllPets" />
+
+            <Button
+                android:id="@+id/modify_pet"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendActivityModify"
+                android:padding="12dp"
+                android:text="@string/modifyPet" />
+
+            <Button
+                android:id="@+id/delete_pet"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="deletePet"
+                android:padding="12dp"
+                android:text="@string/deletePet" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

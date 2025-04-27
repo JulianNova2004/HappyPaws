@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ModifyRecordatory">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Modify your consultation!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+    <TextView
+        android:id="@+id/subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="The information that you don´t\nwanna change let it empty"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/consultationIDM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationId"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/consultationDateM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationDate"
+        android:inputType="date"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"
+        android:focusable="false"
+        android:clickable="true"/>
+
+    <EditText
+        android:id="@+id/reasonM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationReason"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <Spinner
+        android:id="@+id/state_pet_spinner"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/vetM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/designatedVeterinary"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <EditText
+        android:id="@+id/resultsM"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationResults"
+        android:inputType="textCapWords"
+        android:layout_gravity="center"
+        android:layout_margin="12dp"/>
+
+    <Button
+        android:id="@+id/btnSendModifyInformation"
+        android:layout_width="240dp"
+        android:layout_height="wrap_content"
+        android:text="@string/modifyRecordatoryInformation"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+</LinearLayout>

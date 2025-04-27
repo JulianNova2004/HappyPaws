@@ -1,4 +1,6 @@
 package network;
+import java.util.List;
+
 import models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
@@ -20,5 +22,11 @@ public interface UserService {
         @POST("user/login")
         Call<User> login(@Body User user);
 
+        @GET("user/getUsers")
+        Call<List<User>> getAllUsers();
+
+        //stats
+        @GET("user/most")
+        Call<List<User>> most();
 
 }

@@ -2,9 +2,14 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION"/>
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION"/>
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -18,6 +23,96 @@
         android:theme="@style/Theme.HappyPaws"
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
+        <activity
+            android:name=".RequestSection"
+            android:exported="false" />
+        <activity
+            android:name=".StatsUser"
+            android:exported="false" />
+        <activity
+            android:name=".StatsRecordatory"
+            android:exported="false" />
+        <activity
+            android:name=".StatsVacunas"
+            android:exported="false" />
+        <activity
+            android:name=".StatsConsultas"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllPets"
+            android:exported="false" />
+        <activity
+            android:name=".StatsSection"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllHistories"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyHistory"
+            android:exported="false" />
+        <activity
+            android:name=".ShowHistoriesToModify"
+            android:exported="false" />
+        <activity
+            android:name=".ViewVaccines"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteVaccine"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllConsultations"
+            android:exported="false" />
+        <activity
+            android:name=".ShowConsultasToModify"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyConsulta"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteConsulta"
+            android:exported="false" />
+        <activity
+            android:name=".ViewAllRecordatories"
+            android:exported="false" />
+        <activity
+            android:name=".DeleteRecordatory"
+            android:exported="false" />
+        <activity
+            android:name=".ModifyRecordatory"
+            android:exported="false" />
+        <activity
+            android:name=".ShowRecsToModify"
+            android:exported="false" />
+        <activity
+            android:name=".ViewVaccineRecordatories"
+            android:exported="false" />
+        <activity
+            android:name=".EmergencyContact"
+            android:exported="false" />
+        <activity
+            android:name=".RecordatorySection"
+            android:exported="false" />
+        <activity
+            android:name=".VaccineSection"
+            android:exported="false" />
+        <activity
+            android:name=".MedicalHistorySection"
+            android:exported="false" />
+        <activity
+            android:name=".PetSection"
+            android:exported="false" />
+        <activity
+            android:name=".SetRecordatory"
+            android:exported="false" />
+        <activity
+            android:name=".Chat"
+            android:exported="false" />
+        <activity
+            android:name=".ViewChats"
+            android:exported="false" />
+        <activity
+            android:name=".SelectPetUbi"
+            android:exported="false" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
@@ -33,7 +128,7 @@
             android:name=".DeletePet"
             android:exported="false" />
         <activity
-            android:name=".MedicalHistory"
+            android:name=".ViewMedicalHistory"
             android:exported="false" />
         <activity
             android:name=".AddConsultationMedicalHistory"

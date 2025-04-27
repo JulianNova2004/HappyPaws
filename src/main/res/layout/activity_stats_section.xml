@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StatsSection">
+
+    <TextView
+        android:id="@+id/titleStatsS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/allPetsS"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="allPets"
+                android:padding="12dp"
+                android:text="@string/viewAllPets" />
+
+
+            <Button
+                android:id="@+id/allVaccinesS"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="allVaccines"
+                android:padding="12dp"
+                android:text="@string/viewAllVacines" />
+
+            <Button
+                android:id="@+id/allMedicalHistoriesS"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="allMedicalHistories"
+                android:padding="12dp"
+                android:text="@string/viewAllMedicalHistories" />
+
+            <Button
+                android:id="@+id/allRecordatoriesS"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="allRecordatories"
+                android:padding="12dp"
+                android:text="@string/viewAllRecordatoriesVaccine" />
+
+            <Button
+                android:id="@+id/medicalHistoryStats"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="medicalHistoryStats"
+                android:padding="12dp"
+                android:text="@string/medicalHistoryStats" />
+
+            <Button
+                android:id="@+id/vaccineStats"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="vaccineStats"
+                android:padding="12dp"
+                android:text="@string/vaccineStats" />
+
+            <Button
+                android:id="@+id/recordatoryStats"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="recordatoryStats"
+                android:padding="12dp"
+                android:text="@string/recordatoryStats" />
+
+            <Button
+                android:id="@+id/userStats"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="userStats"
+                android:padding="12dp"
+                android:text="@string/userStats" />
+
+        </LinearLayout>
+    </ScrollView>
+
+
+
+</LinearLayout>

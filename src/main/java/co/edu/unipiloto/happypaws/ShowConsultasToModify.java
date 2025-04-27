@@ -1,5 +1,7 @@
 package co.edu.unipiloto.happypaws;
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,75 +18,79 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import models.Consulta;
-import models.Pet;
 import network.ConsultationService;
-import network.PetService;
+import network.RecordatoryService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MedicalHistory extends AppCompatActivity {
+public class ShowConsultasToModify extends AppCompatActivity {
 
-    private ConsultationService consultationService;
     private LinearLayout containerC;
-    private Button btnBringInfoPets;
-    private EditText petId;
+    private Button btnSendModifyConsultas, btnBringConsultationInfo;
+    private EditText consultaId, petId;
+    private ConsultationService consultationService;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.activity_medical_history);
+        setContentView(R.layout.activity_show_consultas_to_modify);
 
-        containerC = findViewById(R.id.containerInformationC);
+        containerC = findViewById(R.id.containerConsultasM);
+        btnSendModifyConsultas = findViewById(R.id.btnSendModifyConsultas);
+        consultaId = findViewById(R.id.consultaID);
         petId = findViewById(R.id.petIDC);
-        btnBringInfoPets = findViewById(R.id.btn_bring_consultation_info);
+        btnBringConsultationInfo = findViewById(R.id.btn_bring_consultation_info);
+
         consultationService = Retro.getClient().create(ConsultationService.class);
 
-        btnBringInfoPets.setOnClickListener(new View.OnClickListener(){
+        btnBringConsultationInfo.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View v){
-                review();
+                reviewPetId();
 
+            }
+        });
+
+        btnSendModifyConsultas.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                reviewConsultaId();
             }
         });
     }
 
-    public void review(){
+    public void reviewPetId(){
         String idPetStr = petId.getText().toString().trim();
         int idPet = Integer.parseInt(idPetStr);
         if (idPetStr.isEmpty()) {
             petId.setError("No deje este campo vacio");
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
-        /*
-        int idPet;
-
-        try {
-            idPet = Integer.parseInt(idPetStr);
-        } catch (NumberFormatException e) {
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
-            return;
-        }
-         */
-
         if (idPet == 0) {
             petId.setError("Ingrese un número válido");
-            Toast.makeText(MedicalHistory.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(MedicalHistory.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        bringInfo(idPet);
+        Toast.makeText(ShowConsultasToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+        viewConsultas(idPet);
+
     }
 
-    public void bringInfo(int idPet){
-        Call<List<Consulta>> call = consultationService.getConsultas(idPet);
+    public void viewConsultas(int idPet){
+
+        Call<List<Consulta>> call = consultationService.getConsultasByPetId(idPet);
         call.enqueue(new Callback<List<Consulta>>() {
             @Override
             public void onResponse(Call<List<Consulta>> call, Response<List<Consulta>> response) {
@@ -92,7 +98,7 @@ public class MedicalHistory extends AppCompatActivity {
                     containerC.removeAllViews();
                     List<Consulta> consultas = response.body();
                     if(consultas.isEmpty()){
-                        TextView noConsulta = new TextView(MedicalHistory.this);
+                        TextView noConsulta = new TextView(ShowConsultasToModify.this);
                         noConsulta.setText("No tiene informacion de consulta para esta mascota");
                         noConsulta.setTextSize(18);
                         noConsulta.setGravity(Gravity.CENTER);
@@ -104,7 +110,31 @@ public class MedicalHistory extends AppCompatActivity {
                         // pets.addAll(response.body());
                         int i = 1;
                         for(Consulta c: consultas){
-                            TextView info = new TextView(MedicalHistory.this);
+                            Date fechaFormateada = null;
+                            String dateString = c.getFecha();
+
+                            if (dateString != null && !dateString.isEmpty()) {
+                                try {
+
+                                    long timestamp = Long.parseLong(dateString);
+                                    fechaFormateada = new Date(timestamp);
+
+                                    //Log.i("HappyPaws", "Fecha convertida: " + fechaFormateada);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.e("HappyPaws", "Error al convertir el timestamp: " + e.getMessage());
+                                }
+                            }
+
+                            String fechaStr = (fechaFormateada != null) ? new SimpleDateFormat("yyyy-MM-dd").format(fechaFormateada) : "Fecha no disponible";
+
+                            Log.i("HappyPaws", "Fecha formateada: " + fechaStr);
+
+                            Gson gson = new Gson();
+                            String jsonR = gson.toJson(response.body());
+                            Log.i("HappyPaws", "JSON GSON " + jsonR);
+
+                            TextView info = new TextView(ShowConsultasToModify.this);
                             info.setText("CONSULTA NÚMERO " + i);
                             info.setTextSize(20);
                             info.setGravity(Gravity.CENTER);
@@ -112,11 +142,11 @@ public class MedicalHistory extends AppCompatActivity {
                             containerC.addView(info);
 
                             TextView idRecieved = createTextView("Id: " + c.getId());
-                            TextView dateRecieved = createTextView("Fecha: " + c.getFecha());
+                            TextView dateRecieved = createTextView("Fecha: " + fechaStr);
                             TextView reasonRecieved = createTextView("Motivo: " + c.getMotivo());
                             TextView stateRecieved = createTextView("Estado: " + c.getEstado());
                             TextView vetRecieved = createTextView("Veterinario: " + c.getVeterinario());
-                            TextView resultsRecieved = createTextView("Veterinario: " + c.getVeterinario());
+                            TextView resultsRecieved = createTextView("Resultados: " + c.getVeterinario());
                             TextView space = createTextView(" ");
                             space.setTextSize(10);
 
@@ -134,16 +164,17 @@ public class MedicalHistory extends AppCompatActivity {
                     }
 
                 } else {
-                    Toast.makeText(MedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ShowConsultasToModify.this, "Error al buscar consultas", Toast.LENGTH_SHORT).show();
                 }
             }
             @Override
             public void onFailure(Call<List<Consulta>> call, Throwable t) {
-                Toast.makeText(MedicalHistory.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Toast.makeText(ShowConsultasToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
                 Log.i("HappyPaws", "Error al buscar consultas", t);
             }
 
         });
+
     }
 
     private TextView createTextView(String data){
@@ -169,5 +200,29 @@ public class MedicalHistory extends AppCompatActivity {
         return (int) (dp * getResources().getDisplayMetrics().density);
     }
 
+    public void reviewConsultaId(){
+        String idConsultaStr = consultaId.getText().toString().trim();
+        int idConsulta = Integer.parseInt(idConsultaStr);
+        if (idConsultaStr.isEmpty()) {
+            petId.setError("No deje este campo vacio");
+            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (idConsulta == 0) {
+            petId.setError("Ingrese un número válido");
+            Toast.makeText(ShowConsultasToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
+            return;
+        }
 
+        Toast.makeText(ShowConsultasToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+        sendConsultaId(idConsulta);
+    }
+    public void sendConsultaId(int idConsulta){
+        //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        //SharedPreferences.Editor editor = preferences.edit();
+        //editor.putInt("Consulta_ID", idConsulta);
+        //editor.apply();
+        Intent intent = new Intent(ShowConsultasToModify.this, ModifyConsulta.class);
+        startActivity(intent);
+    }
 }

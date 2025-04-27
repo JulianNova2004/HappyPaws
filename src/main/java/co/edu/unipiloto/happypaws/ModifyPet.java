@@ -98,7 +98,7 @@ public class ModifyPet extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(ModifyPet.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ModifyPet.this, "Información de la mascota modificada con éxito", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ModifyPet.this,Home.class);
                         startActivity(intent);
 
@@ -109,7 +109,7 @@ public class ModifyPet extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(ModifyPet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al registrar mascota", t);
+                    Log.i("HappyPaws", "Error al modificar mascota", t);
                 }
             });
 
