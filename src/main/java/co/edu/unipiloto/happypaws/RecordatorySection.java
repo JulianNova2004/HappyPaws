@@ -35,7 +35,7 @@ public class RecordatorySection extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
         //boolean isUser = preferences.getBoolean("isUser", false);
-        int typeUser = preferences.getInt("typeUser", 10);
+        int typeUser = preferences.getInt("typeUser", -100);
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
@@ -48,7 +48,9 @@ public class RecordatorySection extends AppCompatActivity {
             //modifyRecordatory.setVisibility(View.GONE);
             deleteRecordatory.setVisibility(View.GONE);
         }else{
-            Toast.makeText(RecordatorySection.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
+            if(typeUser != 10) {
+                Toast.makeText(RecordatorySection.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
+            }
         }
         
     }
@@ -64,7 +66,8 @@ public class RecordatorySection extends AppCompatActivity {
     }
 
     public void viewAllVaccinesRecordatory(View view){
-
+        Intent intent = new Intent(this,ViewAllRecordatories.class);
+        startActivity(intent);
     }
 
     public void modifyVaccineRecordatory(View view){

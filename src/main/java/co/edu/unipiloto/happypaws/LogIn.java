@@ -177,7 +177,7 @@ public class LogIn extends AppCompatActivity {
                         editor.putInt("typeUser", typeUser);
                         editor.putString("Username", usernameStrR);
                         editor.putString("Password", passwordStrR);
-                        editor.putBoolean("isUser", true);
+                        //editor.putBoolean("isUser", true);
                         editor.apply();
 
                         Toast.makeText(LogIn.this, "Inicio de sesión exitoso :D", Toast.LENGTH_SHORT).show();

@@ -113,7 +113,7 @@ public class StatsUser extends AppCompatActivity {
             @Override
             public void onFailure(Call<List<User>> call, Throwable t) {
                 Toast.makeText(StatsUser.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al visualizar la usuarios", t);
+                Log.i("HappyPaws", "Error al visualizar los usuarios", t);
             }
 
         });

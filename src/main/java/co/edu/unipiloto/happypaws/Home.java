@@ -15,7 +15,7 @@ public class Home extends AppCompatActivity {
 
     private TextView title;
 
-    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, statsSection, chats, liveLocation, emergency;
+    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, requestSection, statsSection, chats, liveLocation, emergency;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,6 +27,7 @@ public class Home extends AppCompatActivity {
         vaccineSection = findViewById(R.id.send_vaccine_section);
         medicalHistorySection = findViewById(R.id.send_medicalHistory_section);
         recordatorySection = findViewById(R.id.send_recordatory_section);
+        requestSection = findViewById(R.id.send_request_section);
         statsSection = findViewById(R.id.send_stats_section);
         chats = findViewById(R.id.viewChats);
         liveLocation = findViewById(R.id.send_Map_activity);
@@ -35,13 +36,14 @@ public class Home extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
         boolean isUser = preferences.getBoolean("isUser", false);
-        int typeUser = preferences.getInt("typeUser", -10);
+        int typeUser = preferences.getInt("typeUser", -100);
         title.setText("Welcome " + username + "!");
         //Toast.makeText(Home.this, "Nombre: " + username + " BOOL: " + isUser, Toast.LENGTH_SHORT).show();
         //-1 -> Paseador ; 0 -> Usuario; 1 -> Veterinario: 10 -> Admin;
         if(typeUser==-1){
             //Paseador
             petSection.setVisibility(View.GONE);
+            //requestSection.setVisibility(View.GONE);
             medicalHistorySection.setVisibility(View.GONE);
             vaccineSection.setVisibility(View.GONE);
             recordatorySection.setVisibility(View.GONE);
@@ -56,6 +58,7 @@ public class Home extends AppCompatActivity {
 
         }else if(typeUser==1){
             //Veterinario
+            requestSection.setVisibility(View.GONE);
             statsSection.setVisibility(View.GONE);
             chats.setVisibility(View.GONE);
             liveLocation.setVisibility(View.GONE);
@@ -67,7 +70,7 @@ public class Home extends AppCompatActivity {
             liveLocation.setVisibility(View.GONE);
             emergency.setVisibility(View.GONE);
         } else {
-            Toast.makeText(Home.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
+            Toast.makeText(Home.this, "Se guardó nulo el typeUser", Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -92,6 +95,12 @@ public class Home extends AppCompatActivity {
     public void sendRecordatorySection(View view){
         //Recordatorio
         Intent intent = new Intent(this,RecordatorySection.class);
+        startActivity(intent);
+    }
+
+    public void sendRequestSection(View view){
+        //Cambiar por requestSection
+        Intent intent = new Intent(this,RequestSection.class);
         startActivity(intent);
     }
 

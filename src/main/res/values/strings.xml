@@ -17,6 +17,7 @@
     <string name="medicalHistorySection">Medical History Section!</string>
     <string name="recordatorySection">Recordatory Section!</string>
     <string name="statsSection">Stats Section!</string>
+    <string name="requestSection">Request Section!</string>
 
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
@@ -108,5 +109,12 @@
     <string name="searchRecordatories">Search Recordatories!</string>
 
     <string name="searchUsers">Search Users!</string>
+
+    <string name="sendRequest">Send Request!</string>
+    <string name="viewRequest">View My Requests!</string>
+    <string name="pendingRequest">Pending Requests!</string>
+    <string name="viewU">View My Pet´s Owners!</string>
+    <string name="viewP">View My Pet´s Walkers!</string>
+
 
 </resources>

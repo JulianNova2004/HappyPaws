@@ -35,7 +35,7 @@ public class PetSection extends AppCompatActivity {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
         //boolean isUser = preferences.getBoolean("isUser", false);
-        int typeUser = preferences.getInt("typeUser", 10);
+        int typeUser = preferences.getInt("typeUser", -100);
         title.setText("Welcome " + username + "!");
 
         if(typeUser==0){
@@ -48,7 +48,9 @@ public class PetSection extends AppCompatActivity {
             modifyPet.setVisibility(View.GONE);
             deletePet.setVisibility(View.GONE);
         }else{
-            Toast.makeText(PetSection.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
+            if(typeUser != 10) {
+                Toast.makeText(PetSection.this, "Se guardó nullo el typeUser", Toast.LENGTH_SHORT).show();
+            }
         }
     }
 

@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".RequestSection">
+
+    <TextView
+        android:id="@+id/titleUsrRe"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="60dp"
+        android:layout_marginBottom="20dp"
+        android:textSize="24sp"
+        android:textStyle="bold" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <Button
+                android:id="@+id/send_request"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendRequest"
+                android:padding="12dp"
+                android:text="@string/register" />
+
+            <Button
+                android:id="@+id/viewRequestU"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewRequestUser"
+                android:padding="12dp"
+                android:text="@string/viewRequest" />
+
+            <Button
+                android:id="@+id/viewPendingRequest"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="viewPendingRequest"
+                android:layout_marginBottom="20dp"
+                android:padding="12dp"
+                android:text="@string/pendingRequest" />
+
+            <Button
+                android:id="@+id/viewU"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:onClick="viewUsers"
+                android:layout_marginBottom="20dp"
+                android:padding="12dp"
+                android:text="@string/viewU" />
+
+            <Button
+                android:id="@+id/viewP"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="viewWalkers"
+                android:padding="12dp"
+                android:text="@string/viewP" />
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</LinearLayout>
