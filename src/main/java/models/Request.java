@@ -13,9 +13,7 @@ public class Request {
 
     private String contenido;
 
-    public Request(Paseador paseador, User usuario, int estado, String contenido) {
-        this.paseador = paseador;
-        this.usuario = usuario;
+    public Request(String contenido, int estado) {
         this.estado = estado;
         this.contenido = contenido;
     }

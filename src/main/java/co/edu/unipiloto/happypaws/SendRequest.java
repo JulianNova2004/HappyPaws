@@ -1,0 +1,211 @@
+package co.edu.unipiloto.happypaws;
+
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
+import android.os.Bundle;
+import android.util.Log;
+import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
+
+import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+
+import com.google.gson.Gson;
+
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import models.Consulta;
+import models.Paseador;
+import models.Request;
+import network.RequestService;
+import network.Retro;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+public class SendRequest extends AppCompatActivity {
+
+    private LinearLayout containerAvailableWalkers;
+    private Button btnSendRequest;
+    private EditText walkerID, contenidoRequest;
+    private RequestService requestService;
+    private List<Integer> availableID = new ArrayList<>();
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_send_request);
+
+        containerAvailableWalkers = findViewById(R.id.containerAvailableWalkers);
+        btnSendRequest = findViewById(R.id.btnSendRequest);
+        walkerID = findViewById(R.id.walkerID);
+        contenidoRequest = findViewById(R.id.contenidoRequest);
+        requestService = Retro.getClient().create(RequestService.class);
+        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        int userId = preferences.getInt("User_ID", 0);
+        bringInfo(userId);
+
+        btnSendRequest.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                review(userId);
+            }
+        });
+
+    }
+
+    private void review(int userId){
+        String walkerIDStr = walkerID.getText().toString().trim();
+        if (walkerIDStr.isEmpty()) {
+            walkerID.setError("No deje este campo vacio");
+            Toast.makeText(SendRequest.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        int idWalker = Integer.parseInt(walkerIDStr);
+        if (idWalker <= 0 || !availableID.contains(Integer.valueOf(idWalker))) {
+            walkerID.setError("Ingrese un ID válido, revise la lista de opciones");
+            Toast.makeText(SendRequest.this, "Caremonda ponga un número válido", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        String contenidoStr = contenidoRequest.getText().toString().trim();
+        if (contenidoStr.isEmpty()) {
+            contenidoRequest.setError("No deje este campo vacio");
+            Toast.makeText(SendRequest.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        //Puso bien el id y no dejó vacio
+        sendRequest(userId, idWalker, contenidoStr);
+
+    }
+
+    private void bringInfo(int userId){
+        Call<List<Paseador>> call = requestService.getNoReloRech(userId);
+        call.enqueue(new Callback<List<Paseador>>() {
+            @Override
+            public void onResponse(Call<List<Paseador>> call, Response<List<Paseador>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    availableID.clear();
+                    containerAvailableWalkers.removeAllViews();
+                    List<Paseador> paseadores = response.body();
+                    if(paseadores.isEmpty()){
+                        TextView noPaseadores = new TextView(SendRequest.this);
+                        noPaseadores.setText("En el momento, no hay paseadores disponibles\npara enviar solicitud de paseo");
+                        noPaseadores.setTextSize(18);
+                        noPaseadores.setGravity(Gravity.CENTER);
+                        noPaseadores.setPadding(0, 10, 0, 10);
+                        containerAvailableWalkers.addView(noPaseadores);
+                    }
+                    else{
+                        int i = 1;
+                        for(Paseador p: paseadores){
+
+                            TextView number = createHeaderTextView("PASEADOR NÚMERO " + i);
+
+                            TextView idRecieved = createTextView("Id del Paseador: " + p.getId());
+                            availableID.add(p.getId());
+                            TextView nameRecieved = createTextView("Nombre: " + p.getName());
+                            TextView emailRecieved = createTextView("Correo: " + p.getEmail());
+                            TextView phoneRecieved = createTextView("Número de celular: " + p.getPhoneNum());
+                            TextView space = createTextView(" ");
+                            space.setTextSize(10);
+
+                            containerAvailableWalkers.addView(number);
+                            containerAvailableWalkers.addView(idRecieved);
+                            containerAvailableWalkers.addView(nameRecieved);
+                            containerAvailableWalkers.addView(emailRecieved);
+                            containerAvailableWalkers.addView(phoneRecieved);
+                            containerAvailableWalkers.addView(space);
+
+                            i++;
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(SendRequest.this, "No se pudo obtener la lista de paseadores.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SendRequest.this, "Error al buscar paseadores disponibles", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Paseador>> call, Throwable t) {
+                Toast.makeText(SendRequest.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al buscar paseadores", t);
+            }
+
+        });
+    }
+
+    private void sendRequest(int userId, int walkerId, String contenido){
+        //Estado = 0 porque hasta ahora se va a enviar
+        int estado = 0;
+        Request request = new Request(contenido, estado);
+        Call<Request> call = requestService.crearReq(request, userId, walkerId);
+        call.enqueue(new Callback<Request>() {
+            @Override
+            public void onResponse(Call<Request> call, Response<Request> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(SendRequest.this, "Solicitud enviada exitosamente", Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(SendRequest.this, Home.class);
+                    startActivity(intent);
+                } else {
+                    Toast.makeText(SendRequest.this, "Hubo un error al enviar el la solicitud", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Request> call, Throwable t) {
+                Toast.makeText(SendRequest.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al enviar solicitud", t);
+            }
+        });
+
+    }
+    private TextView createHeaderTextView(String text) {
+        TextView tv = new TextView(this);
+        tv.setText(text);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        tv.setTextColor(Color.parseColor("#ffaa75"));
+        tv.setGravity(Gravity.CENTER);
+        int pad = dpPx(1);
+        tv.setPadding(0, pad, 0, pad);
+        return tv;
+    }
+
+    private TextView createTextView(String data){
+        TextView textView = new TextView(this);
+
+        int lwidth = dpPx(200);
+        int lheight = dpPx(50);
+        int lmargin = dpPx(10);
+        int gravity = Gravity.CENTER;
+
+        LinearLayout.LayoutParams parameters = new LinearLayout.LayoutParams(lwidth, lheight);
+        parameters.gravity = gravity;
+        parameters.setMargins(lmargin, lmargin, lmargin, lmargin);
+
+        textView.setLayoutParams(parameters);
+        textView.setText(data);
+        textView.setGravity(gravity);
+
+        return textView;
+    }
+
+    private int dpPx(int dp){
+        return (int) (dp * getResources().getDisplayMetrics().density);
+    }
+}

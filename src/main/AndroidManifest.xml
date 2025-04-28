@@ -24,6 +24,21 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
         <activity
+            android:name=".ViewUsers"
+            android:exported="false" />
+        <activity
+            android:name=".ViewPendingRequest"
+            android:exported="false" />
+        <activity
+            android:name=".ViewWalkers"
+            android:exported="false" />
+        <activity
+            android:name=".ViewMyRequest"
+            android:exported="false" />
+        <activity
+            android:name=".SendRequest"
+            android:exported="false" />
+        <activity
             android:name=".RequestSection"
             android:exported="false" />
         <activity
@@ -116,7 +131,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="value"/>
+            android:value="AIzaSyCjbIN-yHDH7W1uxi-VZOffOLDBE-IRYOs" />
 
         <activity
             android:name=".Maps"

@@ -116,5 +116,8 @@
     <string name="viewU">View My Pet´s Owners!</string>
     <string name="viewP">View My Pet´s Walkers!</string>
 
+    <string name="acceptRequest">Accept Request!</string>
+    <string name="declineRequest">Decline Request!</string>
+
 
 </resources>
