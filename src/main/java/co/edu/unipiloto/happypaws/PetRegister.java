@@ -2,9 +2,12 @@ package co.edu.unipiloto.happypaws;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.text.InputType;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -215,11 +218,8 @@ public class PetRegister extends AppCompatActivity {
 
 
         for (int i = 1; i<= numberPets; i++){
-            TextView pet = new TextView(this);
-            pet.setText("Pet number " + i);
-            pet.setTextSize(18);
-            pet.setGravity(Gravity.CENTER);
-            pet.setPadding(0, 10, 0, 10);
+            TextView pet = createHeaderTextView("Pet number " + i);
+
             container.addView(pet);
 
             //EditText nameInput = createEditText("Name", InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_FLAG_CAP_WORDS);
@@ -276,6 +276,18 @@ public class PetRegister extends AppCompatActivity {
         3. number
         4. numberDecimal
          */
+    }
+
+    private TextView createHeaderTextView(String text) {
+        TextView tv = new TextView(this);
+        tv.setText(text);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        tv.setTextColor(Color.parseColor("#ffaa75"));
+        tv.setGravity(Gravity.CENTER);
+        int pad = dpPx(1);
+        tv.setPadding(0, pad, 0, pad);
+        return tv;
     }
     private int dpPx(int dp){
         return (int) (dp * getResources().getDisplayMetrics().density);

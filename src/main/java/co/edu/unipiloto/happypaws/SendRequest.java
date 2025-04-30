@@ -9,6 +9,7 @@ import android.util.Log;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -187,21 +188,18 @@ public class SendRequest extends AppCompatActivity {
     }
 
     private TextView createTextView(String data){
+
         TextView textView = new TextView(this);
-
-        int lwidth = dpPx(200);
-        int lheight = dpPx(50);
-        int lmargin = dpPx(10);
-        int gravity = Gravity.CENTER;
-
-        LinearLayout.LayoutParams parameters = new LinearLayout.LayoutParams(lwidth, lheight);
-        parameters.gravity = gravity;
-        parameters.setMargins(lmargin, lmargin, lmargin, lmargin);
-
-        textView.setLayoutParams(parameters);
         textView.setText(data);
-        textView.setGravity(gravity);
-
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        int pad = dpPx(1);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(0, pad, 0, pad);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        textView.setLayoutParams(lp);
         return textView;
     }
 
