@@ -6,11 +6,11 @@ public class Recorrido {
 
     private Pet pet_id;
 
-    private int lat;
+    private Double lat;
 
-    private int lon;
+    private Double lon;
 
-    public Recorrido(Pet pet_id, int lat, int lon) {
+    public Recorrido(Pet pet_id, Double lat, Double lon) {
         this.pet_id = pet_id;
         this.lat = lat;
         this.lon = lon;
@@ -34,19 +34,19 @@ public class Recorrido {
         this.pet_id = pet_id;
     }
 
-    public int getLat() {
+    public Double getLat() {
         return lat;
     }
 
-    public void setLat(int lat) {
+    public void setLat(Double lat) {
         this.lat = lat;
     }
 
-    public int getLon() {
+    public Double getLon() {
         return lon;
     }
 
-    public void setLon(int lon) {
+    public void setLon(Double lon) {
         this.lon = lon;
     }
 }

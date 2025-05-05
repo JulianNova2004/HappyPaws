@@ -119,5 +119,7 @@
     <string name="acceptRequest">Accept Request!</string>
     <string name="declineRequest">Decline Request!</string>
 
+    <string name="searchPet">Search my Pet!</string>
+    <string name="sendLocation">Send Location of a Pet!</string>
 
 </resources>

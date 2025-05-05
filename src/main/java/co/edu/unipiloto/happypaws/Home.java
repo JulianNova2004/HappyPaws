@@ -110,8 +110,8 @@ public class Home extends AppCompatActivity {
     }
     public void sendActivityMap(View view){
 
-        //view_medical_history_home --> class = ViewMedicalHistory
-        Intent intent = new Intent(this,SelectPetUbi.class);
+        //cambiar a seccion de ubicacion
+        Intent intent = new Intent(this,LocationSection.class);
         startActivity(intent);
     }
 
