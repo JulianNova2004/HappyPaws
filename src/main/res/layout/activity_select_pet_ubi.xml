@@ -13,7 +13,8 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione el id de la mascota : "
+        android:text="Seleccione el id de la mascota"
+        android:textSize="24sp"
         android:layout_gravity="center"
         android:layout_marginTop="10dp"/>
 
