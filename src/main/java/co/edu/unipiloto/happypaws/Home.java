@@ -48,7 +48,7 @@ public class Home extends AppCompatActivity {
             vaccineSection.setVisibility(View.GONE);
             recordatorySection.setVisibility(View.GONE);
             statsSection.setVisibility(View.GONE);
-            liveLocation.setVisibility(View.GONE);
+            //liveLocation.setVisibility(View.GONE);
             emergency.setVisibility(View.GONE);
 
         }else if(typeUser==0){

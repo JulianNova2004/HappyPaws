@@ -63,7 +63,7 @@ public class LocationSection extends AppCompatActivity {
     public void sendUbicationRealTime(View view){
 
         //startSendingUbication
-        Intent intent = new Intent(this,StatsSection.class);
+        Intent intent = new Intent(this,StartSendingUbication.class);
         startActivity(intent);
     }
 

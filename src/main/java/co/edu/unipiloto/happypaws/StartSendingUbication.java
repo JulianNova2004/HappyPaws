@@ -49,8 +49,12 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
+import java.util.TimeZone;
 
 
 public class StartSendingUbication extends AppCompatActivity {
@@ -114,6 +118,12 @@ public class StartSendingUbication extends AppCompatActivity {
                     actualLong = loc.getLongitude();
                     currentTimestamp = loc.getTime();
 
+                    SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss.SSS", Locale.getDefault());
+                    sdf.setTimeZone(TimeZone.getTimeZone("America/Bogota"));
+
+                    String dateFormatted = sdf.format(new Date(currentTimestamp));
+                    //Log.i(TAG, formatted);
+
                     Recorrido newReco = new Recorrido();
                     newReco.setId(recorrido.getId());
                     newReco.setPet_id(recorrido.getPet_id());
@@ -131,8 +141,14 @@ public class StartSendingUbication extends AppCompatActivity {
                         public void onResponse(Call<Void> call, Response<Void> response) {
 
                             Toast.makeText(StartSendingUbication.this, "Ubicación enviada", Toast.LENGTH_SHORT).show();
-                            Log.i("StartSendingUbication", "Reco enviado: " + recorrido.getId() + ", LAT: " + recorrido.getLat() + ", LON: " + recorrido.getLon());
+                            Log.i("StartSendingUbication", "Reco enviado: " + newReco.getId() + ", LAT: " + newReco.getLat() + ", LON: " + newReco.getLon());
+
                             //Actualizar textview con datos
+                            String modifyDataSended = "Latitud: " + newReco.getLat() + "\n" +
+                                                    "Longitud: " + newReco.getLon() + "\n" +
+                                                    "Hora: " + dateFormatted;
+
+                            dataSended.setText(modifyDataSended);
 
                         }
 
@@ -144,6 +160,7 @@ public class StartSendingUbication extends AppCompatActivity {
                     });
 
                 }else{
+                    Toast.makeText(StartSendingUbication.this, "Se ha recibido nula la ubicación", Toast.LENGTH_SHORT).show();
                     return;
                 }
             }
@@ -151,8 +168,8 @@ public class StartSendingUbication extends AppCompatActivity {
 
         requestLocationPermissions();
 
-        btnStartSendUbication.setEnabled(false);
-        btnStopSendUbication.setEnabled(false);
+        //btnStartSendUbication.setEnabled(false);
+        //btnStopSendUbication.setEnabled(false);
     }
 
     public void validateFields() {
@@ -319,6 +336,11 @@ public class StartSendingUbication extends AppCompatActivity {
     private void stopSendingUbication(){
         if (!enviandoUbicacion) return;
         enviandoUbicacion = false;
+        String recieveLastUbi = dataSended.getText().toString();
+        recieveLastUbi += "\nSe detuvo el envio de ubicación\nLas últimas coordenadas enviadas son las mostradas";
+        dataSended.setText(recieveLastUbi);
+        Toast.makeText(StartSendingUbication.this, "Dejó de emitir ubicación", Toast.LENGTH_SHORT).show();
+
         fusedClient.removeLocationUpdates(locationCallback);
         btnStartSendUbication.setEnabled(true);
         btnStopSendUbication.setEnabled(false);
