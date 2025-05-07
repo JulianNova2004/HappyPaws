@@ -98,8 +98,8 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
                     Log.e("MapsActivity", "Error al obtener ubicación", t);
                 }
             });
-            //Acá esta el delay de 2s para volver a ejecutar el metodo
-            handler.postDelayed(this, 2000);
+            //Acá esta el delay de 3s para volver a ejecutar el metodo
+            handler.postDelayed(this, 3000);
         }
     };
 
