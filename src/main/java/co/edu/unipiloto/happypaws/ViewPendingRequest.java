@@ -112,6 +112,7 @@ public class ViewPendingRequest extends AppCompatActivity {
                             String rtaU = usuario + petListStr;
                             TextView userRecieved = createTextView("Información del Usuario: " + rtaU);
                             TextView contentRecieved = createTextView("Contenido: " + r.getContenido());
+                            TextView dateRecieved = createTextView("Fecha de envio: " + r.getDate());
 
                             TextView space = createTextView(" ");
                             space.setTextSize(10);

@@ -155,6 +155,7 @@ public class SendRequest extends AppCompatActivity {
         int estado = 0;
         Request request = new Request(contenido, estado);
         Call<Request> call = requestService.crearReq(request, userId, walkerId);
+        Log.i("Values send request",   "UserId: " + userId + ". PaseadorId: " + walkerId);
         call.enqueue(new Callback<Request>() {
             @Override
             public void onResponse(Call<Request> call, Response<Request> response) {

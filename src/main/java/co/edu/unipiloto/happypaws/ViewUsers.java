@@ -80,8 +80,10 @@ public class ViewUsers extends AppCompatActivity {
                             TextView phoneRecieved = createTextView("Número de celular: " + u.getPhoneNumber());
 
                             String petListStr = "[\n";
+                            int n = 1;
                             for(Pet pet: u.getPets()){
-                                petListStr += pet.getName() + ": " + pet.getRace() + " -> "+ "\n" + "Cantidad de paseos: " + pet.getAmount_of_walks() + ",\n";
+                                petListStr += n + ": "+ pet.getName() + ": " + pet.getRace() + " -> "+ "\n" + "Cantidad de paseos: " + pet.getAmount_of_walks() + ",\n";
+                                n++;
                             }
                             petListStr = petListStr.substring(0, petListStr.length()-2);
                             petListStr += "\n]";

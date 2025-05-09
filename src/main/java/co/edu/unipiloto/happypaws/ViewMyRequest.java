@@ -75,6 +75,14 @@ public class ViewMyRequest extends AppCompatActivity {
                                 TextView idRecieved = createTextView("Id: " + r.getId());
                                 TextView nameRecieved = createTextView("Paseador: " + r.getPaseador().getName());
                                 TextView contentRecieved = createTextView("Contenido: " + r.getContenido());
+
+                                String dateRecievedF = r.getDate();
+                                dateRecievedF = dateRecievedF.substring(0, 10);
+
+                                //Toast.makeText(ViewMyRequest.this, "Date:" + dateRecievedF, Toast.LENGTH_SHORT).show();
+
+                                TextView dateRecieved = createTextView("Fecha de envio: " + dateRecievedF);
+
                                 int state = r.getEstado();
                                 String stateStr = "";
                                 switch (state){
@@ -88,7 +96,7 @@ public class ViewMyRequest extends AppCompatActivity {
                                         stateStr = "Aceptada";
                                         break;
                                 }
-                                TextView stateRecieved = createTextView("Paseador: " + stateStr);
+                                TextView stateRecieved = createTextView("Estado: " + stateStr);
 
                                 TextView space = createTextView(" ");
                                 space.setTextSize(10);
@@ -97,12 +105,9 @@ public class ViewMyRequest extends AppCompatActivity {
                                 containerRequestUser.addView(idRecieved);
                                 containerRequestUser.addView(nameRecieved);
                                 containerRequestUser.addView(contentRecieved);
+                                containerRequestUser.addView(dateRecieved);
                                 containerRequestUser.addView(stateRecieved);
                                 containerRequestUser.addView(space);
-
-
-
-
 
                                 i++;
                             }

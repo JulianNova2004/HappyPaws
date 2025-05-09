@@ -7,6 +7,7 @@ import models.Request;
 import models.User;
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.PATCH;
 import retrofit2.http.POST;
@@ -38,7 +39,7 @@ public interface RequestService {
     @PATCH("request/edit/{req_id}/{code}")
     Call<Request> edit(@Path("req_id") int req_id,@Path("code") int code);
 
-    //
+    //Obtener solicitudes de un usuario en especifico
     @GET("request/getRequest/{userId}")
     Call<List<Request>> getRequestUser(@Path("userId") int userId);
 
@@ -46,4 +47,12 @@ public interface RequestService {
     @GET("request/accept/{pas_id}")
     Call<List<User>> getUserAccepted(@Path("pas_id") int pas_id);
 
+    //Filtrar según secuencia de caracteres indicada
+    @GET("filter/{name}")
+    Call<List<Paseador>> getPasLike(@Path("name") String name);
+
+
+    //Borrar request despues de pasado un tiempo determinado
+    @DELETE("/del/{id}")
+    Call<Void> deleteReq(@Path("id") int id);
 }
