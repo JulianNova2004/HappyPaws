@@ -21,6 +21,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.work.Data;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkManager;
 
 import com.google.gson.Gson;
 
@@ -28,12 +31,14 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 import models.Consulta;
 import models.Paseador;
 import models.Request;
 import network.RequestService;
 import network.Retro;
+import network.WorkerPaws;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -41,8 +46,8 @@ import retrofit2.Response;
 public class SendRequest extends AppCompatActivity {
 
     private LinearLayout containerAvailableWalkers;
-    private Button btnSendRequest;
-    private EditText walkerID, contenidoRequest;
+    private Button btnSendRequest, btnSearchWalkers;
+    private EditText walkerID, contenidoRequest, searchWalkers;
     private RequestService requestService;
     private List<Integer> availableID = new ArrayList<>();
 
@@ -56,10 +61,20 @@ public class SendRequest extends AppCompatActivity {
         btnSendRequest = findViewById(R.id.btnSendRequest);
         walkerID = findViewById(R.id.walkerID);
         contenidoRequest = findViewById(R.id.contenidoRequest);
+        searchWalkers = findViewById(R.id.editTextSearchWalkers);
+        btnSearchWalkers = findViewById(R.id.btnSearchWalkers);
+
         requestService = Retro.getClient().create(RequestService.class);
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int userId = preferences.getInt("User_ID", 0);
         bringInfo(userId);
+
+        btnSearchWalkers.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                filterWalkers(userId);
+            }
+        });
 
         btnSendRequest.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -91,6 +106,22 @@ public class SendRequest extends AppCompatActivity {
         }
         //Puso bien el id y no dejó vacio
         sendRequest(userId, idWalker, contenidoStr);
+
+    }
+
+    private void filterWalkers(int userId){
+
+        String searchW = searchWalkers.getText().toString();
+
+        //No tiene nada de nada, llamar bringInfo();
+        if(searchW.isEmpty()){
+            bringInfo(userId);
+        }
+
+        //Contiene un espacio en blanco, llamar metodo
+        else {
+            searchWalkersByFilter(searchW);
+        }
 
     }
 
@@ -150,6 +181,62 @@ public class SendRequest extends AppCompatActivity {
         });
     }
 
+    private void searchWalkersByFilter(String patron){
+
+        Call<List<Paseador>> call = requestService.getPasLike(patron);
+        call.enqueue(new Callback<List<Paseador>>() {
+            @Override
+            public void onResponse(Call<List<Paseador>> call, Response<List<Paseador>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    availableID.clear();
+                    containerAvailableWalkers.removeAllViews();
+                    List<Paseador> paseadores = response.body();
+                    if(paseadores.isEmpty()){
+                        TextView noPaseadores = new TextView(SendRequest.this);
+                        noPaseadores.setText("En el momento, no hay paseadores disponibles\npara enviar solicitud de paseo");
+                        noPaseadores.setTextSize(18);
+                        noPaseadores.setGravity(Gravity.CENTER);
+                        noPaseadores.setPadding(0, 10, 0, 10);
+                        containerAvailableWalkers.addView(noPaseadores);
+                    }
+                    else{
+                        int i = 1;
+                        for(Paseador p: paseadores){
+
+                            TextView number = createHeaderTextView("PASEADOR NÚMERO " + i);
+
+                            TextView idRecieved = createTextView("Id del Paseador: " + p.getId());
+                            availableID.add(p.getId());
+                            TextView nameRecieved = createTextView("Nombre: " + p.getName());
+                            TextView emailRecieved = createTextView("Correo: " + p.getEmail());
+                            TextView phoneRecieved = createTextView("Número de celular: " + p.getPhoneNum());
+                            TextView space = createTextView(" ");
+                            space.setTextSize(10);
+
+                            containerAvailableWalkers.addView(number);
+                            containerAvailableWalkers.addView(idRecieved);
+                            containerAvailableWalkers.addView(nameRecieved);
+                            containerAvailableWalkers.addView(emailRecieved);
+                            containerAvailableWalkers.addView(phoneRecieved);
+                            containerAvailableWalkers.addView(space);
+
+                            i++;
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(SendRequest.this, "No se pudo obtener la lista de paseadores.", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(SendRequest.this, "Error al buscar paseadores disponibles", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Paseador>> call, Throwable t) {
+                Toast.makeText(SendRequest.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al buscar paseadores", t);
+            }
+
+        });
+    }
     private void sendRequest(int userId, int walkerId, String contenido){
         //Estado = 0 porque hasta ahora se va a enviar
         int estado = 0;
@@ -159,8 +246,22 @@ public class SendRequest extends AppCompatActivity {
         call.enqueue(new Callback<Request>() {
             @Override
             public void onResponse(Call<Request> call, Response<Request> response) {
-                if (response.isSuccessful()) {
+                if (response.isSuccessful() && response.body()!=null) {
                     Toast.makeText(SendRequest.this, "Solicitud enviada exitosamente", Toast.LENGTH_SHORT).show();
+
+                    int reqCreatedId = response.body().getId();
+
+                    Data input = new Data.Builder()
+                            .putInt(WorkerPaws.INPUT_REQ_ID, reqCreatedId)
+                            .build();
+
+                    OneTimeWorkRequest makeWork = new OneTimeWorkRequest.Builder(WorkerPaws.class)
+                            .setInputData(input)
+                            .setInitialDelay(1, TimeUnit.MINUTES)
+                            .build();
+
+                    WorkManager.getInstance(SendRequest.this).enqueue(makeWork);
+
                     Intent intent = new Intent(SendRequest.this, Home.class);
                     startActivity(intent);
                 } else {
@@ -176,6 +277,59 @@ public class SendRequest extends AppCompatActivity {
         });
 
     }
+
+//    private void searchRequestToDelete(Request request){
+//
+//        Call<Request> call = requestService.getRequest(request.getId());
+//        call.enqueue(new Callback<Request>() {
+//            @Override
+//            public void onResponse(Call<Request> call, Response<Request> response) {
+//                if (response.isSuccessful() && response.body()!=null) {
+//                    //Toast.makeText(SendRequest.this, "Solicitud expirada", Toast.LENGTH_SHORT).show();
+//                    Request requestRecieved = response.body();
+//                    int stateRecieved = requestRecieved.getEstado();
+//                    if(stateRecieved == 0){
+//                        borrarRequest(requestRecieved);
+//                        Toast.makeText(SendRequest.this, "No se aceptó", Toast.LENGTH_SHORT).show();
+//                    }
+//
+//                } else {
+//                    Toast.makeText(SendRequest.this, "Hubo un error al buscar la solicitud", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Request> call, Throwable t) {
+//                Toast.makeText(SendRequest.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+//                Log.i("HappyPaws", "Error al buscar request", t);
+//            }
+//        });
+//
+//    }
+//
+//    private void borrarRequest(Request request){
+//
+//        Call<Void> call = requestService.deleteReq((request.getId()));
+//        call.enqueue(new Callback<Void>() {
+//            @Override
+//            public void onResponse(Call<Void> call, Response<Void> response) {
+//                if (response.isSuccessful()) {
+//                    Toast.makeText(SendRequest.this, "Solicitud expirada", Toast.LENGTH_SHORT).show();
+//
+//                } else {
+//                    Toast.makeText(SendRequest.this, "Hubo un error al borrar la solicitud", Toast.LENGTH_SHORT).show();
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<Void> call, Throwable t) {
+//                Toast.makeText(SendRequest.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+//                Log.i("HappyPaws", "Error al borrar solicitud", t);
+//            }
+//        });
+//    }
+
+
     private TextView createHeaderTextView(String text) {
         TextView tv = new TextView(this);
         tv.setText(text);

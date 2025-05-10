@@ -40,7 +40,7 @@ public interface RequestService {
     Call<Request> edit(@Path("req_id") int req_id,@Path("code") int code);
 
     //Obtener solicitudes de un usuario en especifico
-    @GET("request/getRequest/{userId}")
+    @GET("request/getRequests/{userId}")
     Call<List<Request>> getRequestUser(@Path("userId") int userId);
 
     //Usuarios aceptados por parte de paseador (estado 1)
@@ -48,11 +48,14 @@ public interface RequestService {
     Call<List<User>> getUserAccepted(@Path("pas_id") int pas_id);
 
     //Filtrar según secuencia de caracteres indicada
-    @GET("filter/{name}")
+    @GET("request/filter/{name}")
     Call<List<Paseador>> getPasLike(@Path("name") String name);
 
-
     //Borrar request despues de pasado un tiempo determinado
-    @DELETE("/del/{id}")
+    @DELETE("request/del/{id}")
     Call<Void> deleteReq(@Path("id") int id);
+
+    //Buscar request en especifico
+    @GET("request/getRequest/{req_id}")
+    Call<Request> getRequest(@Path("req_id") int req_id);
 }

@@ -122,4 +122,6 @@
     <string name="searchPet">Search my Pet!</string>
     <string name="sendLocation">Send Location of a Pet!</string>
 
+    <string name="search">Search!</string>
+
 </resources>
