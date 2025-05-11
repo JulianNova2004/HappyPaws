@@ -113,15 +113,21 @@ public class SendRequest extends AppCompatActivity {
 
         String searchW = searchWalkers.getText().toString();
 
-        //No tiene nada de nada, llamar bringInfo();
-        if(searchW.isEmpty()){
-            bringInfo(userId);
-        }
+        containerAvailableWalkers.removeAllViews();
+        TextView loading = createHeaderTextView("Loading");
+        containerAvailableWalkers.addView(loading);
 
-        //Contiene un espacio en blanco, llamar metodo
-        else {
-            searchWalkersByFilter(searchW);
-        }
+        searchWalkers.postDelayed(() ->{
+            //No tiene nada de nada, llamar bringInfo();
+            if(searchW.isEmpty()){
+                bringInfo(userId);
+            }
+
+            //Contiene un espacio en blanco, llamar metodo
+            else {
+                searchWalkersByFilter(searchW);
+            }
+        }, 1000);
 
     }
 

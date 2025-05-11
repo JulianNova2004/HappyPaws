@@ -227,41 +227,6 @@ public class StartSendingUbication extends AppCompatActivity {
         btnStartSendUbication.setOnClickListener(v -> validateFields());
         btnStopSendUbication.setOnClickListener(v -> stopSendingUbication());
 
-//        btnStartSendUbication.setOnClickListener(v -> {
-//            //Primero comprueba permisos de ubicación
-//            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
-//                    || ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-//
-//                // Si ya está el permiso, setea los botones
-//                fusedClient.requestLocationUpdates(
-//                        locationRequest,
-//                        locationCallback,
-//                        Looper.getMainLooper()
-//                );
-//                btnStartSendUbication.setEnabled(false);
-//                btnStopSendUbication.setEnabled(true);
-//
-//            } else {
-//                //Si no hay permiso, se le pide al paseador
-//                ActivityCompat.requestPermissions(
-//                        this,
-//                        new String[]{
-//                                android.Manifest.permission.ACCESS_FINE_LOCATION,
-//                                android.Manifest.permission.ACCESS_COARSE_LOCATION
-//                        }, REQ_LOCATION_PERMS
-//                );
-//            }
-//        });
-//
-//        btnStopSendUbication.setOnClickListener(v -> {
-//            fusedClient.removeLocationUpdates(locationCallback);
-//            btnStartSendUbication.setEnabled(true);
-//            btnStopSendUbication.setEnabled(false);
-//        });
-//
-//        // Estado inicial
-//        btnStartSendUbication.setEnabled(true);
-//        btnStopSendUbication.setEnabled(false);
 
     }
 
