@@ -15,7 +15,7 @@ public class Home extends AppCompatActivity {
 
     private TextView title;
 
-    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, requestSection, statsSection, chats, liveLocation, emergency;
+    private Button petSection, vaccineSection, medicalHistorySection, recordatorySection, requestSection, statsSection, chats, liveLocation, emergency, ryhtmSection;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -32,6 +32,7 @@ public class Home extends AppCompatActivity {
         chats = findViewById(R.id.viewChats);
         liveLocation = findViewById(R.id.send_Map_activity);
         emergency = findViewById(R.id.emergency);
+        ryhtmSection = findViewById(R.id.send_rythm_section);
 
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         String username = preferences.getString("Username","");
@@ -50,6 +51,7 @@ public class Home extends AppCompatActivity {
             statsSection.setVisibility(View.GONE);
             //liveLocation.setVisibility(View.GONE);
             emergency.setVisibility(View.GONE);
+            ryhtmSection.setVisibility(View.GONE);
 
         }else if(typeUser==0){
             //Usuario
@@ -83,6 +85,12 @@ public class Home extends AppCompatActivity {
     public void sendMedicalHistorySection(View view){
         //Medical History = Consulta --> Cita veterinario
         Intent intent = new Intent(this,MedicalHistorySection.class);
+        startActivity(intent);
+    }
+
+    public void sendRythmSection(View view){
+        //View ritmo -> no hay muchas acciones, por ende no hay sección unitaria
+        Intent intent = new Intent(this,ViewRitmoCardiaco.class);
         startActivity(intent);
     }
 

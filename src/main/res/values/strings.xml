@@ -18,6 +18,7 @@
     <string name="recordatorySection">Recordatory Section!</string>
     <string name="statsSection">Stats Section!</string>
     <string name="requestSection">Request Section!</string>
+    <string name="rythmSection">Rythm Section!</string>
 
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>

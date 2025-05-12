@@ -79,6 +79,16 @@
                 android:text="@string/requestSection" />
 
             <Button
+                android:id="@+id/send_rythm_section"
+                android:layout_width="200dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginBottom="20dp"
+                android:onClick="sendRythmSection"
+                android:padding="12dp"
+                android:text="@string/rythmSection" />
+
+            <Button
                 android:id="@+id/send_stats_section"
                 android:layout_width="200dp"
                 android:layout_height="wrap_content"

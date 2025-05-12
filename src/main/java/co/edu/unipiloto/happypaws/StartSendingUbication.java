@@ -187,8 +187,7 @@ public class StartSendingUbication extends AppCompatActivity {
                 searchReco();
 
             });
-        } else
-            Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
+        } else Toast.makeText(this, "Caremonda llene bien todos los campos", Toast.LENGTH_SHORT).show();
     }
 
     private void searchPet(int petId, Runnable onSuccess) {

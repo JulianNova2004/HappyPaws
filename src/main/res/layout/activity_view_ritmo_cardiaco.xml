@@ -13,47 +13,47 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Seleccione el id de la mascota\nque está paseando"
+        android:text="Seleccione el id de la mascota\nque quiere conocer su ritmo"
         android:textSize="24sp"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
     <EditText
-        android:id="@+id/petIdUbication"
+        android:id="@+id/petIdRythm"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:hint="ID de mascota"
+        android:inputType="number"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
     <Button
-        android:id="@+id/btnStartSendUbication"
+        android:id="@+id/btnStartGetingRythm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Pet's Location"
+        android:text="Get Pet's Rythm"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/dataSended"
+        android:id="@+id/rithmSended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:gravity="center"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"/>
 
     <Button
-        android:id="@+id/btnStopSendUbication"
+        android:id="@+id/btnStopGetingRythm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Stop Sending Location"
+        android:text="Stop Geting Rythm"
         android:layout_gravity="center"
         android:layout_marginTop="50dp"/>
 
     <TextView
-        android:id="@+id/dataSended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textSize="20sp"
@@ -63,7 +63,7 @@
         android:layout_marginTop="50dp"/>
 
     <EditText
-        android:id="@+id/petIdUbication"
+        android:id="@+id/dateToGetAverage"
         android:layout_width="150dp"
         android:layout_height="50dp"
         android:hint="@string/consultationDate"
@@ -71,21 +71,31 @@
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
+    <EditText
+        android:id="@+id/petIdRythmAverage"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="ID de mascota"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+
     <Button
-        android:id="@+id/btnStartSendUbication"
+        android:id="@+id/btnGetAverageRythm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Send Pet's Location"
+        android:text="Get Pet´s Average Rythm!"
         android:layout_gravity="center"
         android:layout_marginTop="20dp"/>
 
     <TextView
-        android:id="@+id/dataSended"
+        android:id="@+id/averageSended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="20sp"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textSize="24sp" />
 
 </LinearLayout>
