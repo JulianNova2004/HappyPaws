@@ -140,7 +140,7 @@ public class ShowRecsToModify extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<List<Recordatorio>> call, Throwable t) {
                     Toast.makeText(ShowRecsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al visualizar mascotas", t);
+                    Log.i("HappyPaws", "Error al visualizar recordatorios", t);
                 }
 
             });

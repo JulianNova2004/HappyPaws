@@ -166,7 +166,7 @@ public class VaccineDateRegister extends AppCompatActivity {
             @Override
             public void onFailure(Call<History> call, Throwable t) {
                 Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al agregar consulta", t);
+                Log.i("HappyPaws", "Error al agregar vacuna", t);
             }
         });
     }
