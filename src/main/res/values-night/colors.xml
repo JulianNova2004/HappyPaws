@@ -3,4 +3,11 @@
 
     <color name="chat_text_color">#FFFFFFFF</color>
 
+    <color name="brand_background">#000619</color>   <!-- este es un poco más oscuro -->
+    <color name="brand_secondary">#2786F0</color>
+    <color name="brand_primary">#3BCAF7</color>
+    <color name="brand_accent">#7DE9FF</color>
+    <color name="text_on_dark">#FFFFFF</color>
+
+
 </resources>
