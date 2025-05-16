@@ -28,12 +28,12 @@ public class NotificationService extends IntentService {
     protected void onHandleIntent(Intent intent) {
         synchronized (this) {
             try {
-                wait(1000);
+                wait(500);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        String texto = "Tu solicitud fue enviada. Acá puedes consultar su estado";
+        String texto = "Tu solicitud fue enviada exitosamente. Acá puedes consultar su estado";
         mostrarNotificacion(texto);
     }
 
