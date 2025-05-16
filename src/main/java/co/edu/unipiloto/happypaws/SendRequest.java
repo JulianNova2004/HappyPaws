@@ -268,6 +268,13 @@ public class SendRequest extends AppCompatActivity {
 
                     WorkManager.getInstance(SendRequest.this).enqueue(makeWork);
 
+                    //Intent intentS = new Intent(SendRequest.this, NotificationService.class);
+                    //startActivity(intentS);
+
+                    Intent intentS = new Intent(SendRequest.this, NotificationService.class);
+                    startService(intentS);
+
+
                     Intent intent = new Intent(SendRequest.this, Home.class);
                     startActivity(intent);
                 } else {

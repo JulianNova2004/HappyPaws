@@ -46,6 +46,7 @@ public class LogIn extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_log_in);
+
         username = findViewById(R.id.usernameLI);
         password = findViewById(R.id.passwordLI);
         btnAccess = findViewById(R.id.logInLI);

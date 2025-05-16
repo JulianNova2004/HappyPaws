@@ -79,7 +79,7 @@ public class EmergencyContact extends AppCompatActivity {
                             container.addView(vetD);
 
                             //Log.i("HappyPaws", "Objeto JSON recibido" + response.body().toString());
-                            Toast.makeText(EmergencyContact.this, "VET_ID = " + vet.getVetId(), Toast.LENGTH_SHORT).show();
+                            //Toast.makeText(EmergencyContact.this, "VET_ID = " + vet.getVetId(), Toast.LENGTH_SHORT).show();
                             TextView idRecieved = createTextView("Id: " + vet.getVetId());
                             TextView nameRecieved = createTextView("Name: " + vet.getName());
                             TextView phoneNumberRecieved = createTextView("Phone: " + vet.getPhoneNumber());
