@@ -13,6 +13,10 @@
 
         <item name="android:windowBackground">@color/brand_background</item>
         <item name="android:textColorPrimary">@color/text_on_dark</item>
-        
+
+        <item name="android:spinnerStyle">@style/Widget.HappyPaws.Spinner</item>
+
     </style>
+
+    <style name="Theme.HappyPaws" parent="Base.Theme.HappyPaws" />
 </resources>

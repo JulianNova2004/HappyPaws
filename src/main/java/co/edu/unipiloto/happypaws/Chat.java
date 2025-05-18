@@ -40,7 +40,8 @@ public class Chat extends AppCompatActivity {
     private int userId;
 
     private int pasId;
-    private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
+    private static final String WEBSOCKET_URL = "ws://192.168.1.9:8080/ws/websocket";
+    //private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
 
     private StompClient stompClient;
     private Disposable stompSubscription;
@@ -93,7 +94,7 @@ public class Chat extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.isSuccessful() && response.body()!=null) {
                     chatId = response.body();
-                    Log.i("chat_id",chatId+"");
+                    Log.i("chat_id",chatId+" ");
 
                     conectarWebSocket();
                     cargarMensajes();
@@ -116,7 +117,7 @@ public class Chat extends AppCompatActivity {
                     messageList.clear();
                     messageList.addAll(response.body());
                     messageAdapter.notifyDataSetChanged();
-                    recyclerMessages.scrollToPosition(messageList.size() - 1); // 🔹 Asegurar que se vean los últimos mensajes
+                    recyclerMessages.scrollToPosition(messageList.size() - 1);
                 } else {
                     Log.e("ChatActivity", "Respuesta no exitosa: " + response.code());
                 }

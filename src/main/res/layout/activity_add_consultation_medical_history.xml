@@ -14,9 +14,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Medical Consultation Register"
-        android:textSize="24sp"
+        android:textSize="26sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
         android:layout_marginTop="160dp"/>
 
     <EditText
@@ -26,6 +27,9 @@
         android:hint="@string/petIdC"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <EditText
@@ -37,6 +41,10 @@
         android:layout_gravity="center"
         android:layout_margin="12dp"
         android:focusable="false"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
         android:clickable="true"/>
 
     <EditText
@@ -46,6 +54,9 @@
         android:hint="@string/consultationReason"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <Spinner
@@ -62,6 +73,9 @@
         android:hint="@string/designatedVeterinary"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <EditText
@@ -71,6 +85,9 @@
         android:hint="@string/consultationResults"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <Button

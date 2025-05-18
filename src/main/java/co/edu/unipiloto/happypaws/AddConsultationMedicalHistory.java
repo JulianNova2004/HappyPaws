@@ -76,8 +76,8 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
 
         statePetSpinner = findViewById(R.id.state_pet_spinner);
         String[] opciones = {"Seleccione estado", "Critico", "Estable"};
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, opciones);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_item, opciones);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         statePetSpinner.setAdapter(adapter);
         statePetSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
