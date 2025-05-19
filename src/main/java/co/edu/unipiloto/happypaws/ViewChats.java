@@ -38,6 +38,7 @@ public class ViewChats extends AppCompatActivity {
     private PaseadorService paseadorService;
 
     private UserService userService;
+    private SharedPreferences sharedPreferences;
 
 
     @Override
@@ -48,8 +49,8 @@ public class ViewChats extends AppCompatActivity {
         recyclerChats = findViewById(R.id.recyclerChatList);
         recyclerChats.setLayoutManager(new LinearLayoutManager(this));
 
-        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        boolean isUser = preferences.getBoolean("isUser", false);
+        sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        boolean isUser = sharedPreferences.getBoolean("isUser", false);
 
 
 
@@ -106,6 +107,10 @@ public class ViewChats extends AppCompatActivity {
     }
 
     private void abrirChatUser(Paseador paseador) {
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("NameContact", paseador.getName());
+        editor.apply();
+
         Log.i("PAS_ID",paseador.getId()+"");
         Intent intent = new Intent(this, Chat.class);
         intent.putExtra("paseId", paseador.getId());
@@ -113,6 +118,10 @@ public class ViewChats extends AppCompatActivity {
     }
 
     private void abrirChatPaseador(User user){
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putString("NameContact", user.getFirstname() + " " + user.getLastname());
+        editor.apply();
+
         Log.i("USER_ID",user.getUserId()+"");
         Intent intent = new Intent(this, Chat.class);
         intent.putExtra("UserViewId", user.getUserId());

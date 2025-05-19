@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,6 +37,7 @@ public class Chat extends AppCompatActivity {
     private EditText editMessage;
     private Button btnSend;
     private ChatService chatService;
+    private TextView contactName;
     private int chatId;
     private int userId;
 
@@ -55,9 +57,13 @@ public class Chat extends AppCompatActivity {
         recyclerMessages.setLayoutManager(new LinearLayoutManager(this));
         editMessage = findViewById(R.id.etMensaje);
         btnSend = findViewById(R.id.btnEnviar);
+        contactName = findViewById(R.id.contactName);
 
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         boolean isUser = preferences.getBoolean("isUser", false);
+        String nameContact = preferences.getString("NameContact", "No Name saved");
+        Log.i("Name of Contact -->",nameContact);
+        contactName.setText(nameContact);
 
         if (isUser){
             pasId = getIntent().getIntExtra("paseId", -1);
