@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -183,7 +184,10 @@ public class ShowHistoriesToModify extends AppCompatActivity {
         tv.setText(text);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        tv.setTextColor(Color.parseColor("#ffaa75"));
+        //tv.setTextColor(Color.parseColor("#ffaa75"));
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+        tv.setTextColor(primary);
+
         tv.setGravity(Gravity.CENTER);
         int pad = dpPx(1);
         tv.setPadding(0, pad, 0, pad);
@@ -202,6 +206,8 @@ public class ShowHistoriesToModify extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        textView.setTextColor(accent);
         textView.setLayoutParams(lp);
         return textView;
     }

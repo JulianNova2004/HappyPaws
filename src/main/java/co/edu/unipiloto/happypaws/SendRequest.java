@@ -2,6 +2,7 @@ package co.edu.unipiloto.happypaws;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -348,7 +350,9 @@ public class SendRequest extends AppCompatActivity {
         tv.setText(text);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        tv.setTextColor(Color.parseColor("#ffaa75"));
+        //tv.setTextColor(Color.parseColor("#ffaa75"));
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+        tv.setTextColor(primary);
         tv.setGravity(Gravity.CENTER);
         int pad = dpPx(1);
         tv.setPadding(0, pad, 0, pad);
@@ -367,6 +371,13 @@ public class SendRequest extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
+
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        textView.setTextColor(accent);
+        //textView.setHintTextColor(accent);
+        //ColorStateList tint = ContextCompat.getColorStateList(this, R.color.brand_secondary);
+        //textView.setBackgroundTintList(tint);
+
         textView.setLayoutParams(lp);
         return textView;
     }

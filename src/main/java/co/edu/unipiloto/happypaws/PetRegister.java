@@ -2,6 +2,7 @@ package co.edu.unipiloto.happypaws;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 
 import com.google.gson.Gson;
 
@@ -262,6 +264,12 @@ public class PetRegister extends AppCompatActivity {
         parameters.gravity = gravity;
         parameters.setMargins(lmargin, lmargin, lmargin, lmargin);
 
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        editText.setTextColor(accent);
+        editText.setHintTextColor(accent);
+        ColorStateList tint = ContextCompat.getColorStateList(this, R.color.brand_secondary);
+        editText.setBackgroundTintList(tint);
+
         editText.setLayoutParams(parameters);
         editText.setHint(hint);
         editText.setInputType(type);
@@ -283,7 +291,10 @@ public class PetRegister extends AppCompatActivity {
         tv.setText(text);
         tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
         tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
-        tv.setTextColor(Color.parseColor("#ffaa75"));
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+
+        //tv.setTextColor(Color.parseColor("#ffaa75"));
+        tv.setTextColor(primary);
         tv.setGravity(Gravity.CENTER);
         int pad = dpPx(1);
         tv.setPadding(0, pad, 0, pad);

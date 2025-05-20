@@ -16,6 +16,7 @@
         android:layout_marginTop="60dp"
         android:layout_marginBottom="20dp"
         android:textSize="24sp"
+        android:textColor="@color/brand_secondary"
         android:textStyle="bold" />
 
     <ScrollView

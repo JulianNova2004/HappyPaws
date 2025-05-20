@@ -16,6 +16,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
         android:layout_margin="16dp"/>
 
     <TextView
@@ -26,6 +27,7 @@
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
         android:layout_margin="16dp"/>
 
     <EditText
@@ -35,6 +37,9 @@
         android:hint="@string/consultationId"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <EditText
@@ -46,6 +51,9 @@
         android:layout_gravity="center"
         android:layout_margin="12dp"
         android:focusable="false"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:clickable="true"/>
 
     <EditText
@@ -55,6 +63,9 @@
         android:hint="@string/consultationReason"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <Spinner
@@ -71,6 +82,9 @@
         android:hint="@string/designatedVeterinary"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <EditText
@@ -80,6 +94,9 @@
         android:hint="@string/consultationResults"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <Button
@@ -89,6 +106,9 @@
         android:text="@string/modifyRecordatoryInformation"
         android:layout_gravity="center"
         android:layout_margin="16dp"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:padding="12dp"/>
 
 </LinearLayout>

@@ -22,6 +22,7 @@ public class StatsSection extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_stats_section);
+
         title = findViewById(R.id.titleStatsS);
         allPetsS = findViewById(R.id.allPetsS);
         allVaccinesS = findViewById(R.id.allVaccinesS);
