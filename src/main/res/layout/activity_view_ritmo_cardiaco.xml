@@ -17,6 +17,8 @@
         android:textSize="24sp"
         android:gravity="center"
         android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+
         android:layout_marginTop="20dp"/>
 
     <EditText
@@ -26,6 +28,10 @@
         android:hint="ID de mascota"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
         android:layout_marginTop="20dp"/>
 
     <Button
@@ -40,10 +46,11 @@
         android:id="@+id/rithmSended"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:gravity="center"
         android:layout_gravity="center"
-        android:layout_marginTop="50dp"/>
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnStopGetingRythm"
@@ -60,6 +67,8 @@
         android:text="Now, find the average of a date"
         android:gravity="center"
         android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+
         android:layout_marginTop="50dp"/>
 
     <EditText
@@ -69,6 +78,10 @@
         android:hint="@string/consultationDate"
         android:inputType="date"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
         android:layout_marginTop="20dp"/>
 
     <EditText
@@ -78,6 +91,10 @@
         android:hint="ID de mascota"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
         android:layout_marginTop="20dp"/>
 
 
@@ -96,6 +113,7 @@
         android:layout_gravity="center"
         android:layout_marginTop="50dp"
         android:gravity="center"
+        android:textColor="@color/brand_secondary"
         android:textSize="24sp" />
 
 </LinearLayout>

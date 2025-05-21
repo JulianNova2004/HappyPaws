@@ -17,6 +17,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
         android:layout_margin="16dp"/>
 
     <EditText
@@ -26,6 +27,9 @@
         android:hint="Insert your pet ID"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="16dp"/>
 
 
