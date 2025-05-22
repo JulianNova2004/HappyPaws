@@ -18,7 +18,9 @@ import androidx.core.view.WindowInsetsCompat;
 import java.util.Calendar;
 
 import models.History;
+import models.Pet;
 import network.HistoryService;
+import network.PetService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,6 +32,7 @@ public class VaccineDateRegister extends AppCompatActivity {
     private EditText petId, date, vaccine, dose, reason, cuantity, comments;
     private Button btnRegisterVaccineInformation;
     private HistoryService historyService;
+    private PetService petService;
     private boolean isValid;
 
     @Override
@@ -50,6 +53,7 @@ public class VaccineDateRegister extends AppCompatActivity {
         btnRegisterVaccineInformation = findViewById(R.id.registerVaccineInformation);
 
         historyService = Retro.getClient().create(HistoryService.class);
+        petService = Retro.getClient().create(PetService.class);
 
         btnRegisterVaccineInformation.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -131,44 +135,76 @@ public class VaccineDateRegister extends AppCompatActivity {
         int petIdInt = (!petId.getText().toString().trim().isEmpty()) ?
                 Integer.parseInt(petId.getText().toString().trim()) : 0;
 
-        String dateStr = date.getText().toString().trim();
-        dateStr = dateStr.isEmpty() ? "" : dateStr;
+        searchPet(petIdInt, () ->{
+            String dateStr = date.getText().toString().trim();
+            dateStr = dateStr.isEmpty() ? "" : dateStr;
 
-        String vaccineStr = vaccine.getText().toString().trim();
+            String vaccineStr = vaccine.getText().toString().trim();
 
-        int doseInt = (!dose.getText().toString().trim().isEmpty()) ?
-                Integer.parseInt(dose.getText().toString().trim()) : 0;
+            int doseInt = (!dose.getText().toString().trim().isEmpty()) ?
+                    Integer.parseInt(dose.getText().toString().trim()) : 0;
 
-        double cuantityDouble = (!cuantity.getText().toString().trim().isEmpty()) ?
-                Double.parseDouble(cuantity.getText().toString().trim()) : 0;
+            double cuantityDouble = (!cuantity.getText().toString().trim().isEmpty()) ?
+                    Double.parseDouble(cuantity.getText().toString().trim()) : 0;
 
-        String reasonStr = reason.getText().toString().trim();
-        String commentsStr = comments.getText().toString().trim();
+            String reasonStr = reason.getText().toString().trim();
+            String commentsStr = comments.getText().toString().trim();
 
-        History historyA = new History(dateStr, vaccineStr, doseInt, cuantityDouble, reasonStr, commentsStr);
-        Call<History> call = historyService.addHistory(historyA, petIdInt);
+            History historyA = new History(dateStr, vaccineStr, doseInt, cuantityDouble, reasonStr, commentsStr);
+            Call<History> call = historyService.addHistory(historyA, petIdInt);
 
-        call.enqueue(new Callback<History>() {
-            @Override
-            public void onResponse(Call<History> call, Response<History> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
+            call.enqueue(new Callback<History>() {
+                @Override
+                public void onResponse(Call<History> call, Response<History> response) {
+                    if (response.isSuccessful()) {
+                        Toast.makeText(VaccineDateRegister.this, "Vacuna agregada exitosamente", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(VaccineDateRegister.this, Home.class);
-                    startActivity(intent);}
-                else{
-                    Toast.makeText(VaccineDateRegister.this, "Error al agregar vacuna", Toast.LENGTH_SHORT).show();
-                    //Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(VaccineDateRegister.this, Home.class);
+                        startActivity(intent);}
+                    else{
+                        Toast.makeText(VaccineDateRegister.this, "Error al agregar vacuna", Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(VaccineDateRegister.this, response.body().toString(), Toast.LENGTH_SHORT).show();
 
+                    }
                 }
-            }
 
-            @Override
-            public void onFailure(Call<History> call, Throwable t) {
-                Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                Log.i("HappyPaws", "Error al agregar vacuna", t);
-            }
+                @Override
+                public void onFailure(Call<History> call, Throwable t) {
+                    Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al agregar vacuna", t);
+                }
+            });
         });
+
+    }
+
+    private void searchPet(int petId, Runnable onSuccess) {
+        //boolean called = false;
+        if (petId != 0) {
+            Call<Pet> call = petService.getPet(petId);
+            call.enqueue(new Callback<Pet>() {
+                @Override
+                public void onResponse(Call<Pet> call, Response<Pet> response) {
+                    if (response.isSuccessful()) {
+                        //pet = response.body();
+                        Log.i("hapi", "callPet: " + response.body().getPetId());
+                        //Log.i("stat", "callPet: "+state);
+                        onSuccess.run();
+                    } else {
+                        Toast.makeText(VaccineDateRegister.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Pet> call, Throwable t) {
+                    Toast.makeText(VaccineDateRegister.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al encontrar mascota", t);
+                }
+            });
+
+        } else {
+            Toast.makeText(VaccineDateRegister.this, "No ha entrado", Toast.LENGTH_SHORT).show();
+        }
     }
 
 

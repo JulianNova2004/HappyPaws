@@ -30,8 +30,10 @@ import java.util.List;
 
 import models.Consulta;
 import models.History;
+import models.Pet;
 import network.ConsultationService;
 import network.HistoryService;
+import network.PetService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,6 +45,7 @@ public class ShowHistoriesToModify extends AppCompatActivity {
     private Button btnSendModifyConsultas, btnBringConsultationInfo;
     private EditText historyId, petId;
     private HistoryService historyService;
+    private PetService petService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +59,7 @@ public class ShowHistoriesToModify extends AppCompatActivity {
         btnBringConsultationInfo = findViewById(R.id.btn_bring_medical_history_info);
 
         historyService = Retro.getClient().create(HistoryService.class);
+        petService = Retro.getClient().create(PetService.class);
 
         btnBringConsultationInfo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -75,26 +79,57 @@ public class ShowHistoriesToModify extends AppCompatActivity {
 
     public void reviewPetId(){
         String idPetStr = petId.getText().toString().trim();
-        int idPet = Integer.parseInt(idPetStr);
+        int idPetInt = Integer.parseInt(idPetStr);
         if (idPetStr.isEmpty()) {
             petId.setError("No deje este campo vacio");
             Toast.makeText(ShowHistoriesToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (idPet == 0) {
+        if (idPetInt == 0) {
             petId.setError("Ingrese un número válido");
             Toast.makeText(ShowHistoriesToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(ShowHistoriesToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        viewConsultas(idPet);
+        searchPet(idPetInt, () ->{
+            viewHistories(idPetInt);
+        });
+        //Toast.makeText(ShowHistoriesToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
 
     }
 
-    public void viewConsultas(int idPet){
+    private void searchPet(int petId, Runnable onSuccess) {
+        //boolean called = false;
+        if (petId != 0) {
+            Call<Pet> call = petService.getPet(petId);
+            call.enqueue(new Callback<Pet>() {
+                @Override
+                public void onResponse(Call<Pet> call, Response<Pet> response) {
+                    if (response.isSuccessful()) {
+                        //pet = response.body();
+                        Log.i("hapi", "callPet: " + response.body().getPetId());
+                        //Log.i("stat", "callPet: "+state);
+                        onSuccess.run();
+                    } else {
+                        Toast.makeText(ShowHistoriesToModify.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        Call<List<History>> call = historyService.getHistoryByPetId(idPet);
+                @Override
+                public void onFailure(Call<Pet> call, Throwable t) {
+                    Toast.makeText(ShowHistoriesToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al encontrar mascota", t);
+                }
+            });
+
+        } else {
+            Toast.makeText(ShowHistoriesToModify.this, "No ha entrado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void viewHistories(int idPetInt){
+
+        Call<List<History>> call = historyService.getHistoryByPetId(idPetInt);
         call.enqueue(new Callback<List<History>>() {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {

@@ -65,8 +65,21 @@ public class ShowRecsToModify extends AppCompatActivity {
 
     public void viewRecordatories(){
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        int userId = sharedPreferences.getInt("User_ID", -1);
+        int typeUser = sharedPreferences.getInt("typeUser", -100);
+        if(typeUser==0){
+            //Usuario
+            int userId = sharedPreferences.getInt("User_ID", -1);
+            viewRecsUser(userId);
+        }else if(typeUser==1 || typeUser ==10){
+            //Veterinario o admin
+            viewAllRecs();
+        }else{
+            Toast.makeText(ShowRecsToModify.this, "Error al con sharedPreferences", Toast.LENGTH_SHORT).show();
+        }
 
+    }
+
+    private void viewRecsUser(int userId){
         if(userId != -1){
             Call<List<Recordatorio>> call = recordatoryService.verRecs(userId);
             call.enqueue(new Callback<List<Recordatorio>>() {
@@ -149,6 +162,86 @@ public class ShowRecsToModify extends AppCompatActivity {
         else{
             Toast.makeText(ShowRecsToModify.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
         }
+    }
+
+    private void viewAllRecs(){
+        Call<List<Recordatorio>> call = recordatoryService.allRecs();
+        call.enqueue(new Callback<List<Recordatorio>>() {
+            @Override
+            public void onResponse(Call<List<Recordatorio>> call, Response<List<Recordatorio>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    container.removeAllViews();
+                    List<Recordatorio> recs = response.body();
+                    if(recs.isEmpty()){
+                        TextView noRec = new TextView(ShowRecsToModify.this);
+                        noRec.setText("No tiene recordatorios registradas");
+                        noRec.setTextSize(18);
+                        noRec.setGravity(Gravity.CENTER);
+                        noRec.setPadding(0, 10, 0, 10);
+                        container.addView(noRec);
+                        //Toast.makeText(Viewrecs.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        // recs.addAll(response.body());
+                        int i = 1;
+                        for(Recordatorio reco: recs){
+                            Date fechaFormateada = null;
+                            String dateString = reco.getDate();
+
+                            if (dateString != null && !dateString.isEmpty()) {
+                                try {
+
+                                    long timestamp = Long.parseLong(dateString);
+                                    fechaFormateada = new Date(timestamp);
+
+                                    //Log.i("HappyPaws", "Fecha convertida: " + fechaFormateada);
+                                } catch (Exception e) {
+                                    e.printStackTrace();
+                                    Log.e("HappyPaws", "Error al convertir el timestamp: " + e.getMessage());
+                                }
+                            }
+
+                            String fechaStr = (fechaFormateada != null) ? new SimpleDateFormat("yyyy-MM-dd").format(fechaFormateada) : "Fecha no disponible";
+
+                            Log.i("HappyPaws", "Fecha formateada: " + fechaStr);
+
+                            Gson gson = new Gson();
+                            String jsonR = gson.toJson(response.body());
+                            Log.i("HappyPaws", "JSON GSON " + jsonR);
+
+                            TextView recoC = createHeaderTextView("REC NUMBER " + i);
+
+                            container.addView(recoC);
+
+                            TextView idRecieved = createTextView("Id: " + reco.getId());
+                            TextView dateRecieved = createTextView("Date: " + fechaStr);
+                            TextView vaccineRecieved = createTextView("Vaccine: " + reco.getVaccine());
+                            TextView petRecieved = createTextView("Pet: " + reco.getPet().getName());
+                            TextView stateRecieved = createTextView("Pet: " + reco.getEstado());
+                            TextView space = createTextView(" ");
+                            space.setTextSize(10);
+
+                            container.addView(idRecieved);
+                            container.addView(dateRecieved);
+                            container.addView(vaccineRecieved);
+                            container.addView(petRecieved);
+                            container.addView(stateRecieved);
+                            container.addView(space);
+                            i++;
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(ShowRecsToModify.this, "Error al visualizar recordatorios", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Recordatorio>> call, Throwable t) {
+                Toast.makeText(ShowRecsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al visualizar recordatorios", t);
+            }
+
+        });
     }
 
     public void sendRecId() {
