@@ -101,7 +101,7 @@ public class ShowConsultasToModify extends AppCompatActivity {
 
     public void viewConsultas(int idPetInt){
 
-        Call<List<Consulta>> call = consultationService.getConsultasByPetId(idPet);
+        Call<List<Consulta>> call = consultationService.getConsultasByPetId(idPetInt);
         call.enqueue(new Callback<List<Consulta>>() {
             @Override
             public void onResponse(Call<List<Consulta>> call, Response<List<Consulta>> response) {
