@@ -41,6 +41,7 @@ public class ShowPetsToModify extends AppCompatActivity {
     private Button btnSendModifyPets;
     private EditText petId;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -149,6 +150,35 @@ public class ShowPetsToModify extends AppCompatActivity {
             Toast.makeText(ShowPetsToModify.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
         }
 
+    }
+
+    private void searchPet(int petId, Runnable onSuccess) {
+        //boolean called = false;
+        if (petId != 0) {
+            Call<Pet> call = petService.getPet(petId);
+            call.enqueue(new Callback<Pet>() {
+                @Override
+                public void onResponse(Call<Pet> call, Response<Pet> response) {
+                    if (response.isSuccessful()) {
+                        //pet = response.body();
+                        Log.i("hapi", "callPet: " + response.body().getPetId());
+                        //Log.i("stat", "callPet: "+state);
+                        onSuccess.run();
+                    } else {
+                        Toast.makeText(ShowPetsToModify.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Pet> call, Throwable t) {
+                    Toast.makeText(ShowPetsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al encontrar mascota", t);
+                }
+            });
+
+        } else {
+            Toast.makeText(ShowPetsToModify.this, "No ha entrado", Toast.LENGTH_SHORT).show();
+        }
     }
 
     private TextView createHeaderTextView(String text) {
