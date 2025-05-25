@@ -84,13 +84,23 @@ public class ShowPetsToModify extends AppCompatActivity {
             return;
         }
 
-        Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        SharedPreferences.Editor editor = preferences.edit();
-        editor.putInt("Pet_ID", idPet);
-        editor.apply();
-        Intent intent = new Intent(ShowPetsToModify.this, ModifyPet.class);
-        startActivity(intent);
+//        Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+//        SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+//        SharedPreferences.Editor editor = preferences.edit();
+//        editor.putInt("Pet_ID", idPet);
+//        editor.apply();
+//        Intent intent = new Intent(ShowPetsToModify.this, ModifyPet.class);
+//        startActivity(intent);
+
+        searchPet(idPet, () ->{
+            Toast.makeText(ShowPetsToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
+            SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putInt("Pet_ID", idPet);
+            editor.apply();
+            Intent intent = new Intent(ShowPetsToModify.this, ModifyPet.class);
+            startActivity(intent);
+        });
     }
 
     public void sendPets(){
@@ -102,7 +112,7 @@ public class ShowPetsToModify extends AppCompatActivity {
             sendPetsUser(userId);
         }else if(typeUser==1 || typeUser ==10){
             //Veterinario o admin
-            //viewAllRecs();
+            sendAllPets();
         }else{
             Toast.makeText(ShowPetsToModify.this, "Error al con sharedPreferences", Toast.LENGTH_SHORT).show();
         }
@@ -165,6 +175,62 @@ public class ShowPetsToModify extends AppCompatActivity {
         else{
             Toast.makeText(ShowPetsToModify.this, "id -1 guardado, revisar", Toast.LENGTH_SHORT).show();
         }
+
+    }
+
+    private void sendAllPets(){
+        //SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        //int userId = sharedPreferences.getInt("User_ID", -1);
+
+
+        Call<List<Pet>> call = petService.getAllPetsT();
+        call.enqueue(new Callback<List<Pet>>() {
+            @Override
+            public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    container.removeAllViews();
+                    List<Pet> pets = response.body();
+                    if(pets.isEmpty()){
+                        TextView noPet = new TextView(ShowPetsToModify.this);
+                        noPet.setText("No tiene mascotas registradas");
+                        noPet.setTextSize(18);
+                        noPet.setGravity(Gravity.CENTER);
+                        noPet.setPadding(0, 10, 0, 10);
+                        container.addView(noPet);
+                        //Toast.makeText(ShowPetsToModify.this, "No tiene ninguna mascota registrada", Toast.LENGTH_SHORT).show();
+                    }
+                    else{
+                        // pets.addAll(response.body());
+                        int i = 1;
+                        for(Pet pet: pets){
+                            TextView petD = createHeaderTextView("PET NUMBER " + i);
+
+                            container.addView(petD);
+
+                            TextView idRecieved = createTextView("Id: " + pet.getPetId());
+                            TextView nameRecieved = createTextView("Name: " + pet.getName());
+                            TextView space = createTextView(" ");
+                            space.setTextSize(10);
+
+                            container.addView(idRecieved);
+                            container.addView(nameRecieved);
+                            container.addView(space);
+                            i++;
+                        }
+                    }
+
+                } else {
+                    Toast.makeText(ShowPetsToModify.this, "Error al buscar mascotas", Toast.LENGTH_SHORT).show();
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Pet>> call, Throwable t) {
+                Toast.makeText(ShowPetsToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                Log.i("HappyPaws", "Error al buscar mascotas", t);
+            }
+
+        });
+
 
     }
 
