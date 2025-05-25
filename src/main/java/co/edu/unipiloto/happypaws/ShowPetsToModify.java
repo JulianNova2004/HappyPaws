@@ -95,7 +95,23 @@ public class ShowPetsToModify extends AppCompatActivity {
 
     public void sendPets(){
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
-        int userId = sharedPreferences.getInt("User_ID", -1);
+        int typeUser = sharedPreferences.getInt("typeUser", -100);
+        if(typeUser==0){
+            //Usuario
+            int userId = sharedPreferences.getInt("User_ID", -1);
+            sendPetsUser(userId);
+        }else if(typeUser==1 || typeUser ==10){
+            //Veterinario o admin
+            //viewAllRecs();
+        }else{
+            Toast.makeText(ShowPetsToModify.this, "Error al con sharedPreferences", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
+    private void sendPetsUser(int userId){
+        //SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
+        //int userId = sharedPreferences.getInt("User_ID", -1);
 
         if(userId != -1){
             Call<List<Pet>> call = petService.getAllPets(userId);
