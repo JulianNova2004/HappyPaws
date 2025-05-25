@@ -91,7 +91,7 @@ public class ModifyPet extends AppCompatActivity {
         Pet petM = new Pet(petNameMStr, breedMStr, amountWalksInt, amountFoodInt, foodMStr, weightMInt, descriptionMStr, ageDouble);
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int petId = sharedPreferences.getInt("Pet_ID", -1);
-        Toast.makeText(ModifyPet.this, "id = " + petId + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ModifyPet.this, "id = " + petId + "", Toast.LENGTH_SHORT).show();
         if(petId != -1){
             Call<Void> call = petService.updatePet(petId, petM);
             call.enqueue(new Callback<Void>(){

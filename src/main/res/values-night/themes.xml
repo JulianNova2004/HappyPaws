@@ -2,5 +2,21 @@
 
     <style name="Base.Theme.HappyPaws" parent="Theme.Material3.DayNight.NoActionBar">
 
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_on_dark</item>
+
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/text_on_dark</item>
+
+        <item name="colorTertiary">@color/brand_accent</item>
+        <item name="colorOnTertiary">@color/text_on_dark</item>
+
+        <item name="android:windowBackground">@color/brand_background</item>
+        <item name="android:textColorPrimary">@color/text_on_dark</item>
+
+        <item name="android:spinnerStyle">@style/Widget.HappyPaws.Spinner</item>
+
     </style>
+
+    <style name="Theme.HappyPaws" parent="Base.Theme.HappyPaws" />
 </resources>

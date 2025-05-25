@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".SendRequest">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Available Walkers"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="30dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="16dp"
+        android:layout_marginTop="8dp">
+
+        <EditText
+            android:id="@+id/editTextSearchWalkers"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            android:layout_weight="1"
+            android:hint="Search Walkers"
+            android:inputType="text"
+            android:textColor="@color/brand_accent"
+            android:textColorHint="@color/brand_accent"
+            android:backgroundTint="@color/brand_secondary"
+            android:padding="8dp"/>
+
+        <Button
+            android:id="@+id/btnSearchWalkers"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/search"
+            android:layout_marginLeft="20dp"
+            android:padding="8dp"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="Visualizacion de consultas para modificar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerAvailableWalkers"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:gravity="center_horizontal"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Now, insert the Walker's ID that you want\nto send a request"
+        android:textSize="20sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/walkerID"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:hint="Insert Walker ID"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+        android:layout_margin="5dp"/>
+
+    <EditText
+        android:id="@+id/contenidoRequest"
+        android:layout_width="280dp"
+        android:layout_height="50dp"
+        android:hint="Add information of the request"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/btnSendRequest"
+        android:layout_width="280dp"
+        android:layout_height="wrap_content"
+        android:text="@string/sendRequest"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+</LinearLayout>

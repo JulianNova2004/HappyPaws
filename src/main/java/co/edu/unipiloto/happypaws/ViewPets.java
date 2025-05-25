@@ -1,15 +1,20 @@
 package co.edu.unipiloto.happypaws;
 
 import android.content.SharedPreferences;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
+import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -64,11 +69,8 @@ public class ViewPets extends AppCompatActivity {
                             // pets.addAll(response.body());
                             int i = 1;
                             for(Pet pet: pets){
-                                TextView petD = new TextView(ViewPets.this);
-                                petD.setText("PET NUMBER " + i);
-                                petD.setTextSize(20);
-                                petD.setGravity(Gravity.CENTER);
-                                petD.setPadding(0, 10, 0, 10);
+                                TextView petD = createHeaderTextView("PET NUMBER " + i);
+
                                 container.addView(petD);
 
                                 TextView idRecieved = createTextView("Id: " + pet.getPetId());
@@ -125,22 +127,35 @@ public class ViewPets extends AppCompatActivity {
 
     }
 
+    private TextView createHeaderTextView(String text) {
+        TextView tv = new TextView(this);
+        tv.setText(text);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        //tv.setTextColor(Color.parseColor("#ffaa75"));
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+        tv.setTextColor(primary);
+        tv.setGravity(Gravity.CENTER);
+        int pad = dpPx(1);
+        tv.setPadding(0, pad, 0, pad);
+        return tv;
+    }
+
     private TextView createTextView(String data){
+
         TextView textView = new TextView(this);
-
-        int lwidth = dpPx(200);
-        int lheight = dpPx(50);
-        int lmargin = dpPx(16);
-        int gravity = Gravity.CENTER;
-
-        LinearLayout.LayoutParams parameters = new LinearLayout.LayoutParams(lwidth, lheight);
-        parameters.gravity = gravity;
-        parameters.setMargins(lmargin, lmargin, lmargin, lmargin);
-
-        textView.setLayoutParams(parameters);
         textView.setText(data);
-        textView.setGravity(gravity);
-
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        int pad = dpPx(1);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(0, pad, 0, pad);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        textView.setLayoutParams(lp);
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        textView.setTextColor(accent);
         return textView;
     }
 

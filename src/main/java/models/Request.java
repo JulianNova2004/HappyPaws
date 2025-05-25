@@ -13,9 +13,9 @@ public class Request {
 
     private String contenido;
 
-    public Request(Paseador paseador, User usuario, int estado, String contenido) {
-        this.paseador = paseador;
-        this.usuario = usuario;
+    private String date;
+
+    public Request(String contenido, int estado) {
         this.estado = estado;
         this.contenido = contenido;
     }
@@ -61,6 +61,14 @@ public class Request {
 
     public void setContenido(String contenido) {
         this.contenido = contenido;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
 }

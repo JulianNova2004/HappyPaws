@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Pet {
 
     private Integer petId;
@@ -21,6 +23,8 @@ public class Pet {
     private double age;
 
     private User user;
+
+    private List<Recorrido> recorridos;
 
 
     public Pet(String name, String race, int amount_of_walks, int amount_of_food, String food, int weight, String description,double age) {
@@ -114,5 +118,13 @@ public class Pet {
 
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public List<Recorrido> getRecorridos() {
+        return recorridos;
+    }
+
+    public void setRecorridos(List<Recorrido> recorridos) {
+        this.recorridos = recorridos;
     }
 }

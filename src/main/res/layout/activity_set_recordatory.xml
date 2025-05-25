@@ -17,6 +17,7 @@
         android:textSize="24sp"
         android:textStyle="bold"
         android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
         android:layout_marginTop="160dp"/>
 
     <EditText
@@ -26,6 +27,9 @@
         android:hint="@string/petIdC"
         android:inputType="number"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
     <EditText
@@ -37,6 +41,9 @@
         android:layout_gravity="center"
         android:layout_margin="12dp"
         android:focusable="false"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:clickable="true"/>
 
     <EditText
@@ -46,6 +53,9 @@
         android:hint="@string/vaccineR"
         android:inputType="textCapWords"
         android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
         android:layout_margin="12dp"/>
 
 

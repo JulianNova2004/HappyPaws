@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -36,11 +37,13 @@ public class Chat extends AppCompatActivity {
     private EditText editMessage;
     private Button btnSend;
     private ChatService chatService;
+    private TextView contactName;
     private int chatId;
     private int userId;
 
     private int pasId;
-    private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
+    private static final String WEBSOCKET_URL = "ws://192.168.1.9:8080/ws/websocket";
+    //private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
 
     private StompClient stompClient;
     private Disposable stompSubscription;
@@ -54,9 +57,13 @@ public class Chat extends AppCompatActivity {
         recyclerMessages.setLayoutManager(new LinearLayoutManager(this));
         editMessage = findViewById(R.id.etMensaje);
         btnSend = findViewById(R.id.btnEnviar);
+        contactName = findViewById(R.id.contactName);
 
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         boolean isUser = preferences.getBoolean("isUser", false);
+        String nameContact = preferences.getString("NameContact", "No Name saved");
+        Log.i("Name of Contact -->",nameContact);
+        contactName.setText(nameContact);
 
         if (isUser){
             pasId = getIntent().getIntExtra("paseId", -1);
@@ -93,7 +100,7 @@ public class Chat extends AppCompatActivity {
             public void onResponse(Call<Integer> call, Response<Integer> response) {
                 if (response.isSuccessful() && response.body()!=null) {
                     chatId = response.body();
-                    Log.i("chat_id",chatId+"");
+                    Log.i("chat_id",chatId+" ");
 
                     conectarWebSocket();
                     cargarMensajes();
@@ -116,7 +123,7 @@ public class Chat extends AppCompatActivity {
                     messageList.clear();
                     messageList.addAll(response.body());
                     messageAdapter.notifyDataSetChanged();
-                    recyclerMessages.scrollToPosition(messageList.size() - 1); // 🔹 Asegurar que se vean los últimos mensajes
+                    recyclerMessages.scrollToPosition(messageList.size() - 1);
                 } else {
                     Log.e("ChatActivity", "Respuesta no exitosa: " + response.code());
                 }

@@ -18,6 +18,7 @@
     <string name="recordatorySection">Recordatory Section!</string>
     <string name="statsSection">Stats Section!</string>
     <string name="requestSection">Request Section!</string>
+    <string name="rythmSection">Rythm Section!</string>
 
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
@@ -28,7 +29,7 @@
     <string name="registerVaccine">Register Pet Vaccine</string>
     <string name="addConsultation">Add Medical History</string>
     <string name="viewMedicalHistory">View The Medical History Of My Pets</string>
-    <string name="map">View Live Location Map</string>
+    <string name="map">Pet´s Location</string>
     <string name="deletePet">Delete Pet</string>
 
 
@@ -116,5 +117,12 @@
     <string name="viewU">View My Pet´s Owners!</string>
     <string name="viewP">View My Pet´s Walkers!</string>
 
+    <string name="acceptRequest">Accept Request!</string>
+    <string name="declineRequest">Decline Request!</string>
+
+    <string name="searchPet">Search my Pet!</string>
+    <string name="sendLocation">Send Location of a Pet!</string>
+
+    <string name="search">Search!</string>
 
 </resources>

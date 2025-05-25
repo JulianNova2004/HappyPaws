@@ -1,10 +1,14 @@
 package co.edu.unipiloto.happypaws;
 
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
@@ -13,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -25,8 +30,10 @@ import java.util.List;
 
 import models.Consulta;
 import models.History;
+import models.Pet;
 import network.ConsultationService;
 import network.HistoryService;
+import network.PetService;
 import network.Retro;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,6 +45,7 @@ public class ShowHistoriesToModify extends AppCompatActivity {
     private Button btnSendModifyConsultas, btnBringConsultationInfo;
     private EditText historyId, petId;
     private HistoryService historyService;
+    private PetService petService;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +59,7 @@ public class ShowHistoriesToModify extends AppCompatActivity {
         btnBringConsultationInfo = findViewById(R.id.btn_bring_medical_history_info);
 
         historyService = Retro.getClient().create(HistoryService.class);
+        petService = Retro.getClient().create(PetService.class);
 
         btnBringConsultationInfo.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -70,26 +79,57 @@ public class ShowHistoriesToModify extends AppCompatActivity {
 
     public void reviewPetId(){
         String idPetStr = petId.getText().toString().trim();
-        int idPet = Integer.parseInt(idPetStr);
+        int idPetInt = Integer.parseInt(idPetStr);
         if (idPetStr.isEmpty()) {
             petId.setError("No deje este campo vacio");
             Toast.makeText(ShowHistoriesToModify.this, "Caremonda ponga algo", Toast.LENGTH_SHORT).show();
             return;
         }
-        if (idPet == 0) {
+        if (idPetInt == 0) {
             petId.setError("Ingrese un número válido");
             Toast.makeText(ShowHistoriesToModify.this, "Caremonda ponga un número mayor a 0", Toast.LENGTH_SHORT).show();
             return;
         }
 
-        Toast.makeText(ShowHistoriesToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
-        viewConsultas(idPet);
+        searchPet(idPetInt, () ->{
+            viewHistories(idPetInt);
+        });
+        //Toast.makeText(ShowHistoriesToModify.this, "Ingresó un ID válido", Toast.LENGTH_SHORT).show();
 
     }
 
-    public void viewConsultas(int idPet){
+    private void searchPet(int petId, Runnable onSuccess) {
+        //boolean called = false;
+        if (petId != 0) {
+            Call<Pet> call = petService.getPet(petId);
+            call.enqueue(new Callback<Pet>() {
+                @Override
+                public void onResponse(Call<Pet> call, Response<Pet> response) {
+                    if (response.isSuccessful()) {
+                        //pet = response.body();
+                        Log.i("hapi", "callPet: " + response.body().getPetId());
+                        //Log.i("stat", "callPet: "+state);
+                        onSuccess.run();
+                    } else {
+                        Toast.makeText(ShowHistoriesToModify.this, "Mascota no encontrada", Toast.LENGTH_SHORT).show();
+                    }
+                }
 
-        Call<List<History>> call = historyService.getHistoryByPetId(idPet);
+                @Override
+                public void onFailure(Call<Pet> call, Throwable t) {
+                    Toast.makeText(ShowHistoriesToModify.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
+                    Log.i("HappyPaws", "Error al encontrar mascota", t);
+                }
+            });
+
+        } else {
+            Toast.makeText(ShowHistoriesToModify.this, "No ha entrado", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    public void viewHistories(int idPetInt){
+
+        Call<List<History>> call = historyService.getHistoryByPetId(idPetInt);
         call.enqueue(new Callback<List<History>>() {
             @Override
             public void onResponse(Call<List<History>> call, Response<List<History>> response) {
@@ -133,11 +173,8 @@ public class ShowHistoriesToModify extends AppCompatActivity {
                             String jsonR = gson.toJson(response.body());
                             Log.i("HappyPaws", "JSON GSON " + jsonR);
 
-                            TextView info = new TextView(ShowHistoriesToModify.this);
-                            info.setText("CONSULTA NÚMERO " + i);
-                            info.setTextSize(20);
-                            info.setGravity(Gravity.CENTER);
-                            info.setPadding(0, 10, 0, 10);
+                            TextView info = createHeaderTextView("CONSULTA NÚMERO " + i);
+
                             containerM.addView(info);
 
                             TextView idRecieved = createTextView("Id: " + hi.getId());
@@ -177,22 +214,36 @@ public class ShowHistoriesToModify extends AppCompatActivity {
         });
     }
 
+    private TextView createHeaderTextView(String text) {
+        TextView tv = new TextView(this);
+        tv.setText(text);
+        tv.setTextSize(TypedValue.COMPLEX_UNIT_SP, 24);
+        tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
+        //tv.setTextColor(Color.parseColor("#ffaa75"));
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+        tv.setTextColor(primary);
+
+        tv.setGravity(Gravity.CENTER);
+        int pad = dpPx(1);
+        tv.setPadding(0, pad, 0, pad);
+        return tv;
+    }
+
     private TextView createTextView(String data){
+
         TextView textView = new TextView(this);
-
-        int lwidth = dpPx(200);
-        int lheight = dpPx(50);
-        int lmargin = dpPx(16);
-        int gravity = Gravity.CENTER;
-
-        LinearLayout.LayoutParams parameters = new LinearLayout.LayoutParams(lwidth, lheight);
-        parameters.gravity = gravity;
-        parameters.setMargins(lmargin, lmargin, lmargin, lmargin);
-
-        textView.setLayoutParams(parameters);
         textView.setText(data);
-        textView.setGravity(gravity);
-
+        textView.setTextSize(TypedValue.COMPLEX_UNIT_SP, 20);
+        int pad = dpPx(1);
+        textView.setGravity(Gravity.CENTER);
+        textView.setPadding(0, pad, 0, pad);
+        LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(
+                ViewGroup.LayoutParams.WRAP_CONTENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT
+        );
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        textView.setTextColor(accent);
+        textView.setLayoutParams(lp);
         return textView;
     }
 

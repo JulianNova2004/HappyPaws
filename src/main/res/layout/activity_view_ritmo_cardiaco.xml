@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="20dp"
+    tools:context=".ViewRitmoCardiaco">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Seleccione el id de la mascota\nque quiere conocer su ritmo"
+        android:textSize="24sp"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/petIdRythm"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="ID de mascota"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/btnStartGetingRythm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Pet's Rythm"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/rithmSended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:textSize="24sp" />
+
+    <Button
+        android:id="@+id/btnStopGetingRythm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Stop Geting Rythm"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="20sp"
+        android:text="Now, find the average of a date"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+
+        android:layout_marginTop="50dp"/>
+
+    <EditText
+        android:id="@+id/dateToGetAverage"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="@string/consultationDate"
+        android:inputType="date"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
+        android:layout_marginTop="20dp"/>
+
+    <EditText
+        android:id="@+id/petIdRythmAverage"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:hint="ID de mascota"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
+        android:layout_marginTop="20dp"/>
+
+
+    <Button
+        android:id="@+id/btnGetAverageRythm"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get Pet´s Average Rythm!"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"/>
+
+    <TextView
+        android:id="@+id/averageSended"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="50dp"
+        android:gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:textSize="24sp" />
+
+</LinearLayout>

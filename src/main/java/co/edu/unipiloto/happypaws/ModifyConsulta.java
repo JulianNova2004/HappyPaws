@@ -42,6 +42,7 @@ public class ModifyConsulta extends AppCompatActivity {
     private Spinner statePetSpinner;
     private String stateStr;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -110,6 +111,7 @@ public class ModifyConsulta extends AppCompatActivity {
                 },
                 año, mes, dia
         );
+
         datePickerDialog.show();
     }
 

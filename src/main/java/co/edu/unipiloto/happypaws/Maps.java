@@ -3,7 +3,9 @@ package co.edu.unipiloto.happypaws;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.Handler;
+import android.util.Log;
 
+import androidx.activity.EdgeToEdge;
 import androidx.fragment.app.FragmentActivity;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -22,15 +24,102 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
+import models.Recorrido;
+import network.RecorridoService;
+import network.Retro;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class Maps extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private Marker mascotaMarker;
     private Polyline rutaPolyline;
     private Handler handler = new Handler();
-    private int index = 0;
+    private RecorridoService recorridoService;
+    private boolean primeraVez = true;
 
-    private List<LatLng> rutaSimulada;
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        EdgeToEdge.enable(this);
+        setContentView(R.layout.activity_maps);
+
+        recorridoService = Retro.getClient().create(RecorridoService.class);
+
+        SupportMapFragment mapFragment = (SupportMapFragment)
+                getSupportFragmentManager().findFragmentById(R.id.map);
+        mapFragment.getMapAsync(this);
+    }
+
+    private final Runnable simulationRunnable = new Runnable() {
+        @Override
+        public void run() {
+
+            Call<Recorrido> call = recorridoService.getLast();
+            call.enqueue(new Callback<Recorrido>() {
+                @Override
+                public void onResponse(Call<Recorrido> call, Response<Recorrido> response) {
+                    if (response.isSuccessful() && response.body() != null) {
+                        Recorrido rec = response.body();
+                        LatLng nuevaPos = new LatLng(rec.getLat(), rec.getLon());
+
+                        if (primeraVez) {
+
+                            mascotaMarker = mMap.addMarker(new MarkerOptions()
+                                    .position(nuevaPos)
+                                    .title("Mascota")
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+                            rutaPolyline = mMap.addPolyline(new PolylineOptions()
+                                    .color(Color.BLUE)
+                                    .width(10));
+                            mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(nuevaPos, 16));
+                            primeraVez = false;
+                        } else {
+
+                            mascotaMarker.setPosition(nuevaPos);
+                            List<LatLng> pts = new ArrayList<>(rutaPolyline.getPoints());
+                            pts.add(nuevaPos);
+                            rutaPolyline.setPoints(pts);
+                            mMap.animateCamera(CameraUpdateFactory.newLatLng(nuevaPos));
+                        }
+
+                        //mascotaMarker.setPosition(nuevaPos);
+                        //List<LatLng> puntos = new ArrayList<>(rutaPolyline.getPoints());
+                        //puntos.add(nuevaPos);
+                        //rutaPolyline.setPoints(puntos);
+                        //mMap.animateCamera(CameraUpdateFactory.newLatLng(nuevaPos));
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Recorrido> call, Throwable t) {
+                    Log.e("MapsActivity", "Error al obtener ubicación", t);
+                }
+            });
+            //Acá esta el delay de 3s para volver a ejecutar el metodo
+            handler.postDelayed(this, 3000);
+        }
+    };
+
+
+    @Override
+    public void onMapReady(GoogleMap googleMap) {
+        mMap = googleMap;
+
+        handler.post(simulationRunnable);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        handler.removeCallbacks(simulationRunnable);
+    }
+
+    //private int index = 0;
+
+    //private List<LatLng> rutaSimulada;
 
     /*
     private List<List<LatLng>> rutasBogota = Arrays.asList(
@@ -97,102 +186,102 @@ public class Maps extends FragmentActivity implements OnMapReadyCallback {
     );
      */
 
-    private List<List<LatLng>> rutasBogota = Arrays.asList(
-            Arrays.asList( // Ruta 1: Chapiyork
-                    new LatLng(4.658572, -74.058123),
-                    new LatLng(4.658400, -74.058000),
-                    new LatLng(4.658250, -74.057850),
-                    new LatLng(4.658100, -74.057700),
-                    new LatLng(4.657950, -74.057550),
-                    new LatLng(4.657800, -74.057400),
-                    new LatLng(4.657650, -74.057250),
-                    new LatLng(4.657500, -74.057100)
-            ),
-            Arrays.asList( // Ruta 2: Candelaria
-                    new LatLng(4.598056, -74.075833),
-                    new LatLng(4.598300, -74.075600),
-                    new LatLng(4.598550, -74.075370),
-                    new LatLng(4.598800, -74.075140),
-                    new LatLng(4.599050, -74.074910),
-                    new LatLng(4.599300, -74.074680),
-                    new LatLng(4.599550, -74.074450),
-                    new LatLng(4.599800, -74.074220)
-            ),
-            Arrays.asList( // Ruta 3: Usaquen
-                    new LatLng(4.699567, -74.044321),
-                    new LatLng(4.699450, -74.044200),
-                    new LatLng(4.699333, -74.044079),
-                    new LatLng(4.699216, -74.043958),
-                    new LatLng(4.699099, -74.043837),
-                    new LatLng(4.698982, -74.043716),
-                    new LatLng(4.698865, -74.043595),
-                    new LatLng(4.698748, -74.043474)
-            ),
-            Arrays.asList( // Ruta 4: Suba
-                    new LatLng(4.710678, -74.091234),
-                    new LatLng(4.710500, -74.091100),
-                    new LatLng(4.710322, -74.090966),
-                    new LatLng(4.710144, -74.090832),
-                    new LatLng(4.709966, -74.090698),
-                    new LatLng(4.709788, -74.090564),
-                    new LatLng(4.709610, -74.090430),
-                    new LatLng(4.709432, -74.090296)
-            )
-    );
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_maps);
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
-                .findFragmentById(R.id.map);
-        mapFragment.getMapAsync(this);
-    }
-
-    @Override
-    public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-
-        seleccionarRutaAleatoria();
-
-        mascotaMarker = mMap.addMarker(new MarkerOptions()
-                .position(rutaSimulada.get(0))
-                .title("Mascota")
-                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
-
-        rutaPolyline = mMap.addPolyline(new PolylineOptions()
-                .color(Color.BLUE)
-                .width(10));
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rutaSimulada.get(0), 16));
-
-        iniciarSimulacion();
-    }
-
-    private void seleccionarRutaAleatoria() {
-        Random random = new Random();
-        int rutaIndex = random.nextInt(rutasBogota.size());
-        rutaSimulada = rutasBogota.get(rutaIndex);
-    }
-    private void iniciarSimulacion() {
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                if (index < rutaSimulada.size()) {
-                    LatLng nuevaPosicion = rutaSimulada.get(index);
-
-                    mascotaMarker.setPosition(nuevaPosicion);
-
-                    List<LatLng> puntos = new ArrayList<>(rutaPolyline.getPoints());
-                    puntos.add(nuevaPosicion);
-                    rutaPolyline.setPoints(puntos);
-
-                    mMap.animateCamera(CameraUpdateFactory.newLatLng(nuevaPosicion));
-
-                    index++;
-                    handler.postDelayed(this, 2000); // Intervalo de 2 segundos
-                }
-            }
-        }, 2000);
-    }
+//    private List<List<LatLng>> rutasBogota = Arrays.asList(
+//            Arrays.asList( // Ruta 1: Chapiyork
+//                    new LatLng(4.658572, -74.058123),
+//                    new LatLng(4.658400, -74.058000),
+//                    new LatLng(4.658250, -74.057850),
+//                    new LatLng(4.658100, -74.057700),
+//                    new LatLng(4.657950, -74.057550),
+//                    new LatLng(4.657800, -74.057400),
+//                    new LatLng(4.657650, -74.057250),
+//                    new LatLng(4.657500, -74.057100)
+//            ),
+//            Arrays.asList( // Ruta 2: Candelaria
+//                    new LatLng(4.598056, -74.075833),
+//                    new LatLng(4.598300, -74.075600),
+//                    new LatLng(4.598550, -74.075370),
+//                    new LatLng(4.598800, -74.075140),
+//                    new LatLng(4.599050, -74.074910),
+//                    new LatLng(4.599300, -74.074680),
+//                    new LatLng(4.599550, -74.074450),
+//                    new LatLng(4.599800, -74.074220)
+//            ),
+//            Arrays.asList( // Ruta 3: Usaquen
+//                    new LatLng(4.699567, -74.044321),
+//                    new LatLng(4.699450, -74.044200),
+//                    new LatLng(4.699333, -74.044079),
+//                    new LatLng(4.699216, -74.043958),
+//                    new LatLng(4.699099, -74.043837),
+//                    new LatLng(4.698982, -74.043716),
+//                    new LatLng(4.698865, -74.043595),
+//                    new LatLng(4.698748, -74.043474)
+//            ),
+//            Arrays.asList( // Ruta 4: Suba
+//                    new LatLng(4.710678, -74.091234),
+//                    new LatLng(4.710500, -74.091100),
+//                    new LatLng(4.710322, -74.090966),
+//                    new LatLng(4.710144, -74.090832),
+//                    new LatLng(4.709966, -74.090698),
+//                    new LatLng(4.709788, -74.090564),
+//                    new LatLng(4.709610, -74.090430),
+//                    new LatLng(4.709432, -74.090296)
+//            )
+//    );
+//
+//    @Override
+//    protected void onCreate(Bundle savedInstanceState) {
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_maps);
+//        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
+//                .findFragmentById(R.id.map);
+//        mapFragment.getMapAsync(this);
+//    }
+//
+//    @Override
+//    public void onMapReady(GoogleMap googleMap) {
+//        mMap = googleMap;
+//
+//        seleccionarRutaAleatoria();
+//
+//        mascotaMarker = mMap.addMarker(new MarkerOptions()
+//                .position(rutaSimulada.get(0))
+//                .title("Mascota")
+//                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)));
+//
+//        rutaPolyline = mMap.addPolyline(new PolylineOptions()
+//                .color(Color.BLUE)
+//                .width(10));
+//
+//        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(rutaSimulada.get(0), 16));
+//
+//        iniciarSimulacion();
+//    }
+//
+//    private void seleccionarRutaAleatoria() {
+//        Random random = new Random();
+//        int rutaIndex = random.nextInt(rutasBogota.size());
+//        rutaSimulada = rutasBogota.get(rutaIndex);
+//    }
+//    private void iniciarSimulacion() {
+//        handler.postDelayed(new Runnable() {
+//            @Override
+//            public void run() {
+//                if (index < rutaSimulada.size()) {
+//                    LatLng nuevaPosicion = rutaSimulada.get(index);
+//
+//                    mascotaMarker.setPosition(nuevaPosicion);
+//
+//                    List<LatLng> puntos = new ArrayList<>(rutaPolyline.getPoints());
+//                    puntos.add(nuevaPosicion);
+//                    rutaPolyline.setPoints(puntos);
+//
+//                    mMap.animateCamera(CameraUpdateFactory.newLatLng(nuevaPosicion));
+//
+//                    index++;
+//                    handler.postDelayed(this, 2000); // Intervalo de 2 segundos
+//                }
+//            }
+//        }, 2000);
+//    }
 }

@@ -334,6 +334,8 @@ public class StatsConsultas extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT
         );
         textView.setLayoutParams(lp);
+        int accent = ContextCompat.getColor(this, R.color.brand_accent);
+        textView.setTextColor(accent);
         return textView;
     }
 
@@ -344,6 +346,9 @@ public class StatsConsultas extends AppCompatActivity {
         tv.setTypeface(Typeface.DEFAULT, Typeface.BOLD);
         tv.setTextColor(Color.parseColor("#ffaa75"));
         tv.setGravity(Gravity.CENTER);
+        int primary = ContextCompat.getColor(this, R.color.brand_primary);
+        tv.setTextColor(primary);
+
         int pad = dpPx(1);
         tv.setPadding(0, pad, 0, pad);
         return tv;
