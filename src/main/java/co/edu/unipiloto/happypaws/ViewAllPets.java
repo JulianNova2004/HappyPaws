@@ -46,7 +46,7 @@ public class ViewAllPets extends AppCompatActivity {
 
     public void viewPets(){
 
-        Call<List<Pet>> call = petService.getAllPets();
+        Call<List<Pet>> call = petService.getAllPetsT();
         call.enqueue(new Callback<List<Pet>>() {
             @Override
             public void onResponse(Call<List<Pet>> call, Response<List<Pet>> response) {
