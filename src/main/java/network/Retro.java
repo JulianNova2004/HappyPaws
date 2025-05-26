@@ -8,6 +8,7 @@ public class Retro {
 
     private static final String BASE_URL = "http://192.168.0.3:8080/";
 
+
     private static Retrofit retrofit = null;
 
     public static Retrofit getClient() {
