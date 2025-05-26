@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".DeleteConsulta">
+
+    <EditText
+        android:id="@+id/conIdD"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:hint="Insert your Consultation ID"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+        android:layout_marginTop="80dp"/>
+
+    <Button
+        android:id="@+id/send_comprobation"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/next"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+    <TextView
+        android:id="@+id/continue1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Llene el siguiente campo\npara verificar su identidad"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/brand_secondary"
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/confirmation"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="Ingrese su contraseña"
+        android:inputType="text"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+        android:padding="12dp"/>
+
+    <Button
+        android:id="@+id/btnConfirm"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/deleteMedicalHistory"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:visibility="gone"
+        android:padding="12dp"/>
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Si su contraseña es correcta,\nse borrará su consulta"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:textColor="@color/brand_primary"
+        android:layout_margin="16dp"/>
+
+    <!--
+    <LinearLayout
+        android:id="@+id/contenedorDelete"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:padding="30dp"
+        android:visibility="gone">
+    </LinearLayout>
+    -->
+
+</LinearLayout>

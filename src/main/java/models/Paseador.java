@@ -1,5 +1,7 @@
 package models;
 
+import java.util.List;
+
 public class Paseador {
 
     public Integer id;
@@ -10,6 +12,7 @@ public class Paseador {
     public String passw;
 
     public String phoneNum;
+    private List<Request> requests;
 
     public Paseador(String email, String passw, String name, String phoneNum) {
         this.name = name;
@@ -56,5 +59,13 @@ public class Paseador {
 
     public void setPhoneNum(String phoneNum) {
         this.phoneNum = phoneNum;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 }

@@ -5,13 +5,13 @@
     android:orientation="horizontal"
     android:gravity="end"
     android:padding="8dp">
-
+    <!--android:background="@color/brand_primary"-->
     <TextView
         android:id="@+id/textMessage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/text_on_dark"
+        android:background="@drawable/rounded_textview_send"
         android:textSize="16sp"
-        android:padding="10dp"
         android:text="Mensaje enviado" />
 </LinearLayout>

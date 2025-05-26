@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!--
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    -->
+
+    <color name="brand_background">#000F26</color>
+    <color name="brand_secondary">#2786F0</color>
+    <color name="brand_primary">#3BCAF7</color>
+    <color name="brand_accent">#7DE9FF</color>
+    <color name="text_on_dark">#FFFFFF</color>
+
+    <color name="chat_text_color">#FF000000</color>
+
+
 </resources>

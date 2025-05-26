@@ -24,6 +24,8 @@ public class User {
 
     private List<Pet> pets;
 
+    private List<Request> requests;
+
     public User() {
     }
 
@@ -116,5 +118,13 @@ public class User {
 
     public void setPets(List<Pet> pets) {
         this.pets = pets;
+    }
+
+    public List<Request> getRequests() {
+        return requests;
+    }
+
+    public void setRequests(List<Request> requests) {
+        this.requests = requests;
     }
 }

@@ -10,14 +10,26 @@
     <string name="phone_number">Phone Number</string>
     <string name="sign_up">Sign UP!</string>
 
+    <string name="speciality">Speciality</string>
+
+    <string name="petSection">Pets Section!</string>
+    <string name="vaccineSection">Vaccine Section!</string>
+    <string name="medicalHistorySection">Medical History Section!</string>
+    <string name="recordatorySection">Recordatory Section!</string>
+    <string name="statsSection">Stats Section!</string>
+    <string name="requestSection">Request Section!</string>
+    <string name="rythmSection">Rythm Section!</string>
+
     <string name="register">Register pet!</string>
     <string name="viewPets">View my pets!</string>
+    <string name="viewAllPets">View all the pets!</string>
     <string name="modifyPet">Modify pets</string>
+    <string name="recordatoryVaccine">Make Vaccine Recordatory</string>
     <string name="viewChats">Chats</string>
     <string name="registerVaccine">Register Pet Vaccine</string>
-    <string name="addConsultation">Add Pet Consultation</string>
-    <string name="viewMedicalHistory">View Medical History</string>
-    <string name="map">View Live Location Map</string>
+    <string name="addConsultation">Add Medical History</string>
+    <string name="viewMedicalHistory">View The Medical History Of My Pets</string>
+    <string name="map">Pet´s Location</string>
     <string name="deletePet">Delete Pet</string>
 
 
@@ -30,8 +42,7 @@
     <string name="weight">Weight (KG)</string>
     <string name="ID_owner">Enter your ID</string>
     <string name="age">Age</string>
-    <string name="modifyPetInformation">Modify Information</string>
-
+    <string name="modifyPetInformation">Modify Pet Information</string>
 
     <string name="logInFP">Log In</string>
     <string name="signUpFP">Sign Up</string>
@@ -55,5 +66,63 @@
 
     <string name="viewInfoC">View Information</string>
 
+    <string name="petIdR">Pet ID</string>
+    <string name="recordatoryDate">Date To Send Recordatory</string>
+    <string name="vaccineR">Name Of Vaccine</string>
+
+    <string name="viewVaccine">View  My Pet Vaccines</string>
+    <string name="viewAllVacines">View All Vaccines</string>
+    <string name="modifyVaccine">Modify Vaccine</string>
+    <string name="deleteVaccine">Delete Vaccine</string>
+
+    <string name="viewAllMedicalHistories">View All Medical Histories</string>
+    <string name="modifyMedicalHistory">Modify Medical History</string>
+    <string name="deleteMedicalHistory">Delete Medical History</string>
+
+    <string name="viewRecordatoriesVaccine">View Vaccine Recordatories</string>
+    <string name="viewAllRecordatoriesVaccine">View All Vaccine Recordatories</string>
+    <string name="modifyRecordatoryVaccine">Modify Vaccine Recordatory</string>
+    <string name="deleteRecordatoryVaccine">Delete Vaccine Recordatory</string>
+
+    <string name="emergency">Emergency Contact</string>
+
+    <string name="modifyPetS">Modify Pet</string>
+
+    <string name="modifyRecordatoryV">Modify Recordatory</string>
+
+    <string name="modifyRecordatoryInformation">Modify Recordatory Information</string>
+
+    <string name="consultationId">Consultation ID</string>
+
+    <string name="historyId">History ID</string>
+
+    <string name="medicalHistoryStats">Medical History Stats!</string>
+    <string name="vaccineStats">Vaccine Stats!</string>
+    <string name="recordatoryStats">Recordatory Stats!</string>
+    <string name="userStats">User Stats!</string>
+
+    <string name="petStatR">Search Pet!</string>
+    <string name="petStateStatR">Search Pets!</string>
+    <string name="petVisits">Search Pet Visits!</string>
+
+    <string name="searchVaccines">Search Vaccines!</string>
+
+    <string name="searchRecordatories">Search Recordatories!</string>
+
+    <string name="searchUsers">Search Users!</string>
+
+    <string name="sendRequest">Send Request!</string>
+    <string name="viewRequest">View My Requests!</string>
+    <string name="pendingRequest">Pending Requests!</string>
+    <string name="viewU">View My Pet´s Owners!</string>
+    <string name="viewP">View My Pet´s Walkers!</string>
+
+    <string name="acceptRequest">Accept Request!</string>
+    <string name="declineRequest">Decline Request!</string>
+
+    <string name="searchPet">Search my Pet!</string>
+    <string name="sendLocation">Send Location of a Pet!</string>
+
+    <string name="search">Search!</string>
 
 </resources>

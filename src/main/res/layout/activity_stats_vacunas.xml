@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StatsVacunas">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccine Stats!"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/vaccinesBetweenDatesS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Vaccines applied between\n2 dates!"
+        android:textSize="25sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/desc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find the vaccines applied between two\ndeterminated dates"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="10dp"/>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_marginLeft="30dp"
+            android:layout_gravity="center"
+            android:textColor="@color/brand_primary"
+            android:text="Insert first date"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:layout_weight="1"
+            android:textSize="20sp"
+            android:textStyle="normal"
+            android:layout_gravity="center"
+            android:textColor="@color/brand_primary"
+            android:text="Insert second date"/>
+
+    </LinearLayout>
+
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="8dp">
+
+        <EditText
+            android:id="@+id/firstDate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginLeft="15dp"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:textColor="@color/brand_accent"
+            android:textColorHint="@color/brand_accent"
+            android:backgroundTint="@color/brand_secondary"
+            android:hint="First date"/>
+
+        <EditText
+            android:id="@+id/secondDate"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="15dp"
+            android:textColor="@color/brand_accent"
+            android:textColorHint="@color/brand_accent"
+            android:backgroundTint="@color/brand_secondary"
+            android:hint="Second Date"/>
+
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnSearchVaccinesBetweenTwoDates"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/searchVaccines"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="Visualizacion de consultas para modificar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerVaccinesBetweenDates"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/visitsS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Amount of Vaccines applied!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/desc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get the amount of vaccines applied of an\nespecific vaccine"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:gravity="center"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/vaccine_spinnerS"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/btnBringAmountOfVaccines"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petStateStatR"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/amountVaccines"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/brand_primary"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:gravity="center"
+        android:layout_marginBottom="20dp"
+        android:layout_marginTop="5dp"/>
+
+</LinearLayout>

@@ -5,7 +5,7 @@ import java.sql.Date;
 public class History {
 
     private Integer id;
-    private Integer petId;
+    private Pet pet;
     private String date;
     private String vaccine;
     private int dosis;
@@ -35,12 +35,12 @@ public class History {
         this.id = id;
     }
 
-    public Integer getPetId() {
-        return petId;
+    public Pet getPet() {
+        return pet;
     }
 
-    public void setPetId(Integer petId) {
-        this.petId = petId;
+    public void setPet(Pet pet) {
+        this.pet = pet;
     }
 
     public String getDate() {

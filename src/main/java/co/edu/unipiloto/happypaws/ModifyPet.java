@@ -91,14 +91,14 @@ public class ModifyPet extends AppCompatActivity {
         Pet petM = new Pet(petNameMStr, breedMStr, amountWalksInt, amountFoodInt, foodMStr, weightMInt, descriptionMStr, ageDouble);
         SharedPreferences sharedPreferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         int petId = sharedPreferences.getInt("Pet_ID", -1);
-        Toast.makeText(ModifyPet.this, "id = " + petId + "", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(ModifyPet.this, "id = " + petId + "", Toast.LENGTH_SHORT).show();
         if(petId != -1){
             Call<Void> call = petService.updatePet(petId, petM);
             call.enqueue(new Callback<Void>(){
                 @Override
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
-                        Toast.makeText(ModifyPet.this, "Usuario registrado con éxito", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ModifyPet.this, "Información de la mascota modificada con éxito", Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(ModifyPet.this,Home.class);
                         startActivity(intent);
 
@@ -109,7 +109,7 @@ public class ModifyPet extends AppCompatActivity {
                 @Override
                 public void onFailure(Call<Void> call, Throwable t) {
                     Toast.makeText(ModifyPet.this, "Error de conexión: " + t.getMessage(), Toast.LENGTH_LONG).show();
-                    Log.i("HappyPaws", "Error al registrar mascota", t);
+                    Log.i("HappyPaws", "Error al modificar mascota", t);
                 }
             });
 

@@ -2,11 +2,17 @@ package co.edu.unipiloto.happypaws;
 
 import android.app.DatePickerDialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
@@ -39,6 +45,8 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
     private ConsultationService consultationService;
 
     private PetService petService;
+    private Spinner statePetSpinner;
+    private String petStateStr;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +57,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
         petId = findViewById(R.id.petIdC);
         date = findViewById(R.id.consultationDate);
         reason = findViewById(R.id.consultationReason);
-        petState = findViewById(R.id.petState);
+        //petState = findViewById(R.id.petState);
         vet = findViewById(R.id.designatedVeterinary);
         result = findViewById(R.id.consultationResults);
         consultationService = Retro.getClient().create(ConsultationService.class);
@@ -61,8 +69,34 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
             @Override
             public void onClick(View v){
                 validateFields();
-                Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
-                startActivity(intent);
+                //Intent intent = new Intent(AddConsultationMedicalHistory.this,Home.class);
+                //startActivity(intent);
+            }
+        });
+
+        statePetSpinner = findViewById(R.id.state_pet_spinner);
+        String[] opciones = {"Seleccione estado", "Critico", "Estable"};
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_item, opciones);
+        adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        statePetSpinner.setAdapter(adapter);
+        statePetSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 1:
+                        petStateStr = "Critico";
+                        break;
+                    case 2:
+                        petStateStr = "Estable";
+                        break;
+                    default:
+                        petStateStr = "";
+                        break;
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                petStateStr = "";
             }
         });
     }
@@ -87,9 +121,14 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
             isValid = false;
         }
 
-        String petStateStr = petState.getText().toString().trim();
+        ///String petStateStr = petState.getText().toString().trim();
         if (petStateStr.isEmpty()) {
-            petState.setError("Este campo es obligatorio");
+            TextView errorText = (TextView) statePetSpinner.getSelectedView();
+            errorText.setError("Debe seleccionar una opción");
+            errorText.setTextColor(Color.RED);
+            statePetSpinner.getBackground()
+                    .setColorFilter(Color.RED, PorterDuff.Mode.SRC_ATOP);
+            //statePetSpinner.setError("Este campo es obligatorio");
             isValid = false;
         }
 
@@ -142,7 +181,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 dateStr = dateStr.isEmpty() ? "" : dateStr;
 
                 String reasonStr = reason.getText().toString().trim();
-                String petStateStr = petState.getText().toString().trim();
+                //String petStateStr = petState.getText().toString().trim();
                 String vetStr = vet.getText().toString().trim();
                 String resultStr = result.getText().toString().trim();
 
@@ -157,7 +196,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                             Intent intent = new Intent(AddConsultationMedicalHistory.this, Home.class);
                             startActivity(intent);}
                         else{
-                            Toast.makeText(AddConsultationMedicalHistory.this, "TAS MAL", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(AddConsultationMedicalHistory.this, "Error al agregar la consulta", Toast.LENGTH_SHORT).show();
                         }
                     }
 
@@ -199,7 +238,7 @@ public class AddConsultationMedicalHistory extends AppCompatActivity {
                 }
             });
 
-        }else{Toast.makeText(AddConsultationMedicalHistory.this, "No ha entrado", Toast.LENGTH_SHORT).show();}
+        }else{Toast.makeText(AddConsultationMedicalHistory.this, "Toast ->nNo ha entrado", Toast.LENGTH_SHORT).show();}
         //return called;
     }
 

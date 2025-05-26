@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:id="@+id/main"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".StatsConsultas">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Medical History Stats!"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/freqS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Most Frequently Pet!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:id="@+id/desc1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get the pet with the most visits registered"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="10dp"/>
+
+    <Button
+        android:id="@+id/btnBringPetMostVisits"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petStatR"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/statPetMostVisits"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="pet"
+        android:textColor="@android:color/black"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"/>
+
+
+    <TextView
+        android:id="@+id/stateS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pets Acording To Their State!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/desc2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Find pets acording their state"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="10dp"/>
+
+    <Spinner
+        android:id="@+id/state_pet_spinnerS"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/btnBringPetsAcordingState"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petStateStatR"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="Visualizacion de consultas para modificar"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerPetsDesc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/visitsS"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Number Of Visits Of A Pet!"
+        android:textSize="25sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+        android:layout_marginTop="15dp"/>
+
+    <TextView
+        android:id="@+id/desc3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get the amount of visits of a pets"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_primary"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/petIDS"
+        android:layout_width="230dp"
+        android:layout_height="50dp"
+        android:hint="Insert a pet ID"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+        android:layout_margin="5dp"/>
+
+    <Button
+        android:id="@+id/btnBringAmountOfVisitsOfPets"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/petVisits"
+        android:layout_gravity="center"
+        android:layout_marginTop="0dp"
+        android:padding="5dp"/>
+
+    <TextView
+        android:id="@+id/amountVisitsPet"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/brand_primary"
+        android:textSize="20sp"
+        android:textStyle="normal"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="5dp"/>
+</LinearLayout>

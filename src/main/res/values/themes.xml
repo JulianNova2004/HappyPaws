@@ -1,9 +1,41 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Base.Theme.HappyPaws" parent="Theme.Material3.DayNight.NoActionBar">
-        <!-- Customize your light theme here. -->
-        <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/text_on_dark</item>
+
+        <item name="colorSecondary">@color/brand_secondary</item>
+        <item name="colorOnSecondary">@color/text_on_dark</item>
+
+        <item name="colorTertiary">@color/brand_accent</item>
+        <item name="colorOnTertiary">@color/text_on_dark</item>
+
+        <item name="android:windowBackground">@color/brand_background</item>
+        <item name="android:textColorPrimary">@color/text_on_dark</item>
+
+        <item name="android:spinnerStyle">@style/Widget.HappyPaws.Spinner</item>
+
+        <item name="android:spinnerItemStyle">@style/Widget.HappyPaws.SpinnerItem</item>
+        <item name="android:spinnerDropDownItemStyle">@style/Widget.HappyPaws.SpinnerDropDownItem</item>
+
     </style>
 
     <style name="Theme.HappyPaws" parent="Base.Theme.HappyPaws" />
+
+    <style name="Widget.HappyPaws.Spinner" parent="Widget.AppCompat.Spinner">
+        <item name="android:backgroundTint">@color/brand_secondary</item>
+        <item name="android:popupBackground">@color/brand_background</item>
+        <item name="android:dropDownSelector">@color/brand_secondary</item>
+    </style>
+
+    <style name="Widget.HappyPaws.SpinnerItem" parent="android:Widget.TextView.SpinnerItem">
+        <item name="android:textColor">@color/brand_primary</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Widget.HappyPaws.SpinnerDropDownItem" parent="Widget.AppCompat.DropDownItem.Spinner">
+        <item name="android:textColor">@color/brand_primary</item>
+        <item name="android:background">@color/brand_background</item>
+    </style>
 </resources>

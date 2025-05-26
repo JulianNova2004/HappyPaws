@@ -8,11 +8,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/contactName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:textColor="@color/text_on_dark"
+            android:textSize="20sp"
+            android:padding="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:text="" />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recyclerChat"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:background="@color/brand_background"
             android:padding="8dp"/>
 
         <LinearLayout
@@ -25,7 +39,10 @@
                 android:id="@+id/etMensaje"
                 android:layout_width="10dp"
                 android:layout_weight="1"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
+                android:textColor="@color/brand_accent"
+                android:textColorHint="@color/brand_accent"
+                android:backgroundTint="@color/brand_secondary"
                 android:hint="Escribe un mensaje"/>
 
             <Button
@@ -33,6 +50,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Enviar"/>
+
         </LinearLayout>
     </LinearLayout>
 </ScrollView>

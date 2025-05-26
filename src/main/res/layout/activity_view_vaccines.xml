@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ViewVaccines">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="View Vaccines Information"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_secondary"
+
+        android:layout_margin="16dp"/>
+
+    <EditText
+        android:id="@+id/petIDV"
+        android:layout_width="200dp"
+        android:layout_height="50dp"
+        android:hint="Insert your pet ID"
+        android:inputType="number"
+        android:layout_gravity="center"
+        android:textColor="@color/brand_accent"
+        android:textColorHint="@color/brand_accent"
+        android:backgroundTint="@color/brand_secondary"
+
+        android:layout_margin="16dp"/>
+
+
+    <Button
+        android:id="@+id/btn_bring_vaccines_info"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:text="@string/viewInfoC"
+        android:layout_gravity="center"
+        android:layout_margin="16dp"
+        android:padding="12dp"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:contentDescription="Vaccines Information"
+        android:fillViewport="true">
+
+        <LinearLayout
+            android:id="@+id/containerVaccinesC"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="16dp" />
+
+    </ScrollView>
+
+</LinearLayout>
