@@ -16,6 +16,8 @@
             android:textColor="@color/text_on_dark"
             android:textSize="20sp"
             android:padding="15dp"
+            android:layout_marginTop="40dp"
+            android:layout_gravity="center"
             android:layout_marginBottom="10dp"
             android:text="" />
 

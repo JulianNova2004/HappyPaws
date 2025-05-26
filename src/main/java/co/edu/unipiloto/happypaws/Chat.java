@@ -42,8 +42,8 @@ public class Chat extends AppCompatActivity {
     private int userId;
 
     private int pasId;
-    private static final String WEBSOCKET_URL = "ws://192.168.1.9:8080/ws/websocket";
-    //private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
+   // private static final String WEBSOCKET_URL = "ws://192.168.1.9:8080/ws/websocket";
+    private static final String WEBSOCKET_URL = "ws://10.0.2.2:8080/ws/websocket";
 
     private StompClient stompClient;
     private Disposable stompSubscription;
@@ -83,10 +83,17 @@ public class Chat extends AppCompatActivity {
         //SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
 
 
-
+        int loggedId = isUser
+                ? preferences.getInt("User_ID", -1)   // soy usuario
+                : preferences.getInt("pasId", -1);     // soy paseador
         messageList = new ArrayList<>();
-        messageAdapter = new MessageAdapter(messageList, userId);
+        messageAdapter = new MessageAdapter(messageList, isUser, loggedId);
         recyclerMessages.setAdapter(messageAdapter);
+
+
+
+//        messageAdapter = new MessageAdapter(messageList, userId);
+//        recyclerMessages.setAdapter(messageAdapter);
         chatService = Retro.getClient().create(ChatService.class);
         crearChat();
 
@@ -122,6 +129,7 @@ public class Chat extends AppCompatActivity {
                     Log.d("ChatActivity", "Mensajes cargados: " + response.body().size());
                     messageList.clear();
                     messageList.addAll(response.body());
+                    messageAdapter.notifyItemInserted(messageList.size()-1);
                     messageAdapter.notifyDataSetChanged();
                     recyclerMessages.scrollToPosition(messageList.size() - 1);
                 } else {
@@ -171,10 +179,27 @@ public class Chat extends AppCompatActivity {
 
                     messageList.add(nuevoMensaje);
                     messageAdapter.notifyItemInserted(messageList.size() - 1);
+//                    if (!yaExisteMensaje(nuevoMensaje)) {
+//                        messageList.add(nuevoMensaje);
+//                        messageAdapter.notifyItemInserted(messageList.size() - 1);
+//                        recyclerMessages.scrollToPosition(messageList.size() - 1);
+//                    } else {
+//                        Log.d("WebSocket", "Mensaje duplicado ignorado");
+//                    }
                 }, throwable -> Log.e("WebSocket", "❌ Error en suscripción", throwable));
 
     }
 
+//    private boolean yaExisteMensaje(Mensaje mensaje) {
+//        for (Mensaje m : messageList) {
+//            if (m.getContent().equals(mensaje.getContent()) &&
+//                    m.getUsuarioId() == mensaje.getUsuarioId() &&
+//                    m.getPaseadorId() == mensaje.getPaseadorId()) {
+//                return true;
+//            }
+//        }
+//        return false;
+//    }
     private void enviarMensaje() {
         SharedPreferences preferences = getSharedPreferences("SaveSession", MODE_PRIVATE);
         boolean isUser = preferences.getBoolean("isUser", false);
@@ -183,6 +208,10 @@ public class Chat extends AppCompatActivity {
             Mensaje nuevoMensaje = new Mensaje(userId, pasId, contenido, isUser);
             Gson gson = new Gson();
             String jsonMensaje = gson.toJson(nuevoMensaje);
+
+//            messageList.add(nuevoMensaje);
+//            messageAdapter.notifyItemInserted(messageList.size() - 1);
+//            recyclerMessages.scrollToPosition(messageList.size() - 1);
 
             stompClient.send("/app/chat", jsonMensaje).subscribe();
 
